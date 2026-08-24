@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Požární útok – SDH Lubina II–Větřkovice</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+min-height:100vh;
+color:white;
+
+background:
+radial-gradient(circle at top right,#5b1010 0%,transparent 35%),
+linear-gradient(145deg,#090d13,#151b24);
+}
+
+.app{
+max-width:1100px;
+margin:auto;
+padding:20px 16px 40px;
+}
+
+.header{
+text-align:center;
+padding:15px 10px 25px;
+}
+
+.logo{
+font-size:42px;
+margin-bottom:10px;
+}
+
+.header h1{
+font-size:23px;
+line-height:1.35;
+margin:0;
+}
+
+.header h1 span{
+color:#ef3333;
+}
+
+.district{
+margin-top:7px;
+color:#8995a6;
+font-size:14px;
+}
+
+.back{
+border:1px solid #394455;
+background:transparent;
+color:#aeb9c8;
+padding:10px 15px;
+border-radius:11px;
+cursor:pointer;
+margin-bottom:15px;
+}
+
+.card{
+background:rgba(255,255,255,.055);
+border:1px solid rgba(255,255,255,.10);
+border-radius:22px;
+padding:20px;
+margin-bottom:16px;
+}
+
+.card h2{
+margin:0 0 18px;
+font-size:24px;
+}
+
+.form{
+display:grid;
+grid-template-columns:1.4fr 1fr auto;
+gap:10px;
+}
+
+input,
+select{
+width:100%;
+padding:13px;
+
+border-radius:12px;
+border:1px solid #354052;
+
+background:#101722;
+color:white;
+
+font-size:15px;
+}
+
+select{
+cursor:pointer;
+}
+
+.primary{
+border:0;
+border-radius:12px;
+padding:13px 18px;
+
+background:#d72f2f;
+color:white;
+
+font-weight:bold;
+cursor:pointer;
+}
+
+.primary:hover{
+background:#ed3a3a;
+}
+
+.table-wrap{
+overflow-x:auto;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:10px;
+min-width:850px;
+}
+
+th{
+padding:12px 8px;
+background:#b92828;
+color:white;
+}
+
+td{
+padding:11px 8px;
+border-bottom:1px solid rgba(255,255,255,.08);
+text-align:center;
+color:#dbe2eb;
+}
+
+.start{
+font-weight:bold;
+font-size:17px;
+}
+
+.time-input{
+width:90px;
+padding:9px;
+text-align:center;
+}
+
+.result{
+font-size:19px;
+font-weight:bold;
+color:#ffd166;
+}
+
+.place{
+font-weight:bold;
+font-size:18px;
+}
+
+.gold{
+color:#ffd700;
+}
+
+.silver{
+color:#cfd3d8;
+}
+
+.bronze{
+color:#cd7f32;
+}
+
+.np{
+color:#ff5555;
+font-weight:bold;
+}
+
+.action{
+border:0;
+background:transparent;
+color:#aeb9c8;
+cursor:pointer;
+font-size:18px;
+margin:0 2px;
+}
+
+.move{
+border:0;
+background:#252e3c;
+color:white;
+border-radius:7px;
+cursor:pointer;
+padding:5px 8px;
+margin:2px;
+}
+
+.move:hover{
+background:#394657;
+}
+
+.category-title{
+font-size:21px;
+font-weight:bold;
+margin-bottom:12px;
+}
+
+.category{
+margin-bottom:25px;
+}
+
+.empty{
+text-align:center;
+padding:25px;
+color:#718096;
+}
+
+.status{
+text-align:center;
+color:#68778b;
+font-size:12px;
+margin-top:20px;
+}
+
+.online{
+display:inline-block;
+width:7px;
+height:7px;
+border-radius:50%;
+background:#36d399;
+margin-right:6px;
+box-shadow:0 0 9px #36d399;
+}
+
+.np-button{
+border:1px solid #394455;
+background:#252e3c;
+color:#cbd5e1;
+border-radius:8px;
+padding:7px 10px;
+cursor:pointer;
+}
+
+.np-button.active{
+background:#b92828;
+border-color:#ef3333;
+color:white;
+}
+
+@media(max-width:700px){
+
+.form{
+grid-template-columns:1fr;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<button
+class="back"
+onclick="window.location.href='index.html'">
+
+← Zpět
+
+</button>
+
+
+<header class="header">
+
+<div class="logo">
+🚒
+</div>
+
+<h1>
+<span>SBOR DOBROVOLNÝCH HASIČŮ</span><br>
+LUBINA II–VĚTŘKOVICE
+</h1>
+
+<div class="district">
+okres Nový Jičín · Požární útok
+</div>
+
+</header>
+
+
+<!-- PŘIDÁNÍ DRUŽSTVA -->
+
+<div class="card">
+
+<h2>
+➕ Startovní listina
+</h2>
+
+<div class="form">
+
+<input
+id="druzstvo"
+placeholder="Název družstva">
+
+<select id="kategorie">
+
+<option value="muzi">
+👨 Muži
+</option>
+
+<option value="zeny">
+👩 Ženy
+</option>
+
+<option value="veterani">
+🏆 Veteráni 35+
+</option>
+
+</select>
+
+<button
+class="primary"
+onclick="pridatDruzstvo()">
+
++ Přidat
+
+</button>
+
+</div>
+
+</div>
+
+
+<!-- STARTOVNI LISTINA -->
+
+<div class="card">
+
+<h2>
+📋 Startovní listina
+</h2>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Start</th>
+<th>Družstvo</th>
+<th>Kategorie</th>
+<th>LP</th>
+<th>PP</th>
+<th>Výsledný čas</th>
+<th>NP</th>
+<th>Pořadí</th>
+<th>Akce</th>
+
+</tr>
+
+</thead>
+
+<tbody id="startTab"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+<!-- VYSLEDKY MUZI -->
+
+<div class="card category">
+
+<div class="category-title">
+👨 Muži – průběžné pořadí
+</div>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Pořadí</th>
+<th>Družstvo</th>
+<th>LP</th>
+<th>PP</th>
+<th>Výsledný čas</th>
+<th>Start</th>
+
+</tr>
+
+</thead>
+
+<tbody id="muziTab"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+<!-- VYSLEDKY ZENY -->
+
+<div class="card category">
+
+<div class="category-title">
+👩 Ženy – průběžné pořadí
+</div>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Pořadí</th>
+<th>Družstvo</th>
+<th>LP</th>
+<th>PP</th>
+<th>Výsledný čas</th>
+<th>Start</th>
+
+</tr>
+
+</thead>
+
+<tbody id="zenyTab"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+<!-- VYSLEDKY VETERANI -->
+
+<div class="card category">
+
+<div class="category-title">
+🏆 Veteráni 35+ – průběžné pořadí
+</div>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Pořadí</th>
+<th>Družstvo</th>
+<th>LP</th>
+<th>PP</th>
+<th>Výsledný čas</th>
+<th>Start</th>
+
+</tr>
+
+</thead>
+
+<tbody id="veteraniTab"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+<div class="status">
+
+<span class="online"></span>
+
+Živá aktualizace
+
+</div>
+
+</div>
+
+
+<script type="module">
+
+import {
+initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+addDoc,
+onSnapshot,
+deleteDoc,
+doc,
+updateDoc,
+serverTimestamp
+}
+from
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+
+/* FIREBASE */
+
+const firebaseConfig={
+
+apiKey:
+"AIzaSyCIZ3Z5HvF6P9TSQ9GxiZEIoVGFsay2pbo",
+
+authDomain:
+"fire-sport-results.firebaseapp.com",
+
+projectId:
+"fire-sport-results",
+
+storageBucket:
+"fire-sport-results.firebasestorage.app",
+
+messagingSenderId:
+"63170955961",
+
+appId:
+"1:63170955961:web:f5b9e052312a79b17de968"
+
+};
+
+
+const app=
+initializeApp(firebaseConfig);
+
+const db=
+getFirestore(app);
+
+
+/* KOLEKCE */
+
+const col=
+collection(db,"pozarní_utok");
+
+
+let data=[];
+
+
+/* VALIDACE ČASU */
+
+function validTime(t){
+
+if(!t.includes(":"))
+return false;
+
+const casti=t.split(":");
+
+if(casti.length!==2)
+return false;
+
+const sekundy=Number(casti[0]);
+const setiny=Number(casti[1]);
+
+if(
+isNaN(sekundy)||
+isNaN(setiny)
+)
+return false;
+
+if(sekundy<0)
+return false;
+
+if(setiny<0||setiny>99)
+return false;
+
+return true;
+
+}
+
+
+/* PŘEVOD ČASU */
+
+function casNaCislo(cas){
+
+const casti=cas.split(":");
+
+return Number(casti[0])*100+
+Number(casti[1]);
+
+}
+
+
+/* REALTIME */
+
+onSnapshot(
+col,
+(snap)=>{
+
+data=[];
+
+snap.forEach(d=>{
+
+data.push({
+
+id:d.id,
+...d.data()
+
+});
+
+});
+
+render();
+
+}
+);
+
+
+/* PŘIDAT DRUŽSTVO */
+
+window.pridatDruzstvo=async function(){
+
+const nazev=
+document
+.getElementById("druzstvo")
+.value
+.trim();
+
+const kategorie=
+document
+.getElementById("kategorie")
+.value;
+
+
+if(!nazev){
+
+alert(
+"Zadej název družstva."
+);
+
+return;
+
+}
+
+
+/*
+START SE URČÍ PODLE POŘADÍ
+V JEDNOM SPOLEČNÉM SEZNAMU
+*/
+
+const start=
+data.length+1;
+
+
+await addDoc(
+col,
+{
+
+druzstvo:nazev,
+
+kategorie:kategorie,
+
+start:start,
+
+lp:"",
+
+pp:"",
+
+vysledek:"",
+
+np:false,
+
+vytvoreno:
+serverTimestamp()
+
+}
+);
+
+
+document
+.getElementById("druzstvo")
+.value="";
+
+};
+
+
+/* VÝPOČET VÝSLEDKU */
+
+function vypocitejVysledek(z){
+
+if(z.np)
+return "NP";
+
+if(!validTime(z.lp)||!validTime(z.pp))
+return "-";
+
+
+/*
+VÝSLEDNÝ ČAS JE
+POMALEJŠÍ Z LP A PP
+*/
+
+if(
+casNaCislo(z.lp)
+>
+casNaCislo(z.pp)
+){
+
+return z.lp;
+
+}
+
+return z.pp;
+
+}
+
+
+/* ULOŽIT ČAS */
+
+window.ulozCas=async function(id,typ){
+
+const z=
+data.find(x=>x.id===id);
+
+if(!z)
+return;
+
+
+const hodnota=
+prompt(
+typ==="lp"
+?
+"Čas levého terče LP:"
+:
+"Čas pravého terče PP:",
+z[typ]||""
+);
+
+
+if(!hodnota)
+return;
+
+
+if(!validTime(hodnota)){
+
+alert(
+"Špatný čas! Použij například 17:42."
+);
+
+return;
+
+}
+
+
+await updateDoc(
+
+doc(db,"pozarní_utok",id),
+
+{
+
+[typ]:hodnota
+
+}
+
+);
+
+};
+
+
+/* NP */
+
+window.prepnoutNP=async function(id){
+
+const z=
+data.find(x=>x.id===id);
+
+if(!z)
+return;
+
+
+await updateDoc(
+
+doc(db,"pozarní_utok",id),
+
+{
+
+np:!z.np
+
+}
+
+);
+
+};
+
+
+/* EDIT DRUŽSTVA */
+
+window.editDruzstvo=async function(id){
+
+const z=
+data.find(x=>x.id===id);
+
+if(!z)
+return;
+
+
+const novy=
+prompt(
+"Družstvo:",
+z.druzstvo
+);
+
+if(!novy)
+return;
+
+
+await updateDoc(
+
+doc(db,"pozarní_utok",id),
+
+{
+
+druzstvo:novy
+
+}
+
+);
+
+};
+
+
+/* SMAZAT */
+
+window.smazDruzstvo=async function(id){
+
+if(!confirm(
+"Opravdu chceš smazat toto družstvo?"
+))
+return;
+
+
+await deleteDoc(
+doc(db,"pozarní_utok",id)
+);
+
+};
+
+
+/* POSUN NAHORU */
+
+window.posunNahoru=async function(id){
+
+const index=
+data.findIndex(x=>x.id===id);
+
+if(index<=0)
+return;
+
+
+const predchozi=
+data[index-1];
+
+const aktualni=
+data[index];
+
+
+await updateDoc(
+
+doc(db,"pozarní_utok",aktualni.id),
+
+{
+
+start:predchozi.start
+
+}
+
+);
+
+await updateDoc(
+
+doc(db,"pozarní_utok",predchozi.id),
+
+{
+
+start:aktualni.start
+
+}
+
+);
+
+};
+
+
+/* POSUN DOLŮ */
+
+window.posunDolu=async function(id){
+
+const index=
+data.findIndex(x=>x.id===id);
+
+if(index<0||index>=data.length-1)
+return;
+
+
+const dalsi=
+data[index+1];
+
+const aktualni=
+data[index];
+
+
+await updateDoc(
+
+doc(db,"pozarní_utok",aktualni.id),
+
+{
+
+start:dalsi.start
+
+}
+
+);
+
+await updateDoc(
+
+doc(db,"pozarní_utok",dalsi.id),
+
+{
+
+start:aktualni.start
+
+}
+
+);
+
+
+/* RENDER */
+
+};
+
+
+window.render=function(){
+
+const startTab=
+document.getElementById("startTab");
+
+const muziTab=
+document.getElementById("muziTab");
+
+const zenyTab=
+document.getElementById("zenyTab");
+
+const veteraniTab=
+document.getElementById("veteraniTab");
+
+
+startTab.innerHTML="";
+muziTab.innerHTML="";
+zenyTab.innerHTML="";
+veteraniTab.innerHTML="";
+
+
+/*
+STARTOVNÍ POŘADÍ
+*/
+
+const startList=
+[...data].sort(
+(a,b)=>
+Number(a.start||0)-
+Number(b.start||0)
+);
+
+
+/* STARTOVNÍ LISTINA */
+
+if(startList.length===0){
+
+startTab.innerHTML=`
+
+<tr>
+
+<td
+colspan="9"
+class="empty">
+
+Zatím není přidané žádné družstvo.
+
+</td>
+
+</tr>
+
+`;
+
+}else{
+
+startList.forEach((z,index)=>{
+
+const vysledek=
+vypocitejVysledek(z);
+
+
+startTab.innerHTML+=`
+
+<tr>
+
+<td class="start">
+${index+1}
+</td>
+
+<td>
+${z.druzstvo}
+</td>
+
+<td>
+${nazevKategorie(z.kategorie)}
+</td>
+
+<td>
+
+<button
+class="action"
+onclick="ulozCas('${z.id}','lp')">
+
+${z.lp||"LP"}
+
+</button>
+
+</td>
+
+<td>
+
+<button
+class="action"
+onclick="ulozCas('${z.id}','pp')">
+
+${z.pp||"PP"}
+
+</button>
+
+</td>
+
+<td class="result">
+
+${vysledek}
+
+</td>
+
+<td>
+
+<button
+class="np-button ${z.np?"active":""}"
+onclick="prepnoutNP('${z.id}')">
+
+${z.np?"NP ✓":"NP"}
+
+</button>
+
+</td>
+
+<td>
+
+${poradiIkona(z)}
+
+</td>
+
+<td>
+
+<button
+class="move"
+onclick="posunNahoru('${z.id}')">
+
+⬆️
+
+</button>
+
+<button
+class="move"
+onclick="posunDolu('${z.id}')">
+
+⬇️
+
+</button>
+
+<button
+class="action"
+onclick="editDruzstvo('${z.id}')">
+
+✏️
+
+</button>
+
+<button
+class="action"
+onclick="smazDruzstvo('${z.id}')">
+
+🗑️
+
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+}
+
+
+/* VÝSLEDKY */
+
+vykresliVysledky(
+muziTab,
+startList.filter(z=>z.kategorie==="muzi")
+);
+
+vykresliVysledky(
+zenyTab,
+startList.filter(z=>z.kategorie==="zeny")
+);
+
+vykresliVysledky(
+veteraniTab,
+startList.filter(z=>z.kategorie==="veterani")
+);
+
+};
+
+
+/* NÁZEV KATEGORIE */
+
+function nazevKategorie(k){
+
+if(k==="zeny")
+return "👩 Ženy";
+
+if(k==="veterani")
+return "🏆 Veteráni 35+";
+
+return "👨 Muži";
+
+}
+
+
+/* POŘADÍ IKONA */
+
+function poradiIkona(z){
+
+return "";
+
+}
+
+
+/* VYKRESLENÍ VÝSLEDKŮ */
+
+function vykresliVysledky(tabulka,seznam){
+
+/*
+PLATNÉ VÝSLEDKY
+*/
+
+const platne=
+seznam
+.filter(z=>
+!z.np &&
+validTime(z.lp) &&
+validTime(z.pp)
+)
+.sort(
+(a,b)=>
+casNaCislo(vypocitejVysledek(a))-
+casNaCislo(vypocitejVysledek(b))
+);
+
+
+/*
+NP VŽDY ÚPLNĚ DOLE
+*/
+
+const np=
+seznam.filter(z=>z.np);
+
+
+/* VŠECHNY */
+
+const vysledky=[
+...platne,
+...np
+];
+
+
+if(vysledky.length===0){
+
+tabulka.innerHTML=`
+
+<tr>
+
+<td
+colspan="6"
+class="empty">
+
+Zatím není žádný výsledek.
+
+</td>
+
+</tr>
+
+`;
+
+return;
+
+}
+
+
+vysledky.forEach((z,index)=>{
+
+const jeNP=z.np;
+
+
+/*
+POŘADÍ POUZE PRO PLATNÉ
+*/
+
+const poradi=
+jeNP
+?
+"NP"
+:
+`${index+1}.`;
+
+
+let mistoClass="";
+
+if(!jeNP){
+
+if(index===0)
+mistoClass="gold";
+
+if(index===1)
+mistoClass="silver";
+
+if(index===2)
+mistoClass="bronze";
+
+}
+
+
+tabulka.innerHTML+=`
+
+<tr>
+
+<td class="place ${mistoClass}">
+
+${poradi}
+
+</td>
+
+<td>
+${z.druzstvo}
+</td>
+
+<td>
+${z.lp||"-"}
+</td>
+
+<td>
+${z.pp||"-"}
+</td>
+
+<td class="result">
+
+${vypocitejVysledek(z)}
+
+</td>
+
+<td>
+${z.start}
+</td>
+
+</tr>
+
+`;
+
+});
+
+}
+
+</script>
+
+</body>
+</html>
