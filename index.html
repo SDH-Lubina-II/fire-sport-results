@@ -72,13 +72,10 @@ border:1px solid rgba(255,255,255,.10);
 border-radius:24px;
 padding:25px 22px;
 margin-bottom:16px;
-
 color:white;
 text-align:left;
 cursor:pointer;
-
 background:rgba(255,255,255,.055);
-
 transition:.2s;
 }
 
@@ -103,7 +100,7 @@ color:#9eabba;
 font-size:14px;
 }
 
-/* ================= MOTANI ================= */
+/* ================= MOTANI HADIC ================= */
 
 .screen{
 display:none;
@@ -113,10 +110,8 @@ display:none;
 border:1px solid #394455;
 background:transparent;
 color:#aeb9c8;
-
 padding:10px 15px;
 border-radius:11px;
-
 cursor:pointer;
 margin-bottom:15px;
 }
@@ -124,7 +119,6 @@ margin-bottom:15px;
 .card{
 background:rgba(255,255,255,.055);
 border:1px solid rgba(255,255,255,.10);
-
 border-radius:22px;
 padding:20px;
 margin-bottom:16px;
@@ -144,13 +138,10 @@ gap:10px;
 input{
 width:100%;
 padding:13px;
-
 border-radius:12px;
 border:1px solid #354052;
-
 background:#101722;
 color:white;
-
 font-size:15px;
 }
 
@@ -165,12 +156,9 @@ font-family:inherit;
 .primary{
 border:0;
 border-radius:12px;
-
 padding:13px 18px;
-
 background:#d72f2f;
 color:white;
-
 font-weight:bold;
 cursor:pointer;
 }
@@ -199,7 +187,6 @@ color:white;
 td{
 padding:12px 8px;
 border-bottom:1px solid rgba(255,255,255,.08);
-
 text-align:center;
 color:#dbe2eb;
 }
@@ -244,16 +231,11 @@ margin-top:20px;
 
 .online{
 display:inline-block;
-
 width:7px;
 height:7px;
-
 border-radius:50%;
-
 background:#36d399;
-
 margin-right:6px;
-
 box-shadow:0 0 9px #36d399;
 }
 
@@ -374,15 +356,21 @@ onclick="zpet()">
 
 <div class="form">
 
-<input
-id="jmeno"
-placeholder="Jméno">
-
+<!-- PRVNI JE PRIJMENI -->
 
 <input
 id="prijmeni"
 placeholder="Příjmení">
 
+
+<!-- DRUHE JE JMENO -->
+
+<input
+id="jmeno"
+placeholder="Jméno">
+
+
+<!-- TRETI JE DRUZSTVO -->
 
 <input
 id="druzstvo"
@@ -468,18 +456,13 @@ Aktuální pořadí
 /* ================= FIREBASE ================= */
 
 import {
-
 initializeApp
-
 }
-
 from
-
 "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 
 
 import {
-
 getFirestore,
 collection,
 addDoc,
@@ -488,11 +471,8 @@ deleteDoc,
 doc,
 updateDoc,
 serverTimestamp
-
 }
-
 from
-
 "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 
@@ -642,15 +622,15 @@ render();
 
 window.pridat=async function(){
 
-const j=
-document
-.getElementById("jmeno")
-.value
-.trim();
-
 const p=
 document
 .getElementById("prijmeni")
+.value
+.trim();
+
+const j=
+document
+.getElementById("jmeno")
 .value
 .trim();
 
@@ -661,9 +641,11 @@ document
 .trim();
 
 
-if(!j||!p||!d){
+if(!p||!j||!d){
 
-alert("Vyplň jméno, příjmení a družstvo.");
+alert(
+"Vyplň příjmení, jméno a družstvo."
+);
 
 return;
 
@@ -672,9 +654,9 @@ return;
 
 await addDoc(col,{
 
-jmeno:j,
-
 prijmeni:p,
+
+jmeno:j,
 
 druzstvo:d,
 
@@ -688,11 +670,11 @@ vytvoreno:serverTimestamp()
 
 
 document
-.getElementById("jmeno")
+.getElementById("prijmeni")
 .value="";
 
 document
-.getElementById("prijmeni")
+.getElementById("jmeno")
 .value="";
 
 document
@@ -732,16 +714,6 @@ if(!z)
 return;
 
 
-const j=
-prompt(
-"Jméno:",
-z.jmeno
-);
-
-if(!j)
-return;
-
-
 const p=
 prompt(
 "Příjmení:",
@@ -749,6 +721,16 @@ z.prijmeni
 );
 
 if(!p)
+return;
+
+
+const j=
+prompt(
+"Jméno:",
+z.jmeno
+);
+
+if(!j)
 return;
 
 
@@ -768,9 +750,9 @@ doc(db,"motani_hadic",id),
 
 {
 
-jmeno:j,
-
 prijmeni:p,
+
+jmeno:j,
 
 druzstvo:d
 
@@ -1079,4 +1061,4 @@ onclick="pridatPokus('${z.id}')">
 </script>
 
 </body>
-</html> 
+</html>
