@@ -25,7 +25,7 @@ linear-gradient(145deg,#090d13,#151b24);
 }
 
 .app{
-max-width:900px;
+max-width:950px;
 margin:auto;
 padding:20px 16px 40px;
 }
@@ -137,7 +137,7 @@ font-size:24px;
 
 .form{
 display:grid;
-grid-template-columns:1fr 1fr auto;
+grid-template-columns:1fr 1fr 1fr auto;
 gap:10px;
 }
 
@@ -179,10 +179,15 @@ cursor:pointer;
 background:#ed3a3a;
 }
 
+.table-wrap{
+overflow-x:auto;
+}
+
 table{
 width:100%;
 border-collapse:collapse;
 margin-top:10px;
+min-width:700px;
 }
 
 th{
@@ -252,7 +257,7 @@ margin-right:6px;
 box-shadow:0 0 9px #36d399;
 }
 
-@media(max-width:650px){
+@media(max-width:700px){
 
 .form{
 grid-template-columns:1fr 1fr;
@@ -260,14 +265,6 @@ grid-template-columns:1fr 1fr;
 
 .form .primary{
 grid-column:1 / -1;
-}
-
-table{
-font-size:13px;
-}
-
-th,td{
-padding:9px 4px;
 }
 
 }
@@ -378,13 +375,18 @@ onclick="zpet()">
 <div class="form">
 
 <input
+id="jmeno"
+placeholder="Jméno">
+
+
+<input
 id="prijmeni"
 placeholder="Příjmení">
 
 
 <input
-id="jmeno"
-placeholder="Jméno">
+id="druzstvo"
+placeholder="Družstvo">
 
 
 <button
@@ -407,6 +409,8 @@ Aktuální pořadí
 </h2>
 
 
+<div class="table-wrap">
+
 <table>
 
 <thead>
@@ -418,6 +422,8 @@ Aktuální pořadí
 <th>Příjmení</th>
 
 <th>Jméno</th>
+
+<th>Družstvo</th>
 
 <th>Nejlepší</th>
 
@@ -435,6 +441,8 @@ Aktuální pořadí
 </tbody>
 
 </table>
+
+</div>
 
 </div>
 
@@ -593,6 +601,7 @@ return true;
 }
 
 
+
 /* ================= PREVOD CASU ================= */
 
 function casNaCislo(cas){
@@ -633,22 +642,28 @@ render();
 
 window.pridat=async function(){
 
-const p=
-document
-.getElementById("prijmeni")
-.value
-.trim();
-
 const j=
 document
 .getElementById("jmeno")
 .value
 .trim();
 
+const p=
+document
+.getElementById("prijmeni")
+.value
+.trim();
 
-if(!p||!j){
+const d=
+document
+.getElementById("druzstvo")
+.value
+.trim();
 
-alert("Vyplň příjmení i jméno.");
+
+if(!j||!p||!d){
+
+alert("Vyplň jméno, příjmení a družstvo.");
 
 return;
 
@@ -657,9 +672,11 @@ return;
 
 await addDoc(col,{
 
+jmeno:j,
+
 prijmeni:p,
 
-jmeno:j,
+druzstvo:d,
 
 pokusy:[],
 
@@ -671,11 +688,15 @@ vytvoreno:serverTimestamp()
 
 
 document
+.getElementById("jmeno")
+.value="";
+
+document
 .getElementById("prijmeni")
 .value="";
 
 document
-.getElementById("jmeno")
+.getElementById("druzstvo")
 .value="";
 
 };
@@ -711,16 +732,6 @@ if(!z)
 return;
 
 
-const p=
-prompt(
-"Příjmení:",
-z.prijmeni
-);
-
-if(!p)
-return;
-
-
 const j=
 prompt(
 "Jméno:",
@@ -731,15 +742,37 @@ if(!j)
 return;
 
 
+const p=
+prompt(
+"Příjmení:",
+z.prijmeni
+);
+
+if(!p)
+return;
+
+
+const d=
+prompt(
+"Družstvo:",
+z.druzstvo || ""
+);
+
+if(!d)
+return;
+
+
 await updateDoc(
 
 doc(db,"motani_hadic",id),
 
 {
 
+jmeno:j,
+
 prijmeni:p,
 
-jmeno:j
+druzstvo:d
 
 }
 
@@ -907,7 +940,7 @@ nejlepsi:nej
 
 
 
-/* ================= VYKRESLENI ================= */
+/* ================= RAZENI PODLE PRIJMENI ================= */
 
 window.render=function(){
 
@@ -920,18 +953,13 @@ t.innerHTML="";
 const serazeno=
 [...data].sort((a,b)=>{
 
-if(!a.nejlepsi&&b.nejlepsi)
-return 1;
+const p1=
+(a.prijmeni||"").toLocaleLowerCase("cs");
 
-if(a.nejlepsi&&!b.nejlepsi)
-return -1;
+const p2=
+(b.prijmeni||"").toLocaleLowerCase("cs");
 
-if(!a.nejlepsi&&!b.nejlepsi)
-return 0;
-
-return casNaCislo(a.nejlepsi)
--
-casNaCislo(b.nejlepsi);
+return p1.localeCompare(p2,"cs");
 
 });
 
@@ -943,7 +971,7 @@ t.innerHTML=`
 <tr>
 
 <td
-colspan="6"
+colspan="7"
 class="empty">
 
 Zatím není přidaný žádný závodník.
@@ -991,6 +1019,10 @@ ${z.prijmeni}
 
 <td>
 ${z.jmeno}
+</td>
+
+<td>
+${z.druzstvo||"-"}
 </td>
 
 <td class="best">
@@ -1047,4 +1079,4 @@ onclick="pridatPokus('${z.id}')">
 </script>
 
 </body>
-</html>
+</html> 
