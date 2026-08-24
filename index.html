@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="cs">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,260 +7,253 @@
 <title>SDH Lubina II–Větřkovice</title>
 
 <style>
-
 *{
-box-sizing:border-box;
+    box-sizing:border-box;
 }
 
 body{
-margin:0;
-font-family:Arial,sans-serif;
-min-height:100vh;
-color:white;
-
-background:
-radial-gradient(circle at top right,#5b1010 0%,transparent 35%),
-linear-gradient(145deg,#090d13,#151b24);
+    margin:0;
+    font-family:Arial,sans-serif;
+    min-height:100vh;
+    color:white;
+    background:
+        radial-gradient(circle at top right,#5b1010 0%,transparent 35%),
+        linear-gradient(145deg,#090d13,#151b24);
 }
 
 .app{
-max-width:950px;
-margin:auto;
-padding:20px 16px 40px;
+    max-width:950px;
+    margin:auto;
+    padding:20px 16px 40px;
 }
 
-/* ================= HLAVNI STRANKA ================= */
+/* HLAVNI STRANKA */
 
 .header{
-text-align:center;
-padding:25px 10px 35px;
+    text-align:center;
+    padding:25px 10px 35px;
 }
 
 .logo{
-font-size:42px;
-margin-bottom:12px;
+    font-size:42px;
+    margin-bottom:12px;
 }
 
 .header h1{
-font-size:22px;
-line-height:1.35;
-margin:0;
+    font-size:22px;
+    line-height:1.35;
+    margin:0;
 }
 
 .header h1 span{
-color:#ef3333;
+    color:#ef3333;
 }
 
 .district{
-margin-top:7px;
-color:#8995a6;
-font-size:14px;
+    margin-top:7px;
+    color:#8995a6;
+    font-size:14px;
 }
 
 .section-title{
-color:#8796aa;
-font-size:13px;
-text-transform:uppercase;
-letter-spacing:2px;
-margin:0 5px 14px;
+    color:#8796aa;
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    margin:0 5px 14px;
 }
 
 .discipline{
-width:100%;
-border:1px solid rgba(255,255,255,.10);
-border-radius:24px;
-padding:25px 22px;
-margin-bottom:16px;
-color:white;
-text-align:left;
-cursor:pointer;
-background:rgba(255,255,255,.055);
-transition:.2s;
+    width:100%;
+    border:1px solid rgba(255,255,255,.10);
+    border-radius:24px;
+    padding:25px 22px;
+    margin-bottom:16px;
+    color:white;
+    text-align:left;
+    cursor:pointer;
+    background:rgba(255,255,255,.055);
+    transition:.2s;
 }
 
 .discipline:hover{
-transform:translateY(-2px);
-background:rgba(255,255,255,.085);
+    transform:translateY(-2px);
+    background:rgba(255,255,255,.085);
 }
 
 .icon{
-font-size:46px;
-margin-bottom:12px;
+    font-size:46px;
+    margin-bottom:12px;
 }
 
 .name{
-font-size:23px;
-font-weight:bold;
-margin-bottom:7px;
+    font-size:23px;
+    font-weight:bold;
+    margin-bottom:7px;
 }
 
 .description{
-color:#9eabba;
-font-size:14px;
+    color:#9eabba;
+    font-size:14px;
 }
 
-/* ================= MOTANI HADIC ================= */
+/* MOTANI HADIC */
 
 .screen{
-display:none;
+    display:none;
 }
 
 .back{
-border:1px solid #394455;
-background:transparent;
-color:#aeb9c8;
-padding:10px 15px;
-border-radius:11px;
-cursor:pointer;
-margin-bottom:15px;
+    border:1px solid #394455;
+    background:transparent;
+    color:#aeb9c8;
+    padding:10px 15px;
+    border-radius:11px;
+    cursor:pointer;
+    margin-bottom:15px;
 }
 
 .card{
-background:rgba(255,255,255,.055);
-border:1px solid rgba(255,255,255,.10);
-border-radius:22px;
-padding:20px;
-margin-bottom:16px;
+    background:rgba(255,255,255,.055);
+    border:1px solid rgba(255,255,255,.10);
+    border-radius:22px;
+    padding:20px;
+    margin-bottom:16px;
 }
 
 .card h2{
-margin:0 0 18px;
-font-size:24px;
+    margin:0 0 18px;
+    font-size:24px;
 }
 
 .form{
-display:grid;
-grid-template-columns:1fr 1fr 1fr auto;
-gap:10px;
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr auto;
+    gap:10px;
 }
 
 input{
-width:100%;
-padding:13px;
-border-radius:12px;
-border:1px solid #354052;
-background:#101722;
-color:white;
-font-size:15px;
+    width:100%;
+    padding:13px;
+    border-radius:12px;
+    border:1px solid #354052;
+    background:#101722;
+    color:white;
+    font-size:15px;
 }
 
 input::placeholder{
-color:#738095;
+    color:#738095;
 }
 
 button{
-font-family:inherit;
+    font-family:inherit;
 }
 
 .primary{
-border:0;
-border-radius:12px;
-padding:13px 18px;
-background:#d72f2f;
-color:white;
-font-weight:bold;
-cursor:pointer;
+    border:0;
+    border-radius:12px;
+    padding:13px 18px;
+    background:#d72f2f;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
 }
 
 .primary:hover{
-background:#ed3a3a;
+    background:#ed3a3a;
 }
 
 .table-wrap{
-overflow-x:auto;
+    overflow-x:auto;
 }
 
 table{
-width:100%;
-border-collapse:collapse;
-margin-top:10px;
-min-width:700px;
+    width:100%;
+    border-collapse:collapse;
+    margin-top:10px;
+    min-width:700px;
 }
 
 th{
-padding:12px 8px;
-background:#b92828;
-color:white;
+    padding:12px 8px;
+    background:#b92828;
+    color:white;
 }
 
 td{
-padding:12px 8px;
-border-bottom:1px solid rgba(255,255,255,.08);
-text-align:center;
-color:#dbe2eb;
+    padding:12px 8px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    text-align:center;
+    color:#dbe2eb;
 }
 
 .best{
-font-size:19px;
-font-weight:bold;
-color:#ffd166;
+    font-size:19px;
+    font-weight:bold;
+    color:#ffd166;
 }
 
 .attempt{
-cursor:pointer;
-padding:3px;
+    cursor:pointer;
+    padding:3px;
 }
 
 .attempt:hover{
-background:rgba(255,255,255,.08);
-border-radius:5px;
+    background:rgba(255,255,255,.08);
+    border-radius:5px;
 }
 
 .action{
-border:0;
-background:transparent;
-color:#aeb9c8;
-cursor:pointer;
-font-size:18px;
-margin:0 3px;
+    border:0;
+    background:transparent;
+    color:#aeb9c8;
+    cursor:pointer;
+    font-size:18px;
+    margin:0 3px;
 }
 
 .empty{
-text-align:center;
-padding:30px;
-color:#718096;
+    text-align:center;
+    padding:30px;
+    color:#718096;
 }
 
 .status{
-text-align:center;
-color:#68778b;
-font-size:12px;
-margin-top:20px;
+    text-align:center;
+    color:#68778b;
+    font-size:12px;
+    margin-top:20px;
 }
 
 .online{
-display:inline-block;
-width:7px;
-height:7px;
-border-radius:50%;
-background:#36d399;
-margin-right:6px;
-box-shadow:0 0 9px #36d399;
+    display:inline-block;
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#36d399;
+    margin-right:6px;
+    box-shadow:0 0 9px #36d399;
 }
 
 @media(max-width:700px){
 
-.form{
-grid-template-columns:1fr 1fr;
-}
+    .form{
+        grid-template-columns:1fr 1fr;
+    }
 
-.form .primary{
-grid-column:1 / -1;
+    .form .primary{
+        grid-column:1 / -1;
+    }
 }
-
-}
-
 </style>
 </head>
 
-
 <body>
-
 
 <div class="app">
 
-
-<!-- ================= HLAVNI STRANKA ================= -->
+<!-- HLAVNI STRANKA -->
 
 <div id="home">
 
@@ -270,11 +262,8 @@ grid-column:1 / -1;
 <div class="logo">🔥</div>
 
 <h1>
-
 <span>SBOR DOBROVOLNÝCH HASIČŮ</span><br>
-
-LUBINA I–VĚTŘKOVICE
-
+LUBINA II–VĚTŘKOVICE
 </h1>
 
 <div class="district">
@@ -283,11 +272,9 @@ okres Nový Jičín
 
 </header>
 
-
 <div class="section-title">
 Soutěže
 </div>
-
 
 <!-- POZARNI UTOK -->
 
@@ -295,9 +282,7 @@ Soutěže
 class="discipline"
 onclick="otevriPozarni()">
 
-<div class="icon">
-🚒
-</div>
+<div class="icon">🚒</div>
 
 <div class="name">
 Požární útok
@@ -309,16 +294,13 @@ Aktuální pořadí
 
 </button>
 
-
 <!-- MOTANI HADIC -->
 
 <button
 class="discipline"
 onclick="otevriMotani()">
 
-<div class="icon">
-🌀
-</div>
+<div class="icon">🌀</div>
 
 <div class="name">
 Motání hadic
@@ -333,10 +315,9 @@ Jednotlivci · nejrychlejší čas
 </div>
 
 
-<!-- ================= MOTANI HADIC ================= -->
+<!-- MOTANI HADIC -->
 
 <div id="motani" class="screen">
-
 
 <button
 class="back"
@@ -346,36 +327,25 @@ onclick="zpet()">
 
 </button>
 
-
 <div class="card">
 
 <h2>
 🌀 Motání hadic
 </h2>
 
-
 <div class="form">
-
-<!-- PRVNI JE PRIJMENI -->
 
 <input
 id="prijmeni"
 placeholder="Příjmení">
 
-
-<!-- DRUHE JE JMENO -->
-
 <input
 id="jmeno"
 placeholder="Jméno">
 
-
-<!-- TRETI JE DRUZSTVO -->
-
 <input
 id="druzstvo"
 placeholder="Družstvo">
-
 
 <button
 class="primary"
@@ -396,7 +366,6 @@ onclick="pridat()">
 Aktuální pořadí
 </h2>
 
-
 <div class="table-wrap">
 
 <table>
@@ -404,29 +373,18 @@ Aktuální pořadí
 <thead>
 
 <tr>
-
 <th>#</th>
-
 <th>Příjmení</th>
-
 <th>Jméno</th>
-
 <th>Družstvo</th>
-
 <th>Nejlepší</th>
-
 <th>Pokusy</th>
-
 <th>Akce</th>
-
 </tr>
 
 </thead>
 
-
-<tbody id="tab">
-
-</tbody>
+<tbody id="tab"></tbody>
 
 </table>
 
@@ -434,631 +392,526 @@ Aktuální pořadí
 
 </div>
 
-
 <div class="status">
 
 <span class="online"></span>
-
 Živá aktualizace
 
 </div>
 
 </div>
 
-
 </div>
-
 
 
 <script type="module">
 
-
-/* ================= FIREBASE ================= */
-
 import {
-initializeApp
+    initializeApp
 }
 from
 "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 
-
 import {
-getFirestore,
-collection,
-addDoc,
-onSnapshot,
-deleteDoc,
-doc,
-updateDoc,
-serverTimestamp
+    getFirestore,
+    collection,
+    addDoc,
+    onSnapshot,
+    deleteDoc,
+    doc,
+    updateDoc,
+    serverTimestamp
 }
 from
 "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 
+/* FIREBASE */
+
 const firebaseConfig = {
 
-apiKey:
-"AIzaSyCIZ3Z5HvF6P9TSQ9GxiZEIoVGFsay2pbo",
+    apiKey:
+    "AIzaSyCIZ3Z5HvF6P9TSQ9GxiZEIoVGFsay2pbo",
 
-authDomain:
-"fire-sport-results.firebaseapp.com",
+    authDomain:
+    "fire-sport-results.firebaseapp.com",
 
-projectId:
-"fire-sport-results",
+    projectId:
+    "fire-sport-results",
 
-storageBucket:
-"fire-sport-results.firebasestorage.app",
+    storageBucket:
+    "fire-sport-results.firebasestorage.app",
 
-messagingSenderId:
-"63170955961",
+    messagingSenderId:
+    "63170955961",
 
-appId:
-"1:63170955961:web:f5b9e052312a79b17de968"
-
+    appId:
+    "1:63170955961:web:f5b9e052312a79b17de968"
 };
-
 
 const app =
 initializeApp(firebaseConfig);
 
-
 const db =
 getFirestore(app);
-
 
 const col =
 collection(db,"motani_hadic");
 
-
 let data=[];
 
 
-
-/* ================= NAVIGACE ================= */
+/* NAVIGACE */
 
 window.otevriMotani=function(){
 
-document
-.getElementById("home")
-.style.display="none";
+    document.getElementById("home")
+    .style.display="none";
 
-document
-.getElementById("motani")
-.style.display="block";
-
+    document.getElementById("motani")
+    .style.display="block";
 };
 
 
 window.otevriPozarni=function(){
 
-alert("Požární útok připravujeme.");
+    alert("Požární útok připravujeme.");
 
 };
 
 
 window.zpet=function(){
 
-document
-.getElementById("motani")
-.style.display="none";
+    document.getElementById("motani")
+    .style.display="none";
 
-document
-.getElementById("home")
-.style.display="block";
-
+    document.getElementById("home")
+    .style.display="block";
 };
 
 
-
-/* ================= VALIDACE CASU ================= */
+/* VALIDACE CASU */
 
 function validTime(t){
 
-if(!t.includes(":"))
-return false;
+    if(!t.includes(":"))
+        return false;
 
-const casti=t.split(":");
+    const casti=t.split(":");
 
-if(casti.length!==2)
-return false;
+    if(casti.length!==2)
+        return false;
 
-const sekundy=Number(casti[0]);
+    const sekundy=Number(casti[0]);
+    const setiny=Number(casti[1]);
 
-const setiny=Number(casti[1]);
+    if(isNaN(sekundy)||isNaN(setiny))
+        return false;
 
-if(isNaN(sekundy)||isNaN(setiny))
-return false;
+    if(sekundy<0)
+        return false;
 
-if(sekundy<0)
-return false;
+    if(setiny<0||setiny>99)
+        return false;
 
-if(setiny<0||setiny>99)
-return false;
-
-return true;
-
+    return true;
 }
 
 
-
-/* ================= PREVOD CASU ================= */
+/* PREVOD CASU */
 
 function casNaCislo(cas){
 
-const casti=cas.split(":");
+    const casti=cas.split(":");
 
-return Number(casti[0])*100+
-Number(casti[1]);
-
+    return Number(casti[0])*100+
+           Number(casti[1]);
 }
 
 
-
-/* ================= REALTIME ================= */
+/* REALTIME */
 
 onSnapshot(col,(snap)=>{
 
-data=[];
+    data=[];
 
-snap.forEach(d=>{
+    snap.forEach(d=>{
 
-data.push({
+        data.push({
+            id:d.id,
+            ...d.data()
+        });
 
-id:d.id,
-...d.data()
+    });
 
-});
-
-});
-
-render();
+    render();
 
 });
 
 
-
-/* ================= PRIDAT ZAVODNIKA ================= */
+/* PRIDAT ZAVODNIKA */
 
 window.pridat=async function(){
 
-const p=
-document
-.getElementById("prijmeni")
-.value
-.trim();
+    const p=
+    document.getElementById("prijmeni")
+    .value.trim();
 
-const j=
-document
-.getElementById("jmeno")
-.value
-.trim();
+    const j=
+    document.getElementById("jmeno")
+    .value.trim();
 
-const d=
-document
-.getElementById("druzstvo")
-.value
-.trim();
+    const d=
+    document.getElementById("druzstvo")
+    .value.trim();
 
+    if(!p||!j||!d){
 
-if(!p||!j||!d){
+        alert(
+        "Vyplň příjmení, jméno a družstvo."
+        );
 
-alert(
-"Vyplň příjmení, jméno a družstvo."
-);
+        return;
+    }
 
-return;
+    await addDoc(col,{
 
-}
+        prijmeni:p,
+        jmeno:j,
+        druzstvo:d,
+        pokusy:[],
+        nejlepsi:"",
+        vytvoreno:serverTimestamp()
 
+    });
 
-await addDoc(col,{
-
-prijmeni:p,
-
-jmeno:j,
-
-druzstvo:d,
-
-pokusy:[],
-
-nejlepsi:"",
-
-vytvoreno:serverTimestamp()
-
-});
-
-
-document
-.getElementById("prijmeni")
-.value="";
-
-document
-.getElementById("jmeno")
-.value="";
-
-document
-.getElementById("druzstvo")
-.value="";
-
+    document.getElementById("prijmeni").value="";
+    document.getElementById("jmeno").value="";
+    document.getElementById("druzstvo").value="";
 };
 
 
-
-/* ================= SMAZAT ================= */
+/* SMAZAT */
 
 window.smaz=async function(id){
 
-if(!confirm(
-"Opravdu chceš smazat tohoto soutěžícího?"
-))
-return;
+    if(!confirm(
+        "Opravdu chceš smazat tohoto soutěžícího?"
+    ))
+        return;
 
-
-await deleteDoc(
-doc(db,"motani_hadic",id)
-);
-
+    await deleteDoc(
+        doc(db,"motani_hadic",id)
+    );
 };
 
 
-
-/* ================= EDIT ZAVODNIKA ================= */
+/* EDIT ZAVODNIKA */
 
 window.edit=async function(id){
 
-const z=
-data.find(s=>s.id===id);
+    const z=
+    data.find(s=>s.id===id);
 
-if(!z)
-return;
+    if(!z)
+        return;
 
+    const p=
+    prompt(
+        "Příjmení:",
+        z.prijmeni
+    );
 
-const p=
-prompt(
-"Příjmení:",
-z.prijmeni
-);
+    if(!p)
+        return;
 
-if(!p)
-return;
+    const j=
+    prompt(
+        "Jméno:",
+        z.jmeno
+    );
 
+    if(!j)
+        return;
 
-const j=
-prompt(
-"Jméno:",
-z.jmeno
-);
+    const d=
+    prompt(
+        "Družstvo:",
+        z.druzstvo || ""
+    );
 
-if(!j)
-return;
+    if(!d)
+        return;
 
+    await updateDoc(
 
-const d=
-prompt(
-"Družstvo:",
-z.druzstvo || ""
-);
+        doc(db,"motani_hadic",id),
 
-if(!d)
-return;
+        {
+            prijmeni:p,
+            jmeno:j,
+            druzstvo:d
+        }
 
-
-await updateDoc(
-
-doc(db,"motani_hadic",id),
-
-{
-
-prijmeni:p,
-
-jmeno:j,
-
-druzstvo:d
-
-}
-
-);
-
+    );
 };
 
 
-
-/* ================= PRIDAT POKUS ================= */
+/* PRIDAT POKUS */
 
 window.pridatPokus=async function(id){
 
-const cas=
-prompt(
-"Zadej čas například 15:23"
-);
+    const cas=
+    prompt(
+        "Zadej čas například 15:23"
+    );
 
-if(!cas)
-return;
+    if(!cas)
+        return;
 
+    if(!validTime(cas)){
 
-if(!validTime(cas)){
+        alert(
+            "Špatný čas! Použij například 15:23."
+        );
 
-alert(
-"Špatný čas! Použij například 15:23."
-);
+        return;
+    }
 
-return;
+    const z=
+    data.find(s=>s.id===id);
 
-}
+    if(!z)
+        return;
 
+    const pokusy=
+    [...(z.pokusy||[])];
 
-const z=
-data.find(s=>s.id===id);
+    pokusy.push(cas);
 
-if(!z)
-return;
+    let nej=pokusy[0];
 
+    for(let i=1;i<pokusy.length;i++){
 
-const pokusy=
-[...(z.pokusy||[])];
+        if(
+            casNaCislo(pokusy[i])
+            <
+            casNaCislo(nej)
+        ){
 
-pokusy.push(cas);
+            nej=pokusy[i];
 
+        }
+    }
 
-/* NEJLEPSI CAS */
+    await updateDoc(
 
-let nej=pokusy[0];
+        doc(db,"motani_hadic",id),
 
+        {
+            pokusy:pokusy,
+            nejlepsi:nej
+        }
 
-for(let i=1;i<pokusy.length;i++){
-
-if(
-casNaCislo(pokusy[i])
-<
-casNaCislo(nej)
-){
-
-nej=pokusy[i];
-
-}
-
-}
-
-
-await updateDoc(
-
-doc(db,"motani_hadic",id),
-
-{
-
-pokusy:pokusy,
-
-nejlepsi:nej
-
-}
-
-);
-
+    );
 };
 
 
-
-/* ================= UPRAVIT POKUS ================= */
+/* UPRAVIT POKUS */
 
 window.editPokus=async function(id,index){
 
-const z=
-data.find(s=>s.id===id);
+    const z=
+    data.find(s=>s.id===id);
 
-if(!z||!Array.isArray(z.pokusy))
-return;
+    if(!z||!Array.isArray(z.pokusy))
+        return;
 
+    const stare=
+    z.pokusy[index];
 
-const stare=
-z.pokusy[index];
+    if(!stare)
+        return;
 
-if(!stare)
-return;
+    const novy=
+    prompt(
+        "Upravit čas:",
+        stare
+    );
 
+    if(!novy)
+        return;
 
-const novy=
-prompt(
-"Upravit čas:",
-stare
-);
+    if(!validTime(novy)){
 
-if(!novy)
-return;
+        alert(
+            "Špatný čas! Použij například 15:23."
+        );
 
+        return;
+    }
 
-if(!validTime(novy)){
+    const pokusy=
+    [...(z.pokusy||[])];
 
-alert(
-"Špatný čas! Použij například 15:23."
-);
+    pokusy[index]=novy;
 
-return;
+    let nej=pokusy[0];
 
-}
+    for(let i=1;i<pokusy.length;i++){
 
+        if(
+            casNaCislo(pokusy[i])
+            <
+            casNaCislo(nej)
+        ){
 
-const pokusy=
-[...(z.pokusy||[])];
+            nej=pokusy[i];
 
-pokusy[index]=novy;
+        }
+    }
 
+    await updateDoc(
 
-/* ZNOVU SPOCITAT NEJLEPSI */
+        doc(db,"motani_hadic",id),
 
-let nej=pokusy[0];
+        {
+            pokusy:pokusy,
+            nejlepsi:nej
+        }
 
-
-for(let i=1;i<pokusy.length;i++){
-
-if(
-casNaCislo(pokusy[i])
-<
-casNaCislo(nej)
-){
-
-nej=pokusy[i];
-
-}
-
-}
-
-
-await updateDoc(
-
-doc(db,"motani_hadic",id),
-
-{
-
-pokusy:pokusy,
-
-nejlepsi:nej
-
-}
-
-);
-
+    );
 };
 
 
-
-/* ================= RAZENI PODLE PRIJMENI ================= */
+/* VYKRESLENI */
 
 window.render=function(){
 
-const t=
-document.getElementById("tab");
+    const t=
+    document.getElementById("tab");
 
-t.innerHTML="";
-
-
-const serazeno=
-[...data].sort((a,b)=>{
-
-const p1=
-(a.prijmeni||"").toLocaleLowerCase("cs");
-
-const p2=
-(b.prijmeni||"").toLocaleLowerCase("cs");
-
-return p1.localeCompare(p2,"cs");
-
-});
+    t.innerHTML="";
 
 
-if(serazeno.length===0){
+    const serazeno=
+    [...data].sort((a,b)=>{
 
-t.innerHTML=`
+        const p1=
+        (a.prijmeni||"")
+        .toLocaleLowerCase("cs");
 
-<tr>
+        const p2=
+        (b.prijmeni||"")
+        .toLocaleLowerCase("cs");
 
-<td
-colspan="7"
-class="empty">
-
-Zatím není přidaný žádný závodník.
-
-</td>
-
-</tr>
-
-`;
-
-return;
-
-}
+        return p1.localeCompare(p2,"cs");
+    });
 
 
-serazeno.forEach((z,i)=>{
+    if(serazeno.length===0){
 
-const pokusy=
-(z.pokusy||[])
-.map((c,index)=>`
+        t.innerHTML=`
 
-<div
-class="attempt"
-onclick="editPokus('${z.id}',${index})">
+        <tr>
 
-⏱ ${c}
+        <td
+        colspan="7"
+        class="empty">
 
-</div>
+        Zatím není přidaný žádný závodník.
 
-`)
-.join("");
+        </td>
 
+        </tr>
 
-t.innerHTML+=`
+        `;
 
-<tr>
-
-<td>
-${i+1}
-</td>
-
-<td>
-${z.prijmeni}
-</td>
-
-<td>
-${z.jmeno}
-</td>
-
-<td>
-${z.druzstvo||"-"}
-</td>
-
-<td class="best">
-
-${z.nejlepsi||"-"}
-
-</td>
-
-<td>
-
-${pokusy||"-"}
-
-</td>
-
-<td>
-
-<button
-class="action"
-onclick="edit('${z.id}')">
-
-✏️
-
-</button>
+        return;
+    }
 
 
-<button
-class="action"
-onclick="smaz('${z.id}')">
+    serazeno.forEach((z,i)=>{
 
-🗑️
+        const pokusy=
+        (z.pokusy||[])
+        .map((c,index)=>`
 
-</button>
+            <div
+            class="attempt"
+            onclick="editPokus('${z.id}',${index})">
+
+            ⏱ ${c}
+
+            </div>
+
+        `)
+        .join("");
 
 
-<button
-class="action"
-onclick="pridatPokus('${z.id}')">
+        t.innerHTML+=`
 
-➕
+        <tr>
 
-</button>
+        <td>
+        ${i+1}
+        </td>
 
-</td>
+        <td>
+        ${z.prijmeni}
+        </td>
 
-</tr>
+        <td>
+        ${z.jmeno}
+        </td>
 
-`;
+        <td>
+        ${z.druzstvo||"-"}
+        </td>
 
-});
+        <td class="best">
+        ${z.nejlepsi||"-"}
+        </td>
 
+        <td>
+        ${pokusy||"-"}
+        </td>
+
+        <td>
+
+        <button
+        class="action"
+        onclick="edit('${z.id}')">
+
+        ✏️
+
+        </button>
+
+        <button
+        class="action"
+        onclick="smaz('${z.id}')">
+
+        🗑️
+
+        </button>
+
+        <button
+        class="action"
+        onclick="pridatPokus('${z.id}')">
+
+        ➕
+
+        </button>
+
+        </td>
+
+        </tr>
+
+        `;
+    });
 };
-
 
 </script>
 
 </body>
-</html>
+</html> 
