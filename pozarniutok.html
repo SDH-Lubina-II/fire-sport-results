@@ -147,12 +147,6 @@ font-weight:bold;
 font-size:17px;
 }
 
-.time-input{
-width:90px;
-padding:9px;
-text-align:center;
-}
-
 .result{
 font-size:19px;
 font-weight:bold;
@@ -174,11 +168,6 @@ color:#cfd3d8;
 
 .bronze{
 color:#cd7f32;
-}
-
-.np{
-color:#ff5555;
-font-weight:bold;
 }
 
 .action{
@@ -337,7 +326,7 @@ onclick="pridatDruzstvo()">
 </div>
 
 
-<!-- STARTOVNI LISTINA -->
+<!-- STARTOVNÍ LISTINA -->
 
 <div class="card">
 
@@ -376,7 +365,7 @@ onclick="pridatDruzstvo()">
 </div>
 
 
-<!-- VYSLEDKY MUZI -->
+<!-- MUŽI -->
 
 <div class="card category">
 
@@ -391,14 +380,12 @@ onclick="pridatDruzstvo()">
 <thead>
 
 <tr>
-
 <th>Pořadí</th>
 <th>Družstvo</th>
 <th>LP</th>
 <th>PP</th>
 <th>Výsledný čas</th>
 <th>Start</th>
-
 </tr>
 
 </thead>
@@ -412,7 +399,7 @@ onclick="pridatDruzstvo()">
 </div>
 
 
-<!-- VYSLEDKY ZENY -->
+<!-- ŽENY -->
 
 <div class="card category">
 
@@ -427,14 +414,12 @@ onclick="pridatDruzstvo()">
 <thead>
 
 <tr>
-
 <th>Pořadí</th>
 <th>Družstvo</th>
 <th>LP</th>
 <th>PP</th>
 <th>Výsledný čas</th>
 <th>Start</th>
-
 </tr>
 
 </thead>
@@ -448,7 +433,7 @@ onclick="pridatDruzstvo()">
 </div>
 
 
-<!-- VYSLEDKY VETERANI -->
+<!-- VETERÁNI -->
 
 <div class="card category">
 
@@ -463,14 +448,12 @@ onclick="pridatDruzstvo()">
 <thead>
 
 <tr>
-
 <th>Pořadí</th>
 <th>Družstvo</th>
 <th>LP</th>
 <th>PP</th>
 <th>Výsledný čas</th>
 <th>Start</th>
-
 </tr>
 
 </thead>
@@ -549,10 +532,13 @@ const db=
 getFirestore(app);
 
 
-/* KOLEKCE */
+/*
+  DŮLEŽITÉ:
+  KOLEKCE JE BEZ DIAKRITIKY
+*/
 
 const col=
-collection(db,"pozarní_utok");
+collection(db,"pozarni_utok");
 
 
 let data=[];
@@ -623,6 +609,15 @@ id:d.id,
 
 render();
 
+},
+(error)=>{
+
+console.error("Firebase chyba:",error);
+
+alert(
+"Chyba při načítání dat z Firebase."
+);
+
 }
 );
 
@@ -630,6 +625,8 @@ render();
 /* PŘIDAT DRUŽSTVO */
 
 window.pridatDruzstvo=async function(){
+
+try{
 
 const nazev=
 document
@@ -655,8 +652,9 @@ return;
 
 
 /*
-START SE URČÍ PODLE POŘADÍ
-V JEDNOM SPOLEČNÉM SEZNAMU
+STARTOVNÍ ČÍSLO
+SE URČÍ PODLE AKTUÁLNÍHO
+POČTU DRUŽSTEV
 */
 
 const start=
@@ -664,7 +662,9 @@ data.length+1;
 
 
 await addDoc(
+
 col,
+
 {
 
 druzstvo:nazev,
@@ -677,20 +677,29 @@ lp:"",
 
 pp:"",
 
-vysledek:"",
-
 np:false,
 
 vytvoreno:
 serverTimestamp()
 
 }
+
 );
 
 
 document
 .getElementById("druzstvo")
 .value="";
+
+}catch(error){
+
+console.error(error);
+
+alert(
+"Závodníka se nepodařilo přidat."
+);
+
+}
 
 };
 
@@ -702,7 +711,10 @@ function vypocitejVysledek(z){
 if(z.np)
 return "NP";
 
-if(!validTime(z.lp)||!validTime(z.pp))
+if(
+!validTime(z.lp)||
+!validTime(z.pp)
+)
 return "-";
 
 
@@ -726,7 +738,7 @@ return z.pp;
 }
 
 
-/* ULOŽIT ČAS */
+/* ULOŽIT LP / PP */
 
 window.ulozCas=async function(id,typ){
 
@@ -739,12 +751,15 @@ return;
 
 const hodnota=
 prompt(
+
 typ==="lp"
 ?
 "Čas levého terče LP:"
 :
 "Čas pravého terče PP:",
+
 z[typ]||""
+
 );
 
 
@@ -765,11 +780,13 @@ return;
 
 await updateDoc(
 
-doc(db,"pozarní_utok",id),
+doc(db,"pozarni_utok",id),
 
 {
 
-[typ]:hodnota
+[typ]:hodnota,
+
+np:false
 
 }
 
@@ -791,7 +808,7 @@ return;
 
 await updateDoc(
 
-doc(db,"pozarní_utok",id),
+doc(db,"pozarni_utok",id),
 
 {
 
@@ -827,7 +844,7 @@ return;
 
 await updateDoc(
 
-doc(db,"pozarní_utok",id),
+doc(db,"pozarni_utok",id),
 
 {
 
@@ -851,7 +868,9 @@ return;
 
 
 await deleteDoc(
-doc(db,"pozarní_utok",id)
+
+doc(db,"pozarni_utok",id)
+
 );
 
 };
@@ -861,40 +880,45 @@ doc(db,"pozarní_utok",id)
 
 window.posunNahoru=async function(id){
 
+const startList=
+[...data].sort(
+(a,b)=>
+Number(a.start||0)-
+Number(b.start||0)
+);
+
 const index=
-data.findIndex(x=>x.id===id);
+startList.findIndex(
+x=>x.id===id
+);
 
 if(index<=0)
 return;
 
 
 const predchozi=
-data[index-1];
+startList[index-1];
 
 const aktualni=
-data[index];
+startList[index];
 
 
 await updateDoc(
 
-doc(db,"pozarní_utok",aktualni.id),
+doc(db,"pozarni_utok",aktualni.id),
 
 {
-
 start:predchozi.start
-
 }
 
 );
 
 await updateDoc(
 
-doc(db,"pozarní_utok",predchozi.id),
+doc(db,"pozarni_utok",predchozi.id),
 
 {
-
 start:aktualni.start
-
 }
 
 );
@@ -906,49 +930,56 @@ start:aktualni.start
 
 window.posunDolu=async function(id){
 
-const index=
-data.findIndex(x=>x.id===id);
+const startList=
+[...data].sort(
+(a,b)=>
+Number(a.start||0)-
+Number(b.start||0)
+);
 
-if(index<0||index>=data.length-1)
+const index=
+startList.findIndex(
+x=>x.id===id
+);
+
+if(
+index<0||
+index>=startList.length-1
+)
 return;
 
 
 const dalsi=
-data[index+1];
+startList[index+1];
 
 const aktualni=
-data[index];
+startList[index];
 
 
 await updateDoc(
 
-doc(db,"pozarní_utok",aktualni.id),
+doc(db,"pozarni_utok",aktualni.id),
 
 {
-
 start:dalsi.start
-
 }
 
 );
 
 await updateDoc(
 
-doc(db,"pozarní_utok",dalsi.id),
+doc(db,"pozarni_utok",dalsi.id),
 
 {
-
 start:aktualni.start
-
 }
 
 );
-
-
-/* RENDER */
 
 };
 
+
+/* RENDER */
 
 window.render=function(){
 
@@ -971,9 +1002,7 @@ zenyTab.innerHTML="";
 veteraniTab.innerHTML="";
 
 
-/*
-STARTOVNÍ POŘADÍ
-*/
+/* STARTOVNÍ POŘADÍ */
 
 const startList=
 [...data].sort(
@@ -983,7 +1012,7 @@ Number(b.start||0)
 );
 
 
-/* STARTOVNÍ LISTINA */
+/* STARTOVNÍ TABULKA */
 
 if(startList.length===0){
 
@@ -1071,7 +1100,7 @@ ${z.np?"NP ✓":"NP"}
 
 <td>
 
-${poradiIkona(z)}
+${index+1}
 
 </td>
 
@@ -1124,17 +1153,23 @@ onclick="smazDruzstvo('${z.id}')">
 
 vykresliVysledky(
 muziTab,
-startList.filter(z=>z.kategorie==="muzi")
+startList.filter(
+z=>z.kategorie==="muzi"
+)
 );
 
 vykresliVysledky(
 zenyTab,
-startList.filter(z=>z.kategorie==="zeny")
+startList.filter(
+z=>z.kategorie==="zeny"
+)
 );
 
 vykresliVysledky(
 veteraniTab,
-startList.filter(z=>z.kategorie==="veterani")
+startList.filter(
+z=>z.kategorie==="veterani"
+)
 );
 
 };
@@ -1155,22 +1190,14 @@ return "👨 Muži";
 }
 
 
-/* POŘADÍ IKONA */
+/* VÝSLEDKY */
 
-function poradiIkona(z){
+function vykresliVysledky(
+tabulka,
+seznam
+){
 
-return "";
-
-}
-
-
-/* VYKRESLENÍ VÝSLEDKŮ */
-
-function vykresliVysledky(tabulka,seznam){
-
-/*
-PLATNÉ VÝSLEDKY
-*/
+/* PLATNÉ VÝSLEDKY */
 
 const platne=
 seznam
@@ -1181,20 +1208,23 @@ validTime(z.pp)
 )
 .sort(
 (a,b)=>
-casNaCislo(vypocitejVysledek(a))-
-casNaCislo(vypocitejVysledek(b))
+casNaCislo(
+vypocitejVysledek(a)
+)
+-
+casNaCislo(
+vypocitejVysledek(b)
+)
 );
 
 
-/*
-NP VŽDY ÚPLNĚ DOLE
-*/
+/* NP ÚPLNĚ DOLE */
 
 const np=
-seznam.filter(z=>z.np);
+seznam.filter(
+z=>z.np
+);
 
-
-/* VŠECHNY */
 
 const vysledky=[
 ...platne,
@@ -1225,13 +1255,15 @@ return;
 }
 
 
-vysledky.forEach((z,index)=>{
+vysledky.forEach(
+(z,index)=>{
 
 const jeNP=z.np;
 
 
 /*
-POŘADÍ POUZE PRO PLATNÉ
+POŘADÍ SE POČÍTÁ JEN
+Z PLATNÝCH VÝSLEDKŮ
 */
 
 const poradi=
@@ -1243,6 +1275,7 @@ jeNP
 
 
 let mistoClass="";
+
 
 if(!jeNP){
 
@@ -1263,9 +1296,7 @@ tabulka.innerHTML+=`
 <tr>
 
 <td class="place ${mistoClass}">
-
 ${poradi}
-
 </td>
 
 <td>
@@ -1281,9 +1312,7 @@ ${z.pp||"-"}
 </td>
 
 <td class="result">
-
 ${vypocitejVysledek(z)}
-
 </td>
 
 <td>
@@ -1301,4 +1330,4 @@ ${z.start}
 </script>
 
 </body>
-</html>
+</html> 
