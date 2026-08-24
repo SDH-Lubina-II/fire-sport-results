@@ -7,6 +7,7 @@
 <title>SDH Lubina II–Větřkovice</title>
 
 <style>
+
 *{
     box-sizing:border-box;
 }
@@ -16,6 +17,7 @@ body{
     font-family:Arial,sans-serif;
     min-height:100vh;
     color:white;
+
     background:
         radial-gradient(circle at top right,#5b1010 0%,transparent 35%),
         linear-gradient(145deg,#090d13,#151b24);
@@ -26,6 +28,7 @@ body{
     margin:auto;
     padding:20px 16px 40px;
 }
+
 
 /* HLAVNI STRANKA */
 
@@ -97,6 +100,7 @@ body{
     font-size:14px;
 }
 
+
 /* MOTANI HADIC */
 
 .screen{
@@ -163,6 +167,7 @@ button{
 .primary:hover{
     background:#ed3a3a;
 }
+
 
 /* MUZI / ZENY */
 
@@ -281,13 +286,17 @@ td{
     .category-buttons{
         grid-template-columns:1fr 1fr;
     }
+
 }
+
 </style>
 </head>
+
 
 <body>
 
 <div class="app">
+
 
 <!-- HLAVNI STRANKA -->
 
@@ -308,9 +317,11 @@ okres Nový Jičín
 
 </header>
 
+
 <div class="section-title">
 Soutěže
 </div>
+
 
 <!-- POZARNI UTOK -->
 
@@ -318,7 +329,9 @@ Soutěže
 class="discipline"
 onclick="otevriPozarni()">
 
-<div class="icon">🚒</div>
+<div class="icon">
+🚒
+</div>
 
 <div class="name">
 Požární útok
@@ -330,13 +343,16 @@ Aktuální pořadí
 
 </button>
 
+
 <!-- MOTANI HADIC -->
 
 <button
 class="discipline"
 onclick="otevriMotani()">
 
-<div class="icon">🌀</div>
+<div class="icon">
+🌀
+</div>
 
 <div class="name">
 Motání hadic
@@ -347,6 +363,8 @@ Jednotlivci · nejrychlejší čas
 </div>
 
 </button>
+
+
 <!-- NASTAVENI -->
 
 <button
@@ -366,6 +384,7 @@ Nastavení viditelnosti soutěží
 </div>
 
 </button>
+
 </div>
 
 
@@ -381,11 +400,13 @@ onclick="zpet()">
 
 </button>
 
+
 <div class="card">
 
 <h2>
 🌀 Motání hadic
 </h2>
+
 
 <div class="form">
 
@@ -410,6 +431,7 @@ onclick="pridat()">
 </button>
 
 </div>
+
 
 <!-- VYBER KATEGORIE -->
 
@@ -453,6 +475,7 @@ onclick="vyberKategorii('zeny')">
 <thead>
 
 <tr>
+
 <th>#</th>
 <th>Příjmení</th>
 <th>Jméno</th>
@@ -460,6 +483,7 @@ onclick="vyberKategorii('zeny')">
 <th>Nejlepší</th>
 <th>Pokusy</th>
 <th>Akce</th>
+
 </tr>
 
 </thead>
@@ -488,6 +512,7 @@ onclick="vyberKategorii('zeny')">
 <thead>
 
 <tr>
+
 <th>#</th>
 <th>Příjmení</th>
 <th>Jméno</th>
@@ -495,6 +520,7 @@ onclick="vyberKategorii('zeny')">
 <th>Nejlepší</th>
 <th>Pokusy</th>
 <th>Akce</th>
+
 </tr>
 
 </thead>
@@ -511,6 +537,7 @@ onclick="vyberKategorii('zeny')">
 <div class="status">
 
 <span class="online"></span>
+
 Živá aktualizace
 
 </div>
@@ -522,11 +549,13 @@ onclick="vyberKategorii('zeny')">
 
 <script type="module">
 
+
 import {
     initializeApp
 }
 from
 "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
 
 import {
     getFirestore,
@@ -563,20 +592,26 @@ const firebaseConfig = {
 
     appId:
     "1:63170955961:web:f5b9e052312a79b17de968"
+
 };
+
 
 const app =
 initializeApp(firebaseConfig);
 
+
 const db =
 getFirestore(app);
+
 
 const col =
 collection(db,"motani_hadic");
 
+
 let data=[];
 
-/* VYBRANA KATEGORIE PRI PRIDAVANI */
+
+/* VYBRANA KATEGORIE */
 
 let vybranaKategorie="muzi";
 
@@ -590,8 +625,11 @@ window.otevriMotani=function(){
 
     document.getElementById("motani")
     .style.display="block";
+
 };
 
+
+/* POZARNI UTOK */
 
 window.otevriPozarni=function(){
 
@@ -599,8 +637,8 @@ window.otevriPozarni=function(){
 
 };
 
-};
 
+/* ZPET */
 
 window.zpet=function(){
 
@@ -609,6 +647,7 @@ window.zpet=function(){
 
     document.getElementById("home")
     .style.display="block";
+
 };
 
 
@@ -624,8 +663,11 @@ window.vyberKategorii=function(kategorie){
     const zeny=
     document.getElementById("btnZeny");
 
+
     muzi.classList.remove("active");
+
     zeny.classList.remove("active");
+
 
     if(kategorie==="muzi"){
 
@@ -653,9 +695,13 @@ function validTime(t){
         return false;
 
     const sekundy=Number(casti[0]);
+
     const setiny=Number(casti[1]);
 
-    if(isNaN(sekundy)||isNaN(setiny))
+    if(
+        isNaN(sekundy)||
+        isNaN(setiny)
+    )
         return false;
 
     if(sekundy<0)
@@ -665,6 +711,7 @@ function validTime(t){
         return false;
 
     return true;
+
 }
 
 
@@ -676,27 +723,33 @@ function casNaCislo(cas){
 
     return Number(casti[0])*100+
            Number(casti[1]);
+
 }
 
 
 /* REALTIME */
 
-onSnapshot(col,(snap)=>{
+onSnapshot(
+    col,
+    (snap)=>{
 
-    data=[];
+        data=[];
 
-    snap.forEach(d=>{
+        snap.forEach(d=>{
 
-        data.push({
-            id:d.id,
-            ...d.data()
+            data.push({
+
+                id:d.id,
+                ...d.data()
+
+            });
+
         });
 
-    });
+        render();
 
-    render();
-
-});
+    }
+);
 
 
 /* PRIDAT ZAVODNIKA */
@@ -704,44 +757,78 @@ onSnapshot(col,(snap)=>{
 window.pridat=async function(){
 
     const p=
-    document.getElementById("prijmeni")
-    .value.trim();
+    document
+    .getElementById("prijmeni")
+    .value
+    .trim();
+
 
     const j=
-    document.getElementById("jmeno")
-    .value.trim();
+    document
+    .getElementById("jmeno")
+    .value
+    .trim();
+
 
     const d=
-    document.getElementById("druzstvo")
-    .value.trim();
+    document
+    .getElementById("druzstvo")
+    .value
+    .trim();
+
 
     if(!p||!j||!d){
 
         alert(
-        "Vyplň příjmení, jméno a družstvo."
+            "Vyplň příjmení, jméno a družstvo."
         );
 
         return;
+
     }
 
-    await addDoc(col,{
 
-        prijmeni:p,
-        jmeno:j,
-        druzstvo:d,
+    await addDoc(
 
-        /* NOVA KATEGORIE */
-        kategorie:vybranaKategorie,
+        col,
 
-        pokusy:[],
-        nejlepsi:"",
-        vytvoreno:serverTimestamp()
+        {
 
-    });
+            prijmeni:p,
 
-    document.getElementById("prijmeni").value="";
-    document.getElementById("jmeno").value="";
-    document.getElementById("druzstvo").value="";
+            jmeno:j,
+
+            druzstvo:d,
+
+            kategorie:
+            vybranaKategorie,
+
+            pokusy:[],
+
+            nejlepsi:"",
+
+            vytvoreno:
+            serverTimestamp()
+
+        }
+
+    );
+
+
+    document
+    .getElementById("prijmeni")
+    .value="";
+
+
+    document
+    .getElementById("jmeno")
+    .value="";
+
+
+    document
+    .getElementById("druzstvo")
+    .value="";
+
 };
 
 
@@ -754,9 +841,17 @@ window.smaz=async function(id){
     ))
         return;
 
+
     await deleteDoc(
-        doc(db,"motani_hadic",id)
+
+        doc(
+            db,
+            "motani_hadic",
+            id
+        )
+
     );
+
 };
 
 
@@ -765,10 +860,14 @@ window.smaz=async function(id){
 window.edit=async function(id){
 
     const z=
-    data.find(s=>s.id===id);
+    data.find(
+        s=>s.id===id
+    );
+
 
     if(!z)
         return;
+
 
     const p=
     prompt(
@@ -776,8 +875,10 @@ window.edit=async function(id){
         z.prijmeni
     );
 
+
     if(!p)
         return;
+
 
     const j=
     prompt(
@@ -785,29 +886,42 @@ window.edit=async function(id){
         z.jmeno
     );
 
+
     if(!j)
         return;
+
 
     const d=
     prompt(
         "Družstvo:",
-        z.druzstvo || ""
+        z.druzstvo||""
     );
+
 
     if(!d)
         return;
 
+
     await updateDoc(
 
-        doc(db,"motani_hadic",id),
+        doc(
+            db,
+            "motani_hadic",
+            id
+        ),
 
         {
+
             prijmeni:p,
+
             jmeno:j,
+
             druzstvo:d
+
         }
 
     );
+
 };
 
 
@@ -820,8 +934,10 @@ window.pridatPokus=async function(id){
         "Zadej čas například 15:23"
     );
 
+
     if(!cas)
         return;
+
 
     if(!validTime(cas)){
 
@@ -830,22 +946,36 @@ window.pridatPokus=async function(id){
         );
 
         return;
+
     }
 
+
     const z=
-    data.find(s=>s.id===id);
+    data.find(
+        s=>s.id===id
+    );
+
 
     if(!z)
         return;
 
+
     const pokusy=
     [...(z.pokusy||[])];
 
+
     pokusy.push(cas);
 
-    let nej=pokusy[0];
 
-    for(let i=1;i<pokusy.length;i++){
+    let nej=
+    pokusy[0];
+
+
+    for(
+        let i=1;
+        i<pokusy.length;
+        i++
+    ){
 
         if(
             casNaCislo(pokusy[i])
@@ -853,21 +983,32 @@ window.pridatPokus=async function(id){
             casNaCislo(nej)
         ){
 
-            nej=pokusy[i];
+            nej=
+            pokusy[i];
 
         }
+
     }
+
 
     await updateDoc(
 
-        doc(db,"motani_hadic",id),
+        doc(
+            db,
+            "motani_hadic",
+            id
+        ),
 
         {
+
             pokusy:pokusy,
+
             nejlepsi:nej
+
         }
 
     );
+
 };
 
 
@@ -876,16 +1017,25 @@ window.pridatPokus=async function(id){
 window.editPokus=async function(id,index){
 
     const z=
-    data.find(s=>s.id===id);
+    data.find(
+        s=>s.id===id
+    );
 
-    if(!z||!Array.isArray(z.pokusy))
+
+    if(
+        !z||
+        !Array.isArray(z.pokusy)
+    )
         return;
+
 
     const stare=
     z.pokusy[index];
 
+
     if(!stare)
         return;
+
 
     const novy=
     prompt(
@@ -893,8 +1043,10 @@ window.editPokus=async function(id,index){
         stare
     );
 
+
     if(!novy)
         return;
+
 
     if(!validTime(novy)){
 
@@ -903,16 +1055,26 @@ window.editPokus=async function(id,index){
         );
 
         return;
+
     }
+
 
     const pokusy=
     [...(z.pokusy||[])];
 
+
     pokusy[index]=novy;
 
-    let nej=pokusy[0];
 
-    for(let i=1;i<pokusy.length;i++){
+    let nej=
+    pokusy[0];
+
+
+    for(
+        let i=1;
+        i<pokusy.length;
+        i++
+    ){
 
         if(
             casNaCislo(pokusy[i])
@@ -920,21 +1082,32 @@ window.editPokus=async function(id,index){
             casNaCislo(nej)
         ){
 
-            nej=pokusy[i];
+            nej=
+            pokusy[i];
 
         }
+
     }
+
 
     await updateDoc(
 
-        doc(db,"motani_hadic",id),
+        doc(
+            db,
+            "motani_hadic",
+            id
+        ),
 
         {
+
             pokusy:pokusy,
+
             nejlepsi:nej
+
         }
 
     );
+
 };
 
 
@@ -945,46 +1118,50 @@ window.render=function(){
     const tabMuzi=
     document.getElementById("tabMuzi");
 
+
     const tabZeny=
     document.getElementById("tabZeny");
 
+
     tabMuzi.innerHTML="";
+
     tabZeny.innerHTML="";
 
 
-    /* RAZENI PODLE PRIJMENI */
-
     const serazeno=
-    [...data].sort((a,b)=>{
+    [...data].sort(
+        (a,b)=>{
 
-        const p1=
-        (a.prijmeni||"")
-        .toLocaleLowerCase("cs");
-
-        const p2=
-        (b.prijmeni||"")
-        .toLocaleLowerCase("cs");
-
-        return p1.localeCompare(p2,"cs");
-
-    });
+            const p1=
+            (a.prijmeni||"")
+            .toLocaleLowerCase("cs");
 
 
-    /*
-       STARE ZAZNAMY BEZ KATEGORIE
-       nechame automaticky mezi MUZI,
-       aby nezmizely.
-    */
+            const p2=
+            (b.prijmeni||"")
+            .toLocaleLowerCase("cs");
+
+
+            return p1.localeCompare(
+                p2,
+                "cs"
+            );
+
+        }
+    );
+
 
     const muzi=
-    serazeno.filter(z=>
-        z.kategorie==="muzi" ||
+    serazeno.filter(
+        z=>
+        z.kategorie==="muzi"||
         !z.kategorie
     );
 
 
     const zeny=
-    serazeno.filter(z=>
+    serazeno.filter(
+        z=>
         z.kategorie==="zeny"
     );
 
@@ -1003,9 +1180,12 @@ window.render=function(){
 };
 
 
-/* VYKRESLENI JEDNE TABULKY */
+/* VYKRESLENI TABULKY */
 
-function vykresliTabulku(tabulka,seznam){
+function vykresliTabulku(
+    tabulka,
+    seznam
+){
 
     if(seznam.length===0){
 
@@ -1026,88 +1206,95 @@ function vykresliTabulku(tabulka,seznam){
         `;
 
         return;
+
     }
 
 
-    seznam.forEach((z,i)=>{
+    seznam.forEach(
+        (z,i)=>{
 
-        const pokusy=
-        (z.pokusy||[])
-        .map((c,index)=>`
+            const pokusy=
+            (z.pokusy||[])
+            .map(
+                (c,index)=>`
 
-            <div
-            class="attempt"
-            onclick="editPokus('${z.id}',${index})">
+                <div
+                class="attempt"
+                onclick="editPokus('${z.id}',${index})">
 
-            ⏱ ${c}
+                ⏱ ${c}
 
-            </div>
+                </div>
 
-        `)
-        .join("");
+                `
+            )
+            .join("");
 
 
-        tabulka.innerHTML+=`
+            tabulka.innerHTML+=`
 
-        <tr>
+            <tr>
 
-        <td>
-        ${i+1}
-        </td>
+            <td>
+            ${i+1}
+            </td>
 
-        <td>
-        ${z.prijmeni}
-        </td>
+            <td>
+            ${z.prijmeni}
+            </td>
 
-        <td>
-        ${z.jmeno}
-        </td>
+            <td>
+            ${z.jmeno}
+            </td>
 
-        <td>
-        ${z.druzstvo||"-"}
-        </td>
+            <td>
+            ${z.druzstvo||"-"}
+            </td>
 
-        <td class="best">
-        ${z.nejlepsi||"-"}
-        </td>
+            <td class="best">
+            ${z.nejlepsi||"-"}
+            </td>
 
-        <td>
-        ${pokusy||"-"}
-        </td>
+            <td>
+            ${pokusy||"-"}
+            </td>
 
-        <td>
+            <td>
 
-        <button
-        class="action"
-        onclick="edit('${z.id}')">
+            <button
+            class="action"
+            onclick="edit('${z.id}')">
 
-        ✏️
+            ✏️
 
-        </button>
+            </button>
 
-        <button
-        class="action"
-        onclick="smaz('${z.id}')">
 
-        🗑️
+            <button
+            class="action"
+            onclick="smaz('${z.id}')">
 
-        </button>
+            🗑️
 
-        <button
-        class="action"
-        onclick="pridatPokus('${z.id}')">
+            </button>
 
-        ➕
 
-        </button>
+            <button
+            class="action"
+            onclick="pridatPokus('${z.id}')">
 
-        </td>
+            ➕
 
-        </tr>
+            </button>
 
-        `;
+            </td>
 
-    });
+            </tr>
+
+            `;
+
+        }
+    );
 
 }
 
