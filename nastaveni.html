@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Nastavení soutěží</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+min-height:100vh;
+color:white;
+
+background:
+radial-gradient(circle at top right,#5b1010 0%,transparent 35%),
+linear-gradient(145deg,#090d13,#151b24);
+}
+
+.app{
+max-width:700px;
+margin:auto;
+padding:25px 16px 40px;
+}
+
+.header{
+text-align:center;
+margin-bottom:25px;
+}
+
+.logo{
+font-size:42px;
+margin-bottom:10px;
+}
+
+h1{
+font-size:25px;
+margin:0 0 8px;
+}
+
+.subtitle{
+color:#8995a6;
+font-size:14px;
+}
+
+.card{
+background:rgba(255,255,255,.055);
+border:1px solid rgba(255,255,255,.10);
+border-radius:22px;
+padding:20px;
+margin-bottom:18px;
+}
+
+.card h2{
+margin:0 0 18px;
+font-size:21px;
+}
+
+.setting{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:15px;
+
+padding:15px 0;
+
+border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.setting:last-child{
+border-bottom:0;
+}
+
+.setting-name{
+font-size:16px;
+font-weight:bold;
+}
+
+.setting-description{
+font-size:12px;
+color:#78869a;
+margin-top:4px;
+}
+
+.main-setting{
+background:rgba(185,40,40,.10);
+margin:0 -10px 10px;
+padding:15px 10px;
+border-radius:14px;
+}
+
+.main-setting .setting-name{
+font-size:18px;
+}
+
+
+/* PREPINAC */
+
+.switch{
+position:relative;
+width:58px;
+height:32px;
+flex-shrink:0;
+}
+
+.switch input{
+opacity:0;
+width:0;
+height:0;
+}
+
+.slider{
+position:absolute;
+cursor:pointer;
+inset:0;
+
+background:#394455;
+
+border-radius:32px;
+
+transition:.2s;
+}
+
+.slider:before{
+content:"";
+
+position:absolute;
+
+width:24px;
+height:24px;
+
+left:4px;
+top:4px;
+
+background:white;
+
+border-radius:50%;
+
+transition:.2s;
+}
+
+.switch input:checked + .slider{
+background:#d72f2f;
+}
+
+.switch input:checked + .slider:before{
+transform:translateX(26px);
+}
+
+.status{
+text-align:center;
+color:#68778b;
+font-size:13px;
+margin-top:20px;
+}
+
+.online{
+display:inline-block;
+width:7px;
+height:7px;
+border-radius:50%;
+background:#36d399;
+margin-right:6px;
+box-shadow:0 0 9px #36d399;
+}
+
+.back{
+display:block;
+width:100%;
+
+padding:13px;
+
+border:1px solid #394455;
+border-radius:12px;
+
+background:transparent;
+color:#aeb9c8;
+
+font-size:15px;
+
+cursor:pointer;
+
+margin-top:20px;
+}
+
+.back:hover{
+background:rgba(255,255,255,.06);
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+<div class="header">
+
+<div class="logo">
+⚙️
+</div>
+
+<h1>
+Nastavení soutěží
+</h1>
+
+<div class="subtitle">
+Viditelnost soutěží a kategorií pro diváky
+</div>
+
+</div>
+
+
+<!-- POZARNI UTOK -->
+
+<div class="card">
+
+<h2>
+🚒 Požární útok
+</h2>
+
+
+<div class="setting main-setting">
+
+<div>
+
+<div class="setting-name">
+Celá soutěž
+</div>
+
+<div class="setting-description">
+Zobrazit Požární útok divákům
+</div>
+
+</div>
+
+<label class="switch">
+
+<input
+type="checkbox"
+id="utokCelkem"
+checked
+>
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+
+<div class="setting">
+
+<div>
+
+<div class="setting-name">
+👨 Muži
+</div>
+
+<div class="setting-description">
+Kategorie Muži
+</div>
+
+</div>
+
+<label class="switch">
+
+<input
+type="checkbox"
+id="utokMuzi"
+checked
+>
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+
+<div class="setting">
+
+<div>
+
+<div class="setting-name">
+👩 Ženy
+</div>
+
+<div class="setting-description">
+Kategorie Ženy
+</div>
+
+</div>
+
+<label class="switch">
+
+<input
+type="checkbox"
+id="utokZeny"
+checked
+>
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+
+<div class="setting">
+
+<div>
+
+<div class="setting-name">
+🏆 Veteráni 35+
+</div>
+
+<div class="setting-description">
+Kategorie Veteráni 35+
+</div>
+
+</div>
+
+<label class="switch">
+
+<input
+type="checkbox"
+id="utokVeterani"
+checked
+>
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+</div>
+
+
+<!-- MOTANI HADIC -->
+
+<div class="card">
+
+<h2>
+🌀 Motání hadic
+</h2>
+
+
+<div class="setting main-setting">
+
+<div>
+
+<div class="setting-name">
+Celá soutěž
+</div>
+
+<div class="setting-description">
+Zobrazit Motání hadic divákům
+</div>
+
+</div>
+
+<label class="switch">
+
+<input
+type="checkbox"
+id="motaniCelkem"
+checked
+>
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+
+<div class="setting">
+
+<div>
+
+<div class="setting-name">
+👨 Muži
+</div>
+
+<div class="setting-description">
+Kategorie Muži
+</div>
+
+</div>
+
+<label class="switch">
+
+<input
+type="checkbox"
+id="motaniMuzi"
+checked
+>
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+
+<div class="setting">
+
+<div>
+
+<div class="setting-name">
+👩 Ženy
+</div>
+
+<div class="setting-description">
+Kategorie Ženy
+</div>
+
+</div>
+
+<label class="switch">
+
+<input
+type="checkbox"
+id="motaniZeny"
+checked
+>
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+</div>
+
+
+<div class="status">
+
+<span class="online"></span>
+
+Nastavení se ukládá automaticky
+
+</div>
+
+
+<button
+class="back"
+onclick="window.location.href='index.html'">
+
+← Zpět na soutěž
+
+</button>
+
+
+</div>
+
+
+<script type="module">
+
+import {
+initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+
+import {
+getFirestore,
+doc,
+setDoc,
+onSnapshot
+}
+from
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+
+/* FIREBASE */
+
+const firebaseConfig = {
+
+apiKey:
+"AIzaSyCIZ3Z5HvF6P9TSQ9GxiZEIoVGFsay2pbo",
+
+authDomain:
+"fire-sport-results.firebaseapp.com",
+
+projectId:
+"fire-sport-results",
+
+storageBucket:
+"fire-sport-results.firebasestorage.app",
+
+messagingSenderId:
+"63170955961",
+
+appId:
+"1:63170955961:web:f5b9e052312a79b17de968"
+
+};
+
+
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getFirestore(app);
+
+
+/*
+  JEDEN DOKUMENT PRO NASTAVENI
+*/
+
+const nastaveniRef =
+doc(db,"nastaveni","viditelnost");
+
+
+/* PRVKY */
+
+const prvky={
+
+utokCelkem:
+document.getElementById("utokCelkem"),
+
+utokMuzi:
+document.getElementById("utokMuzi"),
+
+utokZeny:
+document.getElementById("utokZeny"),
+
+utokVeterani:
+document.getElementById("utokVeterani"),
+
+motaniCelkem:
+document.getElementById("motaniCelkem"),
+
+motaniMuzi:
+document.getElementById("motaniMuzi"),
+
+motaniZeny:
+document.getElementById("motaniZeny")
+
+};
+
+
+/* VYCHOZI HODNOTY */
+
+const vychozi={
+
+utokCelkem:true,
+utokMuzi:true,
+utokZeny:true,
+utokVeterani:true,
+
+motaniCelkem:true,
+motaniMuzi:true,
+motaniZeny:true
+
+};
+
+
+/* REALTIME NACITANI */
+
+onSnapshot(
+nastaveniRef,
+(snap)=>{
+
+if(!snap.exists()){
+
+setDoc(
+nastaveniRef,
+vychozi
+);
+
+return;
+
+}
+
+const data=snap.data();
+
+
+Object.keys(prvky).forEach(k=>{
+
+if(
+typeof data[k]==="boolean"
+){
+
+prvky[k].checked=data[k];
+
+}else{
+
+prvky[k].checked=vychozi[k];
+
+}
+
+});
+
+}
+);
+
+
+/* AUTOMATICKE UKLADANI */
+
+Object.keys(prvky).forEach(k=>{
+
+prvky[k].addEventListener(
+"change",
+async ()=>{
+
+await setDoc(
+
+nastaveniRef,
+
+{
+[k]:prvky[k].checked
+},
+
+{
+merge:true
+}
+
+);
+
+}
+);
+
+});
+
+
+/*
+  KDYZ SE VYPNE CELE SOUTEZ,
+  KATEGORIE ZUSTAVAJI ULOZENE.
+  PO ZNOVUZAPNUTI SE VRATI
+  DO PUvodniho STAVU.
+*/
+
+</script>
+
+</body>
+</html>
