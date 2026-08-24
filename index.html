@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Fire Sport Results</title>
+  <title>SDH Lubina I–Větřkovice</title>
 
   <style>
     * {
@@ -17,137 +17,154 @@
       font-family: Arial, sans-serif;
       min-height: 100vh;
       background:
-        radial-gradient(circle at top right, #26364d 0%, transparent 35%),
-        linear-gradient(145deg, #07111f, #101827 55%, #07111f);
+        radial-gradient(circle at 50% -10%, #26374d 0%, transparent 42%),
+        linear-gradient(145deg, #060d17, #101a29 55%, #060d17);
       color: white;
     }
 
     .app {
-      max-width: 650px;
-      margin: 0 auto;
+      max-width: 620px;
       min-height: 100vh;
-      padding: 24px 18px 35px;
+      margin: auto;
+      padding: 28px 18px 40px;
     }
+
+    /* HLAVIČKA */
 
     .header {
       text-align: center;
-      padding: 25px 10px 35px;
+      padding: 20px 5px 38px;
     }
 
-    .logo {
-      width: 72px;
-      height: 72px;
-      margin: 0 auto 18px;
-      border-radius: 22px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 38px;
-      background: linear-gradient(145deg, #ffb000, #f04400);
-      box-shadow: 0 12px 35px rgba(255, 105, 0, 0.3);
+    .fire {
+      font-size: 42px;
+      margin-bottom: 15px;
     }
 
-    h1 {
-      font-size: 30px;
-      letter-spacing: 1px;
-      margin-bottom: 8px;
+    .header h1 {
+      font-size: 19px;
+      line-height: 1.35;
+      letter-spacing: 1.4px;
+      font-weight: 800;
+      color: white;
     }
 
-    .subtitle {
-      color: #9eacbd;
-      font-size: 15px;
+    .header h1 span {
+      color: #ef3333;
     }
 
-    .section-title {
+    .district {
+      margin-top: 7px;
+      color: #8492a5;
       font-size: 14px;
-      color: #8796aa;
-      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+    /* NADPIS */
+
+    .choose {
+      color: #718095;
+      font-size: 12px;
+      font-weight: bold;
       letter-spacing: 2px;
+      text-transform: uppercase;
       margin: 0 5px 14px;
     }
 
-    .discipline {
-      width: 100%;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 24px;
-      padding: 24px;
-      margin-bottom: 16px;
-      text-align: left;
-      color: white;
-      cursor: pointer;
-      transition: 0.2s;
-      background: rgba(255,255,255,0.055);
-      backdrop-filter: blur(12px);
-    }
+    /* KARTY */
 
-    .discipline:hover {
-      transform: translateY(-2px);
-      border-color: rgba(255,255,255,0.18);
+    .discipline {
+      position: relative;
+      width: 100%;
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: 24px;
+      padding: 25px 23px;
+      margin-bottom: 15px;
+      color: white;
+      text-align: left;
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform .18s, border-color .18s;
+      box-shadow: 0 12px 35px rgba(0,0,0,.18);
     }
 
     .discipline:active {
-      transform: scale(0.98);
+      transform: scale(.985);
+    }
+
+    .discipline:hover {
+      border-color: rgba(255,255,255,.2);
     }
 
     .attack {
       background:
-        linear-gradient(135deg, rgba(255,90,0,0.22), rgba(255,170,0,0.06)),
-        rgba(255,255,255,0.055);
+        linear-gradient(135deg, rgba(235,48,48,.22), rgba(235,48,48,.04)),
+        rgba(255,255,255,.055);
     }
 
     .hoses {
       background:
-        linear-gradient(135deg, rgba(0,145,255,0.20), rgba(0,210,180,0.06)),
-        rgba(255,255,255,0.055);
+        linear-gradient(135deg, rgba(35,125,255,.20), rgba(35,125,255,.03)),
+        rgba(255,255,255,.055);
     }
 
     .icon {
-      font-size: 38px;
-      margin-bottom: 15px;
+      font-size: 42px;
+      margin-bottom: 13px;
     }
 
     .discipline h2 {
       font-size: 23px;
-      margin-bottom: 8px;
+      letter-spacing: .2px;
+      margin-bottom: 7px;
     }
 
     .discipline p {
-      color: #aab6c5;
+      color: #9daabc;
       font-size: 14px;
-      line-height: 1.5;
     }
 
     .arrow {
-      float: right;
-      font-size: 28px;
-      color: #728096;
-      margin-top: -32px;
+      position: absolute;
+      right: 23px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 34px;
+      color: #637186;
+      font-weight: 300;
     }
 
+    /* STAV */
+
     .status {
-      margin-top: 35px;
       text-align: center;
+      margin-top: 28px;
       color: #68778b;
       font-size: 12px;
     }
 
     .online {
       display: inline-block;
-      width: 8px;
-      height: 8px;
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
       background: #36d399;
       margin-right: 6px;
-      box-shadow: 0 0 10px #36d399;
+      box-shadow: 0 0 9px #36d399;
     }
 
     @media (max-width: 420px) {
-      h1 {
-        font-size: 26px;
+
+      .header h1 {
+        font-size: 17px;
+      }
+
+      .discipline h2 {
+        font-size: 21px;
       }
 
       .discipline {
-        padding: 21px;
+        padding: 22px 20px;
       }
     }
   </style>
@@ -158,42 +175,59 @@
   <main class="app">
 
     <header class="header">
-      <div class="logo">🔥</div>
 
-      <h1>FIRE SPORT RESULTS</h1>
+      <div class="fire">🔥</div>
 
-      <p class="subtitle">
-        Výsledky hasičských soutěží
-      </p>
+      <h1>
+        <span>SBOR DOBROVOLNÝCH HASIČŮ</span><br>
+        LUBINA I–VĚTŘKOVICE
+      </h1>
+
+      <div class="district">
+        okres Nový Jičín
+      </div>
+
     </header>
 
-    <div class="section-title">
+
+    <div class="choose">
       Vyber disciplínu
     </div>
 
-    <button class="discipline attack" onclick="openDiscipline('attack')">
+
+    <!-- POŽÁRNÍ ÚTOK -->
+
+    <button
+      class="discipline attack"
+      onclick="openDiscipline('attack')">
+
       <div class="icon">🚒</div>
 
       <h2>Požární útok</h2>
 
-      <p>
-        1 pokus · LP + PP · automatické pořadí
-      </p>
+      <p>Aktuální pořadí</p>
 
       <div class="arrow">›</div>
+
     </button>
 
-    <button class="discipline hoses" onclick="openDiscipline('hoses')">
-      <div class="icon">🪢</div>
+
+    <!-- MOTÁNÍ HADIC -->
+
+    <button
+      class="discipline hoses"
+      onclick="openDiscipline('hoses')">
+
+      <div class="icon">🌀</div>
 
       <h2>Motání hadic</h2>
 
-      <p>
-        1 pokus · měření času · automatické pořadí
-      </p>
+      <p>Jednotlivci · nejrychlejší čas</p>
 
       <div class="arrow">›</div>
+
     </button>
+
 
     <div class="status">
       <span class="online"></span>
@@ -202,18 +236,13 @@
 
   </main>
 
-  <script type="module">
 
-    // =========================
-    // FIREBASE
-    // =========================
+  <script type="module">
 
     import { initializeApp }
       from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 
-    import {
-      getFirestore
-    }
+    import { getFirestore }
       from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 
@@ -243,18 +272,14 @@
     const db = getFirestore(app);
 
 
-    // =========================
-    // DISCIPLÍNY
-    // =========================
-
     window.openDiscipline = function(type) {
 
       if (type === "attack") {
-        alert("Požární útok – připravujeme zadávání výsledků.");
+        alert("Požární útok – připravujeme výsledky.");
       }
 
       if (type === "hoses") {
-        alert("Motání hadic – připravujeme zadávání výsledků.");
+        alert("Motání hadic – připravujeme výsledky.");
       }
 
     };
@@ -262,4 +287,4 @@
   </script>
 
 </body>
-  </html>
+</html>
