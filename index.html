@@ -164,6 +164,38 @@ button{
     background:#ed3a3a;
 }
 
+/* MUZI / ZENY */
+
+.category-buttons{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-top:15px;
+}
+
+.category-button{
+    border:1px solid #394455;
+    border-radius:12px;
+    padding:13px;
+    background:#101722;
+    color:#aeb9c8;
+    font-weight:bold;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.category-button.active{
+    background:#b92828;
+    border-color:#ef3333;
+    color:white;
+}
+
+.category-title{
+    font-size:21px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
 .table-wrap{
     overflow-x:auto;
 }
@@ -244,6 +276,10 @@ td{
 
     .form .primary{
         grid-column:1 / -1;
+    }
+
+    .category-buttons{
+        grid-template-columns:1fr 1fr;
     }
 }
 </style>
@@ -357,14 +393,40 @@ onclick="pridat()">
 
 </div>
 
+<!-- VYBER KATEGORIE -->
+
+<div class="category-buttons">
+
+<button
+id="btnMuzi"
+class="category-button active"
+onclick="vyberKategorii('muzi')">
+
+👨 Muži
+
+</button>
+
+<button
+id="btnZeny"
+class="category-button"
+onclick="vyberKategorii('zeny')">
+
+👩 Ženy
+
+</button>
+
+</div>
+
 </div>
 
 
+<!-- MUZI -->
+
 <div class="card">
 
-<h2>
-Aktuální pořadí
-</h2>
+<div class="category-title">
+👨 Muži
+</div>
 
 <div class="table-wrap">
 
@@ -384,13 +446,49 @@ Aktuální pořadí
 
 </thead>
 
-<tbody id="tab"></tbody>
+<tbody id="tabMuzi"></tbody>
 
 </table>
 
 </div>
 
 </div>
+
+
+<!-- ZENY -->
+
+<div class="card">
+
+<div class="category-title">
+👩 Ženy
+</div>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+<th>#</th>
+<th>Příjmení</th>
+<th>Jméno</th>
+<th>Družstvo</th>
+<th>Nejlepší</th>
+<th>Pokusy</th>
+<th>Akce</th>
+</tr>
+
+</thead>
+
+<tbody id="tabZeny"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
 
 <div class="status">
 
@@ -460,6 +558,10 @@ collection(db,"motani_hadic");
 
 let data=[];
 
+/* VYBRANA KATEGORIE PRI PRIDAVANI */
+
+let vybranaKategorie="muzi";
+
 
 /* NAVIGACE */
 
@@ -487,6 +589,34 @@ window.zpet=function(){
 
     document.getElementById("home")
     .style.display="block";
+};
+
+
+/* VYBER KATEGORIE */
+
+window.vyberKategorii=function(kategorie){
+
+    vybranaKategorie=kategorie;
+
+    const muzi=
+    document.getElementById("btnMuzi");
+
+    const zeny=
+    document.getElementById("btnZeny");
+
+    muzi.classList.remove("active");
+    zeny.classList.remove("active");
+
+    if(kategorie==="muzi"){
+
+        muzi.classList.add("active");
+
+    }else{
+
+        zeny.classList.add("active");
+
+    }
+
 };
 
 
@@ -579,6 +709,10 @@ window.pridat=async function(){
         prijmeni:p,
         jmeno:j,
         druzstvo:d,
+
+        /* NOVA KATEGORIE */
+        kategorie:vybranaKategorie,
+
         pokusy:[],
         nejlepsi:"",
         vytvoreno:serverTimestamp()
@@ -788,11 +922,17 @@ window.editPokus=async function(id,index){
 
 window.render=function(){
 
-    const t=
-    document.getElementById("tab");
+    const tabMuzi=
+    document.getElementById("tabMuzi");
 
-    t.innerHTML="";
+    const tabZeny=
+    document.getElementById("tabZeny");
 
+    tabMuzi.innerHTML="";
+    tabZeny.innerHTML="";
+
+
+    /* RAZENI PODLE PRIJMENI */
 
     const serazeno=
     [...data].sort((a,b)=>{
@@ -806,12 +946,50 @@ window.render=function(){
         .toLocaleLowerCase("cs");
 
         return p1.localeCompare(p2,"cs");
+
     });
 
 
-    if(serazeno.length===0){
+    /*
+       STARE ZAZNAMY BEZ KATEGORIE
+       nechame automaticky mezi MUZI,
+       aby nezmizely.
+    */
 
-        t.innerHTML=`
+    const muzi=
+    serazeno.filter(z=>
+        z.kategorie==="muzi" ||
+        !z.kategorie
+    );
+
+
+    const zeny=
+    serazeno.filter(z=>
+        z.kategorie==="zeny"
+    );
+
+
+    vykresliTabulku(
+        tabMuzi,
+        muzi
+    );
+
+
+    vykresliTabulku(
+        tabZeny,
+        zeny
+    );
+
+};
+
+
+/* VYKRESLENI JEDNE TABULKY */
+
+function vykresliTabulku(tabulka,seznam){
+
+    if(seznam.length===0){
+
+        tabulka.innerHTML=`
 
         <tr>
 
@@ -831,7 +1009,7 @@ window.render=function(){
     }
 
 
-    serazeno.forEach((z,i)=>{
+    seznam.forEach((z,i)=>{
 
         const pokusy=
         (z.pokusy||[])
@@ -849,7 +1027,7 @@ window.render=function(){
         .join("");
 
 
-        t.innerHTML+=`
+        tabulka.innerHTML+=`
 
         <tr>
 
@@ -908,10 +1086,12 @@ window.render=function(){
         </tr>
 
         `;
+
     });
-};
+
+}
 
 </script>
 
 </body>
-</html>
+</html> 
