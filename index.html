@@ -7,244 +7,273 @@
 <title>SDH Lubina II–Větřkovice</title>
 
 <style>
-*{
-    box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    min-height:100vh;
-    color:white;
-    background:
-        radial-gradient(circle at top right,#5b1010 0%,transparent 35%),
-        linear-gradient(145deg,#090d13,#151b24);
+margin:0;
+font-family:Arial,sans-serif;
+min-height:100vh;
+color:white;
+background:
+radial-gradient(circle at top right,#5b1010 0%,transparent 35%),
+linear-gradient(145deg,#090d13,#151b24);
 }
 
 .app{
-    max-width:950px;
-    margin:auto;
-    padding:20px 16px 40px;
+max-width:1100px;
+margin:auto;
+padding:20px 16px 40px;
 }
 
-/* HLAVNI STRANKA */
-
 .header{
-    text-align:center;
-    padding:25px 10px 35px;
+text-align:center;
+padding:25px 10px 35px;
 }
 
 .logo{
-    font-size:42px;
-    margin-bottom:12px;
+font-size:42px;
+margin-bottom:12px;
 }
 
 .header h1{
-    font-size:22px;
-    line-height:1.35;
-    margin:0;
+font-size:22px;
+line-height:1.35;
+margin:0;
 }
 
 .header h1 span{
-    color:#ef3333;
+color:#ef3333;
 }
 
 .district{
-    margin-top:7px;
-    color:#8995a6;
-    font-size:14px;
+margin-top:7px;
+color:#8995a6;
+font-size:14px;
 }
 
 .section-title{
-    color:#8796aa;
-    font-size:13px;
-    text-transform:uppercase;
-    letter-spacing:2px;
-    margin:0 5px 14px;
+color:#8796aa;
+font-size:13px;
+text-transform:uppercase;
+letter-spacing:2px;
+margin:0 5px 14px;
 }
 
 .discipline{
-    width:100%;
-    border:1px solid rgba(255,255,255,.10);
-    border-radius:24px;
-    padding:25px 22px;
-    margin-bottom:16px;
-    color:white;
-    text-align:left;
-    cursor:pointer;
-    background:rgba(255,255,255,.055);
-    transition:.2s;
+width:100%;
+border:1px solid rgba(255,255,255,.10);
+border-radius:24px;
+padding:25px 22px;
+margin-bottom:16px;
+color:white;
+text-align:left;
+cursor:pointer;
+background:rgba(255,255,255,.055);
+transition:.2s;
 }
 
 .discipline:hover{
-    transform:translateY(-2px);
-    background:rgba(255,255,255,.085);
+transform:translateY(-2px);
+background:rgba(255,255,255,.085);
 }
 
 .icon{
-    font-size:46px;
-    margin-bottom:12px;
+font-size:46px;
+margin-bottom:12px;
 }
 
 .name{
-    font-size:23px;
-    font-weight:bold;
-    margin-bottom:7px;
+font-size:23px;
+font-weight:bold;
+margin-bottom:7px;
 }
 
 .description{
-    color:#9eabba;
-    font-size:14px;
+color:#9eabba;
+font-size:14px;
 }
 
-/* MOTANI HADIC */
-
 .screen{
-    display:none;
+display:none;
 }
 
 .back{
-    border:1px solid #394455;
-    background:transparent;
-    color:#aeb9c8;
-    padding:10px 15px;
-    border-radius:11px;
-    cursor:pointer;
-    margin-bottom:15px;
+border:1px solid #394455;
+background:transparent;
+color:#aeb9c8;
+padding:10px 15px;
+border-radius:11px;
+cursor:pointer;
+margin-bottom:15px;
 }
 
 .card{
-    background:rgba(255,255,255,.055);
-    border:1px solid rgba(255,255,255,.10);
-    border-radius:22px;
-    padding:20px;
-    margin-bottom:16px;
+background:rgba(255,255,255,.055);
+border:1px solid rgba(255,255,255,.10);
+border-radius:22px;
+padding:20px;
+margin-bottom:16px;
 }
 
 .card h2{
-    margin:0 0 18px;
-    font-size:24px;
+margin:0 0 18px;
+font-size:24px;
 }
 
 .form{
-    display:grid;
-    grid-template-columns:1fr 1fr 1fr auto;
-    gap:10px;
+display:grid;
+grid-template-columns:1fr 1fr 1fr auto;
+gap:10px;
 }
 
 input{
-    width:100%;
-    padding:13px;
-    border-radius:12px;
-    border:1px solid #354052;
-    background:#101722;
-    color:white;
-    font-size:15px;
+width:100%;
+padding:13px;
+border-radius:12px;
+border:1px solid #354052;
+background:#101722;
+color:white;
+font-size:15px;
 }
 
 input::placeholder{
-    color:#738095;
+color:#738095;
 }
 
 button{
-    font-family:inherit;
+font-family:inherit;
 }
 
 .primary{
-    border:0;
-    border-radius:12px;
-    padding:13px 18px;
-    background:#d72f2f;
-    color:white;
-    font-weight:bold;
-    cursor:pointer;
+border:0;
+border-radius:12px;
+padding:13px 18px;
+background:#d72f2f;
+color:white;
+font-weight:bold;
+cursor:pointer;
 }
 
 .primary:hover{
-    background:#ed3a3a;
+background:#ed3a3a;
+}
+
+.gender-buttons{
+display:flex;
+gap:10px;
+margin-top:14px;
+}
+
+.gender{
+flex:1;
+padding:13px;
+border-radius:12px;
+border:1px solid #394455;
+background:#101722;
+color:#aeb9c8;
+font-weight:bold;
+cursor:pointer;
+}
+
+.gender.active{
+background:#b92828;
+border-color:#ef3333;
+color:white;
 }
 
 .table-wrap{
-    overflow-x:auto;
+overflow-x:auto;
 }
 
 table{
-    width:100%;
-    border-collapse:collapse;
-    margin-top:10px;
-    min-width:700px;
+width:100%;
+border-collapse:collapse;
+margin-top:10px;
+min-width:750px;
 }
 
 th{
-    padding:12px 8px;
-    background:#b92828;
-    color:white;
+padding:12px 8px;
+background:#b92828;
+color:white;
 }
 
 td{
-    padding:12px 8px;
-    border-bottom:1px solid rgba(255,255,255,.08);
-    text-align:center;
-    color:#dbe2eb;
+padding:12px 8px;
+border-bottom:1px solid rgba(255,255,255,.08);
+text-align:center;
+color:#dbe2eb;
 }
 
 .best{
-    font-size:19px;
-    font-weight:bold;
-    color:#ffd166;
+font-size:19px;
+font-weight:bold;
+color:#ffd166;
 }
 
 .attempt{
-    cursor:pointer;
-    padding:3px;
+cursor:pointer;
+padding:3px;
 }
 
 .attempt:hover{
-    background:rgba(255,255,255,.08);
-    border-radius:5px;
+background:rgba(255,255,255,.08);
+border-radius:5px;
 }
 
 .action{
-    border:0;
-    background:transparent;
-    color:#aeb9c8;
-    cursor:pointer;
-    font-size:18px;
-    margin:0 3px;
+border:0;
+background:transparent;
+color:#aeb9c8;
+cursor:pointer;
+font-size:18px;
+margin:0 3px;
 }
 
 .empty{
-    text-align:center;
-    padding:30px;
-    color:#718096;
+text-align:center;
+padding:30px;
+color:#718096;
 }
 
 .status{
-    text-align:center;
-    color:#68778b;
-    font-size:12px;
-    margin-top:20px;
+text-align:center;
+color:#68778b;
+font-size:12px;
+margin-top:20px;
 }
 
 .online{
-    display:inline-block;
-    width:7px;
-    height:7px;
-    border-radius:50%;
-    background:#36d399;
-    margin-right:6px;
-    box-shadow:0 0 9px #36d399;
+display:inline-block;
+width:7px;
+height:7px;
+border-radius:50%;
+background:#36d399;
+margin-right:6px;
+box-shadow:0 0 9px #36d399;
+}
+
+.category-title{
+margin-top:25px;
+margin-bottom:10px;
+font-size:20px;
+font-weight:bold;
 }
 
 @media(max-width:700px){
 
-    .form{
-        grid-template-columns:1fr 1fr;
-    }
+.form{
+grid-template-columns:1fr 1fr;
+}
 
-    .form .primary{
-        grid-column:1 / -1;
-    }
+.form .primary{
+grid-column:1 / -1;
+}
+
+.gender-buttons{
+grid-column:1 / -1;
+}
+
 }
 </style>
 </head>
@@ -276,11 +305,7 @@ okres Nový Jičín
 Soutěže
 </div>
 
-<!-- POZARNI UTOK -->
-
-<button
-class="discipline"
-onclick="otevriPozarni()">
+<button class="discipline" onclick="otevriPozarni()">
 
 <div class="icon">🚒</div>
 
@@ -294,11 +319,7 @@ Aktuální pořadí
 
 </button>
 
-<!-- MOTANI HADIC -->
-
-<button
-class="discipline"
-onclick="otevriMotani()">
+<button class="discipline" onclick="otevriMotani()">
 
 <div class="icon">🌀</div>
 
@@ -319,12 +340,8 @@ Jednotlivci · nejrychlejší čas
 
 <div id="motani" class="screen">
 
-<button
-class="back"
-onclick="zpet()">
-
+<button class="back" onclick="zpet()">
 ← Zpět
-
 </button>
 
 <div class="card">
@@ -350,9 +367,25 @@ placeholder="Družstvo">
 <button
 class="primary"
 onclick="pridat()">
-
 + Přidat
+</button>
 
+</div>
+
+<div class="gender-buttons">
+
+<button
+id="muz"
+class="gender active"
+onclick="vyberPohlavi('muzi')">
+👨 Muži
+</button>
+
+<button
+id="zena"
+class="gender"
+onclick="vyberPohlavi('zeny')">
+👩 Ženy
 </button>
 
 </div>
@@ -360,18 +393,19 @@ onclick="pridat()">
 </div>
 
 
+<!-- MUZI -->
+
 <div class="card">
 
-<h2>
-Aktuální pořadí
-</h2>
+<div class="category-title">
+👨 Muži
+</div>
 
 <div class="table-wrap">
 
 <table>
 
 <thead>
-
 <tr>
 <th>#</th>
 <th>Příjmení</th>
@@ -381,16 +415,49 @@ Aktuální pořadí
 <th>Pokusy</th>
 <th>Akce</th>
 </tr>
-
 </thead>
 
-<tbody id="tab"></tbody>
+<tbody id="tabMuzi"></tbody>
 
 </table>
 
 </div>
 
 </div>
+
+
+<!-- ZENY -->
+
+<div class="card">
+
+<div class="category-title">
+👩 Ženy
+</div>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>#</th>
+<th>Příjmení</th>
+<th>Jméno</th>
+<th>Družstvo</th>
+<th>Nejlepší</th>
+<th>Pokusy</th>
+<th>Akce</th>
+</tr>
+</thead>
+
+<tbody id="tabZeny"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
 
 <div class="status">
 
@@ -407,46 +474,45 @@ Aktuální pořadí
 <script type="module">
 
 import {
-    initializeApp
+initializeApp
 }
 from
 "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 
 import {
-    getFirestore,
-    collection,
-    addDoc,
-    onSnapshot,
-    deleteDoc,
-    doc,
-    updateDoc,
-    serverTimestamp
+getFirestore,
+collection,
+addDoc,
+onSnapshot,
+deleteDoc,
+doc,
+updateDoc,
+serverTimestamp
 }
 from
 "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 
-/* FIREBASE */
-
 const firebaseConfig = {
 
-    apiKey:
-    "AIzaSyCIZ3Z5HvF6P9TSQ9GxiZEIoVGFsay2pbo",
+apiKey:
+"AIzaSyCIZ3Z5HvF6P9TSQ9GxiZEIoVGFsay2pbo",
 
-    authDomain:
-    "fire-sport-results.firebaseapp.com",
+authDomain:
+"fire-sport-results.firebaseapp.com",
 
-    projectId:
-    "fire-sport-results",
+projectId:
+"fire-sport-results",
 
-    storageBucket:
-    "fire-sport-results.firebasestorage.app",
+storageBucket:
+"fire-sport-results.firebasestorage.app",
 
-    messagingSenderId:
-    "63170955961",
+messagingSenderId:
+"63170955961",
 
-    appId:
-    "1:63170955961:web:f5b9e052312a79b17de968"
+appId:
+"1:63170955961:web:f5b9e052312a79b17de968"
+
 };
 
 const app =
@@ -460,33 +526,60 @@ collection(db,"motani_hadic");
 
 let data=[];
 
+let vybranePohlavi="muzi";
+
 
 /* NAVIGACE */
 
 window.otevriMotani=function(){
 
-    document.getElementById("home")
-    .style.display="none";
+document.getElementById("home").style.display="none";
+document.getElementById("motani").style.display="block";
 
-    document.getElementById("motani")
-    .style.display="block";
 };
-
 
 window.otevriPozarni=function(){
 
-    alert("Požární útok připravujeme.");
+alert("Požární útok připravujeme.");
+
+};
+
+window.zpet=function(){
+
+document.getElementById("motani").style.display="none";
+document.getElementById("home").style.display="block";
 
 };
 
 
-window.zpet=function(){
+/* VYBER POHLAVI */
 
-    document.getElementById("motani")
-    .style.display="none";
+window.vyberPohlavi=function(pohlavi){
 
-    document.getElementById("home")
-    .style.display="block";
+vybranePohlavi=pohlavi;
+
+document
+.getElementById("muz")
+.classList.remove("active");
+
+document
+.getElementById("zena")
+.classList.remove("active");
+
+if(pohlavi==="muzi"){
+
+document
+.getElementById("muz")
+.classList.add("active");
+
+}else{
+
+document
+.getElementById("zena")
+.classList.add("active");
+
+}
+
 };
 
 
@@ -494,27 +587,28 @@ window.zpet=function(){
 
 function validTime(t){
 
-    if(!t.includes(":"))
-        return false;
+if(!t.includes(":"))
+return false;
 
-    const casti=t.split(":");
+const casti=t.split(":");
 
-    if(casti.length!==2)
-        return false;
+if(casti.length!==2)
+return false;
 
-    const sekundy=Number(casti[0]);
-    const setiny=Number(casti[1]);
+const sekundy=Number(casti[0]);
+const setiny=Number(casti[1]);
 
-    if(isNaN(sekundy)||isNaN(setiny))
-        return false;
+if(isNaN(sekundy)||isNaN(setiny))
+return false;
 
-    if(sekundy<0)
-        return false;
+if(sekundy<0)
+return false;
 
-    if(setiny<0||setiny>99)
-        return false;
+if(setiny<0||setiny>99)
+return false;
 
-    return true;
+return true;
+
 }
 
 
@@ -522,10 +616,11 @@ function validTime(t){
 
 function casNaCislo(cas){
 
-    const casti=cas.split(":");
+const casti=cas.split(":");
 
-    return Number(casti[0])*100+
-           Number(casti[1]);
+return Number(casti[0])*100+
+Number(casti[1]);
+
 }
 
 
@@ -533,61 +628,67 @@ function casNaCislo(cas){
 
 onSnapshot(col,(snap)=>{
 
-    data=[];
+data=[];
 
-    snap.forEach(d=>{
+snap.forEach(d=>{
 
-        data.push({
-            id:d.id,
-            ...d.data()
-        });
+data.push({
+id:d.id,
+...d.data()
+});
 
-    });
+});
 
-    render();
+render();
 
 });
 
 
-/* PRIDAT ZAVODNIKA */
+/* PRIDAT */
 
 window.pridat=async function(){
 
-    const p=
-    document.getElementById("prijmeni")
-    .value.trim();
+const p=
+document.getElementById("prijmeni")
+.value.trim();
 
-    const j=
-    document.getElementById("jmeno")
-    .value.trim();
+const j=
+document.getElementById("jmeno")
+.value.trim();
 
-    const d=
-    document.getElementById("druzstvo")
-    .value.trim();
+const d=
+document.getElementById("druzstvo")
+.value.trim();
 
-    if(!p||!j||!d){
+if(!p||!j||!d){
 
-        alert(
-        "Vyplň příjmení, jméno a družstvo."
-        );
+alert(
+"Vyplň příjmení, jméno a družstvo."
+);
 
-        return;
-    }
+return;
 
-    await addDoc(col,{
+}
 
-        prijmeni:p,
-        jmeno:j,
-        druzstvo:d,
-        pokusy:[],
-        nejlepsi:"",
-        vytvoreno:serverTimestamp()
+await addDoc(col,{
 
-    });
+prijmeni:p,
+jmeno:j,
+druzstvo:d,
 
-    document.getElementById("prijmeni").value="";
-    document.getElementById("jmeno").value="";
-    document.getElementById("druzstvo").value="";
+pohlavi:vybranePohlavi,
+
+pokusy:[],
+nejlepsi:"",
+
+vytvoreno:serverTimestamp()
+
+});
+
+document.getElementById("prijmeni").value="";
+document.getElementById("jmeno").value="";
+document.getElementById("druzstvo").value="";
+
 };
 
 
@@ -595,14 +696,15 @@ window.pridat=async function(){
 
 window.smaz=async function(id){
 
-    if(!confirm(
-        "Opravdu chceš smazat tohoto soutěžícího?"
-    ))
-        return;
+if(!confirm(
+"Opravdu chceš smazat tohoto soutěžícího?"
+))
+return;
 
-    await deleteDoc(
-        doc(db,"motani_hadic",id)
-    );
+await deleteDoc(
+doc(db,"motani_hadic",id)
+);
+
 };
 
 
@@ -610,50 +712,42 @@ window.smaz=async function(id){
 
 window.edit=async function(id){
 
-    const z=
-    data.find(s=>s.id===id);
+const z=
+data.find(s=>s.id===id);
 
-    if(!z)
-        return;
+if(!z)
+return;
 
-    const p=
-    prompt(
-        "Příjmení:",
-        z.prijmeni
-    );
+const p=
+prompt("Příjmení:",z.prijmeni);
 
-    if(!p)
-        return;
+if(!p)
+return;
 
-    const j=
-    prompt(
-        "Jméno:",
-        z.jmeno
-    );
+const j=
+prompt("Jméno:",z.jmeno);
 
-    if(!j)
-        return;
+if(!j)
+return;
 
-    const d=
-    prompt(
-        "Družstvo:",
-        z.druzstvo || ""
-    );
+const d=
+prompt("Družstvo:",z.druzstvo||"");
 
-    if(!d)
-        return;
+if(!d)
+return;
 
-    await updateDoc(
+await updateDoc(
 
-        doc(db,"motani_hadic",id),
+doc(db,"motani_hadic",id),
 
-        {
-            prijmeni:p,
-            jmeno:j,
-            druzstvo:d
-        }
+{
+prijmeni:p,
+jmeno:j,
+druzstvo:d
+}
 
-    );
+);
+
 };
 
 
@@ -661,59 +755,60 @@ window.edit=async function(id){
 
 window.pridatPokus=async function(id){
 
-    const cas=
-    prompt(
-        "Zadej čas například 15:23"
-    );
+const cas=
+prompt("Zadej čas například 15:23");
 
-    if(!cas)
-        return;
+if(!cas)
+return;
 
-    if(!validTime(cas)){
+if(!validTime(cas)){
 
-        alert(
-            "Špatný čas! Použij například 15:23."
-        );
+alert(
+"Špatný čas! Použij například 15:23."
+);
 
-        return;
-    }
+return;
 
-    const z=
-    data.find(s=>s.id===id);
+}
 
-    if(!z)
-        return;
+const z=
+data.find(s=>s.id===id);
 
-    const pokusy=
-    [...(z.pokusy||[])];
+if(!z)
+return;
 
-    pokusy.push(cas);
+const pokusy=
+[...(z.pokusy||[])];
 
-    let nej=pokusy[0];
+pokusy.push(cas);
 
-    for(let i=1;i<pokusy.length;i++){
+let nej=pokusy[0];
 
-        if(
-            casNaCislo(pokusy[i])
-            <
-            casNaCislo(nej)
-        ){
+for(let i=1;i<pokusy.length;i++){
 
-            nej=pokusy[i];
+if(
+casNaCislo(pokusy[i])
+<
+casNaCislo(nej)
+){
 
-        }
-    }
+nej=pokusy[i];
 
-    await updateDoc(
+}
 
-        doc(db,"motani_hadic",id),
+}
 
-        {
-            pokusy:pokusy,
-            nejlepsi:nej
-        }
+await updateDoc(
 
-    );
+doc(db,"motani_hadic",id),
+
+{
+pokusy:pokusy,
+nejlepsi:nej
+}
+
+);
+
 };
 
 
@@ -721,66 +816,65 @@ window.pridatPokus=async function(id){
 
 window.editPokus=async function(id,index){
 
-    const z=
-    data.find(s=>s.id===id);
+const z=
+data.find(s=>s.id===id);
 
-    if(!z||!Array.isArray(z.pokusy))
-        return;
+if(!z||!Array.isArray(z.pokusy))
+return;
 
-    const stare=
-    z.pokusy[index];
+const stare=z.pokusy[index];
 
-    if(!stare)
-        return;
+if(!stare)
+return;
 
-    const novy=
-    prompt(
-        "Upravit čas:",
-        stare
-    );
+const novy=
+prompt("Upravit čas:",stare);
 
-    if(!novy)
-        return;
+if(!novy)
+return;
 
-    if(!validTime(novy)){
+if(!validTime(novy)){
 
-        alert(
-            "Špatný čas! Použij například 15:23."
-        );
+alert(
+"Špatný čas! Použij například 15:23."
+);
 
-        return;
-    }
+return;
 
-    const pokusy=
-    [...(z.pokusy||[])];
+}
 
-    pokusy[index]=novy;
+const pokusy=
+[...(z.pokusy||[])];
 
-    let nej=pokusy[0];
+pokusy[index]=novy;
 
-    for(let i=1;i<pokusy.length;i++){
+let nej=pokusy[0];
 
-        if(
-            casNaCislo(pokusy[i])
-            <
-            casNaCislo(nej)
-        ){
+for(let i=1;i<pokusy.length;i++){
 
-            nej=pokusy[i];
+if(
+casNaCislo(pokusy[i])
+<
+casNaCislo(nej)
+){
 
-        }
-    }
+nej=pokusy[i];
 
-    await updateDoc(
+}
 
-        doc(db,"motani_hadic",id),
+}
 
-        {
-            pokusy:pokusy,
-            nejlepsi:nej
-        }
+await updateDoc(
 
-    );
+doc(db,"motani_hadic",id),
+
+{
+pokusy:pokusy,
+nejlepsi:nej
+}
+
+);
+
 };
 
 
@@ -788,128 +882,154 @@ window.editPokus=async function(id,index){
 
 window.render=function(){
 
-    const t=
-    document.getElementById("tab");
+const tabMuzi=
+document.getElementById("tabMuzi");
 
-    t.innerHTML="";
+const tabZeny=
+document.getElementById("tabZeny");
 
-
-    const serazeno=
-    [...data].sort((a,b)=>{
-
-        const p1=
-        (a.prijmeni||"")
-        .toLocaleLowerCase("cs");
-
-        const p2=
-        (b.prijmeni||"")
-        .toLocaleLowerCase("cs");
-
-        return p1.localeCompare(p2,"cs");
-    });
+tabMuzi.innerHTML="";
+tabZeny.innerHTML="";
 
 
-    if(serazeno.length===0){
+const serazeno=
+[...data].sort((a,b)=>{
 
-        t.innerHTML=`
+const p1=
+(a.prijmeni||"")
+.toLocaleLowerCase("cs");
 
-        <tr>
+const p2=
+(b.prijmeni||"")
+.toLocaleLowerCase("cs");
 
-        <td
-        colspan="7"
-        class="empty">
+return p1.localeCompare(p2,"cs");
 
-        Zatím není přidaný žádný závodník.
-
-        </td>
-
-        </tr>
-
-        `;
-
-        return;
-    }
+});
 
 
-    serazeno.forEach((z,i)=>{
+const muzi=
+serazeno.filter(z=>z.pohlavi==="muzi");
 
-        const pokusy=
-        (z.pokusy||[])
-        .map((c,index)=>`
-
-            <div
-            class="attempt"
-            onclick="editPokus('${z.id}',${index})">
-
-            ⏱ ${c}
-
-            </div>
-
-        `)
-        .join("");
+const zeny=
+serazeno.filter(z=>z.pohlavi==="zeny");
 
 
-        t.innerHTML+=`
+vykresliTabulku(
+tabMuzi,
+muzi
+);
 
-        <tr>
+vykresliTabulku(
+tabZeny,
+zeny
+);
 
-        <td>
-        ${i+1}
-        </td>
-
-        <td>
-        ${z.prijmeni}
-        </td>
-
-        <td>
-        ${z.jmeno}
-        </td>
-
-        <td>
-        ${z.druzstvo||"-"}
-        </td>
-
-        <td class="best">
-        ${z.nejlepsi||"-"}
-        </td>
-
-        <td>
-        ${pokusy||"-"}
-        </td>
-
-        <td>
-
-        <button
-        class="action"
-        onclick="edit('${z.id}')">
-
-        ✏️
-
-        </button>
-
-        <button
-        class="action"
-        onclick="smaz('${z.id}')">
-
-        🗑️
-
-        </button>
-
-        <button
-        class="action"
-        onclick="pridatPokus('${z.id}')">
-
-        ➕
-
-        </button>
-
-        </td>
-
-        </tr>
-
-        `;
-    });
 };
+
+
+/* TABULKA */
+
+function vykresliTabulku(tabulka,seznam){
+
+if(seznam.length===0){
+
+tabulka.innerHTML=`
+
+<tr>
+
+<td colspan="7" class="empty">
+
+Zatím není přidaný žádný závodník.
+
+</td>
+
+</tr>
+
+`;
+
+return;
+
+}
+
+
+seznam.forEach((z,i)=>{
+
+const pokusy=
+(z.pokusy||[])
+.map((c,index)=>`
+
+<div
+class="attempt"
+onclick="editPokus('${z.id}',${index})">
+
+⏱ ${c}
+
+</div>
+
+`)
+.join("");
+
+
+tabulka.innerHTML+=`
+
+<tr>
+
+<td>${i+1}</td>
+
+<td>${z.prijmeni}</td>
+
+<td>${z.jmeno}</td>
+
+<td>${z.druzstvo||"-"}</td>
+
+<td class="best">
+
+${z.nejlepsi||"-"}
+
+</td>
+
+<td>
+
+${pokusy||"-"}
+
+</td>
+
+<td>
+
+<button
+class="action"
+onclick="edit('${z.id}')">
+
+✏️
+
+</button>
+
+<button
+class="action"
+onclick="smaz('${z.id}')">
+
+🗑️
+
+</button>
+
+<button
+class="action"
+onclick="pridatPokus('${z.id}')">
+
+➕
+
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+}
+
+}
 
 </script>
 
