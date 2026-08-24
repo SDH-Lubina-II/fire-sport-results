@@ -1,702 +1,1048 @@
 <!DOCTYPE html>
 <html lang="cs">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SDH Lubina II–Větřkovice</title>
+
+<title>SDH Lubina I–Větřkovice</title>
 
 <style>
+
 *{
-  box-sizing:border-box;
+box-sizing:border-box;
 }
 
 body{
-  margin:0;
-  min-height:100vh;
-  font-family:Arial,sans-serif;
-  color:white;
-  background:
-    radial-gradient(circle at top right,#5b1010 0%,transparent 35%),
-    linear-gradient(145deg,#090d13,#151b24);
+margin:0;
+font-family:Arial,sans-serif;
+min-height:100vh;
+color:white;
+
+background:
+radial-gradient(circle at top right,#5b1010 0%,transparent 35%),
+linear-gradient(145deg,#090d13,#151b24);
 }
 
 .app{
-  max-width:850px;
-  margin:auto;
-  padding:20px 16px 40px;
+max-width:900px;
+margin:auto;
+padding:20px 16px 40px;
 }
 
-button{
-  font-family:inherit;
-}
+/* ================= HLAVNI STRANKA ================= */
 
 .header{
-  text-align:center;
-  padding:20px 5px 25px;
+text-align:center;
+padding:25px 10px 35px;
 }
 
 .logo{
-  font-size:42px;
-  margin-bottom:12px;
+font-size:42px;
+margin-bottom:12px;
 }
 
 .header h1{
-  font-size:22px;
-  line-height:1.35;
-  margin:0;
+font-size:22px;
+line-height:1.35;
+margin:0;
 }
 
 .header h1 span{
-  color:#ef3333;
+color:#ef3333;
 }
 
 .district{
-  color:#8995a6;
-  margin-top:7px;
-  font-size:14px;
+margin-top:7px;
+color:#8995a6;
+font-size:14px;
 }
 
-.card{
-  background:rgba(255,255,255,.055);
-  border:1px solid rgba(255,255,255,.10);
-  border-radius:22px;
-  padding:20px;
-  margin-bottom:16px;
+.section-title{
+color:#8796aa;
+font-size:13px;
+text-transform:uppercase;
+letter-spacing:2px;
+margin:0 5px 14px;
 }
 
-h2{
-  margin:0 0 18px;
-  font-size:24px;
+.discipline{
+width:100%;
+border:1px solid rgba(255,255,255,.10);
+border-radius:24px;
+padding:25px 22px;
+margin-bottom:16px;
+
+color:white;
+text-align:left;
+cursor:pointer;
+
+background:rgba(255,255,255,.055);
+
+transition:.2s;
 }
 
-.form{
-  display:grid;
-  grid-template-columns:1fr 1fr auto;
-  gap:10px;
+.discipline:hover{
+transform:translateY(-2px);
+background:rgba(255,255,255,.085);
 }
 
-input{
-  width:100%;
-  padding:13px;
-  border-radius:12px;
-  border:1px solid #354052;
-  background:#101722;
-  color:white;
-  font-size:15px;
+.icon{
+font-size:46px;
+margin-bottom:12px;
 }
 
-input::placeholder{
-  color:#738095;
+.name{
+font-size:23px;
+font-weight:bold;
+margin-bottom:7px;
 }
 
-.primary{
-  border:0;
-  border-radius:12px;
-  padding:13px 18px;
-  background:#d72f2f;
-  color:white;
-  font-weight:bold;
-  cursor:pointer;
+.description{
+color:#9eabba;
+font-size:14px;
 }
 
-.primary:hover{
-  background:#ed3a3a;
+/* ================= MOTANI ================= */
+
+.screen{
+display:none;
 }
 
 .back{
-  border:1px solid #394455;
-  background:transparent;
-  color:#aeb9c8;
-  padding:10px 15px;
-  border-radius:11px;
-  cursor:pointer;
-  margin-bottom:15px;
+border:1px solid #394455;
+background:transparent;
+color:#aeb9c8;
+
+padding:10px 15px;
+border-radius:11px;
+
+cursor:pointer;
+margin-bottom:15px;
+}
+
+.card{
+background:rgba(255,255,255,.055);
+border:1px solid rgba(255,255,255,.10);
+
+border-radius:22px;
+padding:20px;
+margin-bottom:16px;
+}
+
+.card h2{
+margin:0 0 18px;
+font-size:24px;
+}
+
+.form{
+display:grid;
+grid-template-columns:1fr 1fr auto;
+gap:10px;
+}
+
+input{
+width:100%;
+padding:13px;
+
+border-radius:12px;
+border:1px solid #354052;
+
+background:#101722;
+color:white;
+
+font-size:15px;
+}
+
+input::placeholder{
+color:#738095;
+}
+
+button{
+font-family:inherit;
+}
+
+.primary{
+border:0;
+border-radius:12px;
+
+padding:13px 18px;
+
+background:#d72f2f;
+color:white;
+
+font-weight:bold;
+cursor:pointer;
+}
+
+.primary:hover{
+background:#ed3a3a;
 }
 
 table{
-  width:100%;
-  border-collapse:collapse;
+width:100%;
+border-collapse:collapse;
+margin-top:10px;
 }
 
 th{
-  text-align:center;
-  padding:12px 8px;
-  background:#b92828;
-  font-size:13px;
+padding:12px 8px;
+background:#b92828;
+color:white;
 }
 
 td{
-  padding:12px 8px;
-  border-bottom:1px solid rgba(255,255,255,.08);
-  text-align:center;
-  color:#dbe2eb;
-}
+padding:12px 8px;
+border-bottom:1px solid rgba(255,255,255,.08);
 
-tr:first-child td{
-  font-weight:bold;
-}
-
-.time{
-  font-size:19px;
-  font-weight:bold;
+text-align:center;
+color:#dbe2eb;
 }
 
 .best{
-  color:#ffd166;
+font-size:19px;
+font-weight:bold;
+color:#ffd166;
+}
+
+.attempt{
+cursor:pointer;
+padding:3px;
+}
+
+.attempt:hover{
+background:rgba(255,255,255,.08);
+border-radius:5px;
 }
 
 .action{
-  border:0;
-  background:transparent;
-  color:#aeb9c8;
-  cursor:pointer;
-  font-size:18px;
-  margin:0 3px;
+border:0;
+background:transparent;
+color:#aeb9c8;
+cursor:pointer;
+font-size:18px;
+margin:0 3px;
 }
 
 .empty{
-  text-align:center;
-  padding:30px 10px;
-  color:#718096;
-}
-
-.hidden{
-  display:none;
-}
-
-.infinity{
-  color:#ff6969;
-  font-size:21px;
-  font-weight:bold;
+text-align:center;
+padding:30px;
+color:#718096;
 }
 
 .status{
-  text-align:center;
-  color:#68778b;
-  font-size:12px;
-  margin-top:20px;
+text-align:center;
+color:#68778b;
+font-size:12px;
+margin-top:20px;
 }
 
 .online{
-  display:inline-block;
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:#36d399;
-  margin-right:6px;
-  box-shadow:0 0 9px #36d399;
+display:inline-block;
+
+width:7px;
+height:7px;
+
+border-radius:50%;
+
+background:#36d399;
+
+margin-right:6px;
+
+box-shadow:0 0 9px #36d399;
 }
 
 @media(max-width:650px){
-  .form{
-    grid-template-columns:1fr 1fr;
-  }
 
-  .form .primary{
-    grid-column:1 / -1;
-  }
-
-  table{
-    font-size:13px;
-  }
-
-  th,td{
-    padding:10px 4px;
-  }
+.form{
+grid-template-columns:1fr 1fr;
 }
+
+.form .primary{
+grid-column:1 / -1;
+}
+
+table{
+font-size:13px;
+}
+
+th,td{
+padding:9px 4px;
+}
+
+}
+
 </style>
 </head>
 
+
 <body>
+
 
 <div class="app">
 
-<!-- HLAVNI STRANKA -->
+
+<!-- ================= HLAVNI STRANKA ================= -->
 
 <div id="home">
 
-  <header class="header">
-    <div class="logo">🚒</div>
+<header class="header">
 
-    <h1>
-      <span>SBOR DOBROVOLNÝCH HASIČŮ</span><br>
-      LUBINA II–VĚTŘKOVICE
-    </h1>
+<div class="logo">🔥</div>
 
-    <div class="district">
-      okres Nový Jičín
-    </div>
-  </header>
+<h1>
 
-  <div class="card" onclick="otevriMotani()" style="cursor:pointer">
-    <div style="font-size:45px;margin-bottom:10px">🌀</div>
-    <h2>Motání hadic</h2>
-    <div style="color:#9eabba">
-      Jednotlivci · nejrychlejší čas
-    </div>
-  </div>
+<span>SBOR DOBROVOLNÝCH HASIČŮ</span><br>
 
-  <div class="card" onclick="otevriPozarni()" style="cursor:pointer">
-    <div style="font-size:45px;margin-bottom:10px">🚒</div>
-    <h2>Požární útok</h2>
-    <div style="color:#9eabba">
-      Aktuální pořadí
-    </div>
-  </div>
+LUBINA I–VĚTŘKOVICE
 
+</h1>
+
+<div class="district">
+okres Nový Jičín
 </div>
+
+</header>
+
+
+<div class="section-title">
+Soutěže
+</div>
+
+
+<!-- POZARNI UTOK -->
+
+<button
+class="discipline"
+onclick="otevriPozarni()">
+
+<div class="icon">
+🚒
+</div>
+
+<div class="name">
+Požární útok
+</div>
+
+<div class="description">
+Aktuální pořadí
+</div>
+
+</button>
 
 
 <!-- MOTANI HADIC -->
 
-<div id="motani" class="hidden">
+<button
+class="discipline"
+onclick="otevriMotani()">
 
-  <button class="back" onclick="zpet()">
-    ← Zpět
-  </button>
+<div class="icon">
+🌀
+</div>
 
-  <div class="card">
+<div class="name">
+Motání hadic
+</div>
 
-    <h2>🌀 Motání hadic</h2>
+<div class="description">
+Jednotlivci · nejrychlejší čas
+</div>
 
-    <div class="form">
+</button>
 
-      <input
-        id="prijmeni"
-        placeholder="Příjmení">
-
-      <input
-        id="jmeno"
-        placeholder="Jméno">
-
-      <button
-        class="primary"
-        onclick="pridatZavodnika()">
-        + Přidat
-      </button>
-
-    </div>
-
-  </div>
+</div>
 
 
-  <div class="card">
+<!-- ================= MOTANI HADIC ================= -->
 
-    <h2>Aktuální pořadí</h2>
+<div id="motani" class="screen">
 
-    <table>
 
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Příjmení</th>
-          <th>Jméno</th>
-          <th>Čas</th>
-          <th>Akce</th>
-        </tr>
-      </thead>
+<button
+class="back"
+onclick="zpet()">
 
-      <tbody id="tabulka"></tbody>
+← Zpět
 
-    </table>
+</button>
 
-  </div>
 
-  <div class="status">
-    <span class="online"></span>
-    Živá aktualizace
-  </div>
+<div class="card">
+
+<h2>
+🌀 Motání hadic
+</h2>
+
+
+<div class="form">
+
+<input
+id="prijmeni"
+placeholder="Příjmení">
+
+
+<input
+id="jmeno"
+placeholder="Jméno">
+
+
+<button
+class="primary"
+onclick="pridat()">
+
++ Přidat
+
+</button>
 
 </div>
 
 </div>
+
+
+<div class="card">
+
+<h2>
+Aktuální pořadí
+</h2>
+
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>#</th>
+
+<th>Příjmení</th>
+
+<th>Jméno</th>
+
+<th>Nejlepší</th>
+
+<th>Pokusy</th>
+
+<th>Akce</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="tab">
+
+</tbody>
+
+</table>
+
+</div>
+
+
+<div class="status">
+
+<span class="online"></span>
+
+Živá aktualizace
+
+</div>
+
+</div>
+
+
+</div>
+
 
 
 <script type="module">
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
-
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  onSnapshot,
-  deleteDoc,
-  updateDoc,
-  doc,
-  serverTimestamp
-}
-from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
-
 
 /* ================= FIREBASE ================= */
 
+import {
+
+initializeApp
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+
+import {
+
+getFirestore,
+collection,
+addDoc,
+onSnapshot,
+deleteDoc,
+doc,
+updateDoc,
+serverTimestamp
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+
 const firebaseConfig = {
 
-  apiKey:
-  "AIzaSyCIZ3Z5HvF6P9TSQ9GxiZEIoVGFsay2pbo",
+apiKey:
+"AIzaSyCIZ3Z5HvF6P9TSQ9GxiZEIoVGFsay2pbo",
 
-  authDomain:
-  "fire-sport-results.firebaseapp.com",
+authDomain:
+"fire-sport-results.firebaseapp.com",
 
-  projectId:
-  "fire-sport-results",
+projectId:
+"fire-sport-results",
 
-  storageBucket:
-  "fire-sport-results.firebasestorage.app",
+storageBucket:
+"fire-sport-results.firebasestorage.app",
 
-  messagingSenderId:
-  "63170955961",
+messagingSenderId:
+"63170955961",
 
-  appId:
-  "1:63170955961:web:f5b9e052312a79b17de968"
+appId:
+"1:63170955961:web:f5b9e052312a79b17de968"
+
 };
 
-const app = initializeApp(firebaseConfig);
 
-const db = getFirestore(app);
-
-const motaniCollection =
-  collection(db,"motani_hadic");
+const app =
+initializeApp(firebaseConfig);
 
 
-let zavodnici = [];
+const db =
+getFirestore(app);
+
+
+const col =
+collection(db,"motani_hadic");
+
+
+let data=[];
+
 
 
 /* ================= NAVIGACE ================= */
 
-window.otevriMotani = function(){
+window.otevriMotani=function(){
 
-  document.getElementById("home")
-  .classList.add("hidden");
+document
+.getElementById("home")
+.style.display="none";
 
-  document.getElementById("motani")
-  .classList.remove("hidden");
-
-};
-
-
-window.otevriPozarni = function(){
-
-  alert("Požární útok připravujeme.");
+document
+.getElementById("motani")
+.style.display="block";
 
 };
 
 
-window.zpet = function(){
+window.otevriPozarni=function(){
 
-  document.getElementById("motani")
-  .classList.add("hidden");
-
-  document.getElementById("home")
-  .classList.remove("hidden");
+alert("Požární útok připravujeme.");
 
 };
 
 
-/* ================= FIREBASE REALTIME ================= */
+window.zpet=function(){
 
-onSnapshot(motaniCollection,(snapshot)=>{
+document
+.getElementById("motani")
+.style.display="none";
 
-  zavodnici = [];
+document
+.getElementById("home")
+.style.display="block";
 
-  snapshot.forEach((item)=>{
+};
 
-    zavodnici.push({
-      id:item.id,
-      ...item.data()
-    });
 
-  });
 
-  vykresli();
+/* ================= VALIDACE CASU ================= */
+
+function validTime(t){
+
+if(!t.includes(":"))
+return false;
+
+const casti=t.split(":");
+
+if(casti.length!==2)
+return false;
+
+const sekundy=Number(casti[0]);
+
+const setiny=Number(casti[1]);
+
+if(isNaN(sekundy)||isNaN(setiny))
+return false;
+
+if(sekundy<0)
+return false;
+
+if(setiny<0||setiny>99)
+return false;
+
+return true;
+
+}
+
+
+/* ================= PREVOD CASU ================= */
+
+function casNaCislo(cas){
+
+const casti=cas.split(":");
+
+return Number(casti[0])*100+
+Number(casti[1]);
+
+}
+
+
+
+/* ================= REALTIME ================= */
+
+onSnapshot(col,(snap)=>{
+
+data=[];
+
+snap.forEach(d=>{
+
+data.push({
+
+id:d.id,
+...d.data()
+
+});
+
+});
+
+render();
 
 });
 
 
-/* ================= PRIDANI ================= */
 
-window.pridatZavodnika = async function(){
+/* ================= PRIDAT ZAVODNIKA ================= */
 
-  const prijmeni =
-    document.getElementById("prijmeni")
-    .value.trim();
+window.pridat=async function(){
 
-  const jmeno =
-    document.getElementById("jmeno")
-    .value.trim();
+const p=
+document
+.getElementById("prijmeni")
+.value
+.trim();
 
-  if(!prijmeni || !jmeno){
-
-    alert("Vyplň příjmení i jméno.");
-
-    return;
-  }
-
-  await addDoc(motaniCollection,{
-
-    prijmeni:prijmeni,
-
-    jmeno:jmeno,
-
-    cas:null,
-
-    nedokoncil:false,
-
-    vytvoreno:serverTimestamp()
-
-  });
-
-  document.getElementById("prijmeni").value="";
-  document.getElementById("jmeno").value="";
-
-};
+const j=
+document
+.getElementById("jmeno")
+.value
+.trim();
 
 
-/* ================= CAS ================= */
+if(!p||!j){
 
-function casNaSekundy(cas){
+alert("Vyplň příjmení i jméno.");
 
-  const casti=cas.split(":");
-
-  return Number(casti[0])*60+
-         Number(casti[1]);
+return;
 
 }
 
 
-function platnyCas(cas){
+await addDoc(col,{
 
-  if(!/^\d+:\d{2}$/.test(cas))
-    return false;
+prijmeni:p,
 
-  const casti=cas.split(":");
+jmeno:j,
 
-  const sekundy=Number(casti[0]);
+pokusy:[],
 
-  const setiny=Number(casti[1]);
+nejlepsi:"",
 
-  return sekundy>=0 &&
-         setiny>=0 &&
-         setiny<=99;
+vytvoreno:serverTimestamp()
 
-}
+});
 
 
-/* ================= ZAPSAT CAS ================= */
+document
+.getElementById("prijmeni")
+.value="";
 
-window.zapsatCas = async function(id){
-
-  const zadany =
-    prompt("Zadej čas například 15:23");
-
-  if(!zadany)
-    return;
-
-  if(!platnyCas(zadany)){
-
-    alert("Špatný formát. Použij například 15:23.");
-
-    return;
-  }
-
-  await updateDoc(
-    doc(db,"motani_hadic",id),
-    {
-      cas:zadany,
-      nedokoncil:false
-    }
-  );
+document
+.getElementById("jmeno")
+.value="";
 
 };
 
-
-/* ================= NEDOKONCIL ================= */
-
-window.nedokoncil = async function(id){
-
-  await updateDoc(
-
-    doc(db,"motani_hadic",id),
-
-    {
-      cas:null,
-      nedokoncil:true
-    }
-
-  );
-
-};
-
-
-/* ================= EDIT ================= */
-
-window.upravit = async function(id){
-
-  const z =
-    zavodnici.find(x=>x.id===id);
-
-  if(!z)
-    return;
-
-  const novePrijmeni =
-    prompt("Příjmení:",z.prijmeni);
-
-  if(!novePrijmeni)
-    return;
-
-  const noveJmeno =
-    prompt("Jméno:",z.jmeno);
-
-  if(!noveJmeno)
-    return;
-
-  await updateDoc(
-
-    doc(db,"motani_hadic",id),
-
-    {
-      prijmeni:novePrijmeni,
-      jmeno:noveJmeno
-    }
-
-  );
-
-};
 
 
 /* ================= SMAZAT ================= */
 
-window.smazat = async function(id){
+window.smaz=async function(id){
 
-  if(!confirm("Opravdu smazat závodníka?"))
-    return;
+if(!confirm(
+"Opravdu chceš smazat tohoto soutěžícího?"
+))
+return;
 
-  await deleteDoc(
-    doc(db,"motani_hadic",id)
-  );
+
+await deleteDoc(
+doc(db,"motani_hadic",id)
+);
 
 };
 
 
-/* ================= VYKRESLENI ================= */
 
-function vykresli(){
+/* ================= EDIT ZAVODNIKA ================= */
 
-  const tabulka =
-    document.getElementById("tabulka");
+window.edit=async function(id){
 
-  let serazeni =
-    [...zavodnici];
+const z=
+data.find(s=>s.id===id);
 
-  serazeni.sort((a,b)=>{
-
-    if(a.nedokoncil && !b.nedokoncil)
-      return 1;
-
-    if(!a.nedokoncil && b.nedokoncil)
-      return -1;
-
-    if(a.nedokoncil && b.nedokoncil)
-      return 0;
-
-    if(a.cas===null)
-      return 1;
-
-    if(b.cas===null)
-      return -1;
-
-    return casNaSekundy(a.cas) -
-           casNaSekundy(b.cas);
-
-  });
+if(!z)
+return;
 
 
-  if(serazeni.length===0){
+const p=
+prompt(
+"Příjmení:",
+z.prijmeni
+);
 
-    tabulka.innerHTML=`
-      <tr>
-        <td colspan="5" class="empty">
-          Zatím není přidaný žádný závodník.
-        </td>
-      </tr>
-    `;
-
-    return;
-  }
+if(!p)
+return;
 
 
-  tabulka.innerHTML="";
+const j=
+prompt(
+"Jméno:",
+z.jmeno
+);
+
+if(!j)
+return;
 
 
-  serazeni.forEach((z,index)=>{
+await updateDoc(
 
-    let casText="-";
-    let casClass="";
+doc(db,"motani_hadic",id),
 
-    if(z.nedokoncil){
+{
 
-      casText="∞";
-      casClass="infinity";
+prijmeni:p,
 
-    }else if(z.cas){
-
-      casText=z.cas;
-      casClass="time";
-
-    }
-
-
-    tabulka.innerHTML+=`
-
-      <tr>
-
-        <td>${index+1}</td>
-
-        <td>${z.prijmeni}</td>
-
-        <td>${z.jmeno}</td>
-
-        <td class="${casClass}">
-          ${casText}
-        </td>
-
-        <td>
-
-          <button
-            class="action"
-            onclick="zapsatCas('${z.id}')">
-            ⏱
-          </button>
-
-          <button
-            class="action"
-            onclick="nedokoncil('${z.id}')">
-            ∞
-          </button>
-
-          <button
-            class="action"
-            onclick="upravit('${z.id}')">
-            ✏️
-          </button>
-
-          <button
-            class="action"
-            onclick="smazat('${z.id}')">
-            🗑️
-          </button>
-
-        </td>
-
-      </tr>
-
-    `;
-
-  });
+jmeno:j
 
 }
+
+);
+
+};
+
+
+
+/* ================= PRIDAT POKUS ================= */
+
+window.pridatPokus=async function(id){
+
+const cas=
+prompt(
+"Zadej čas například 15:23"
+);
+
+if(!cas)
+return;
+
+
+if(!validTime(cas)){
+
+alert(
+"Špatný čas! Použij například 15:23."
+);
+
+return;
+
+}
+
+
+const z=
+data.find(s=>s.id===id);
+
+if(!z)
+return;
+
+
+const pokusy=
+[...(z.pokusy||[])];
+
+pokusy.push(cas);
+
+
+/* NEJLEPSI CAS */
+
+let nej=pokusy[0];
+
+
+for(let i=1;i<pokusy.length;i++){
+
+if(
+casNaCislo(pokusy[i])
+<
+casNaCislo(nej)
+){
+
+nej=pokusy[i];
+
+}
+
+}
+
+
+await updateDoc(
+
+doc(db,"motani_hadic",id),
+
+{
+
+pokusy:pokusy,
+
+nejlepsi:nej
+
+}
+
+);
+
+};
+
+
+
+/* ================= UPRAVIT POKUS ================= */
+
+window.editPokus=async function(id,index){
+
+const z=
+data.find(s=>s.id===id);
+
+if(!z||!Array.isArray(z.pokusy))
+return;
+
+
+const stare=
+z.pokusy[index];
+
+if(!stare)
+return;
+
+
+const novy=
+prompt(
+"Upravit čas:",
+stare
+);
+
+if(!novy)
+return;
+
+
+if(!validTime(novy)){
+
+alert(
+"Špatný čas! Použij například 15:23."
+);
+
+return;
+
+}
+
+
+const pokusy=
+[...(z.pokusy||[])];
+
+pokusy[index]=novy;
+
+
+/* ZNOVU SPOCITAT NEJLEPSI */
+
+let nej=pokusy[0];
+
+
+for(let i=1;i<pokusy.length;i++){
+
+if(
+casNaCislo(pokusy[i])
+<
+casNaCislo(nej)
+){
+
+nej=pokusy[i];
+
+}
+
+}
+
+
+await updateDoc(
+
+doc(db,"motani_hadic",id),
+
+{
+
+pokusy:pokusy,
+
+nejlepsi:nej
+
+}
+
+);
+
+};
+
+
+
+/* ================= VYKRESLENI ================= */
+
+window.render=function(){
+
+const t=
+document.getElementById("tab");
+
+t.innerHTML="";
+
+
+const serazeno=
+[...data].sort((a,b)=>{
+
+if(!a.nejlepsi&&b.nejlepsi)
+return 1;
+
+if(a.nejlepsi&&!b.nejlepsi)
+return -1;
+
+if(!a.nejlepsi&&!b.nejlepsi)
+return 0;
+
+return casNaCislo(a.nejlepsi)
+-
+casNaCislo(b.nejlepsi);
+
+});
+
+
+if(serazeno.length===0){
+
+t.innerHTML=`
+
+<tr>
+
+<td
+colspan="6"
+class="empty">
+
+Zatím není přidaný žádný závodník.
+
+</td>
+
+</tr>
+
+`;
+
+return;
+
+}
+
+
+serazeno.forEach((z,i)=>{
+
+const pokusy=
+(z.pokusy||[])
+.map((c,index)=>`
+
+<div
+class="attempt"
+onclick="editPokus('${z.id}',${index})">
+
+⏱ ${c}
+
+</div>
+
+`)
+.join("");
+
+
+t.innerHTML+=`
+
+<tr>
+
+<td>
+${i+1}
+</td>
+
+<td>
+${z.prijmeni}
+</td>
+
+<td>
+${z.jmeno}
+</td>
+
+<td class="best">
+
+${z.nejlepsi||"-"}
+
+</td>
+
+<td>
+
+${pokusy||"-"}
+
+</td>
+
+<td>
+
+<button
+class="action"
+onclick="edit('${z.id}')">
+
+✏️
+
+</button>
+
+
+<button
+class="action"
+onclick="smaz('${z.id}')">
+
+🗑️
+
+</button>
+
+
+<button
+class="action"
+onclick="pridatPokus('${z.id}')">
+
+➕
+
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+};
+
 
 </script>
 
