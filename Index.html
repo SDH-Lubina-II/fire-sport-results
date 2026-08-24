@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Fire Sport Results</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top right, #26364d 0%, transparent 35%),
+        linear-gradient(145deg, #07111f, #101827 55%, #07111f);
+      color: white;
+    }
+
+    .app {
+      max-width: 650px;
+      margin: 0 auto;
+      min-height: 100vh;
+      padding: 24px 18px 35px;
+    }
+
+    .header {
+      text-align: center;
+      padding: 25px 10px 35px;
+    }
+
+    .logo {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 18px;
+      border-radius: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 38px;
+      background: linear-gradient(145deg, #ffb000, #f04400);
+      box-shadow: 0 12px 35px rgba(255, 105, 0, 0.3);
+    }
+
+    h1 {
+      font-size: 30px;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: #9eacbd;
+      font-size: 15px;
+    }
+
+    .section-title {
+      font-size: 14px;
+      color: #8796aa;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin: 0 5px 14px;
+    }
+
+    .discipline {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      padding: 24px;
+      margin-bottom: 16px;
+      text-align: left;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+      background: rgba(255,255,255,0.055);
+      backdrop-filter: blur(12px);
+    }
+
+    .discipline:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,0.18);
+    }
+
+    .discipline:active {
+      transform: scale(0.98);
+    }
+
+    .attack {
+      background:
+        linear-gradient(135deg, rgba(255,90,0,0.22), rgba(255,170,0,0.06)),
+        rgba(255,255,255,0.055);
+    }
+
+    .hoses {
+      background:
+        linear-gradient(135deg, rgba(0,145,255,0.20), rgba(0,210,180,0.06)),
+        rgba(255,255,255,0.055);
+    }
+
+    .icon {
+      font-size: 38px;
+      margin-bottom: 15px;
+    }
+
+    .discipline h2 {
+      font-size: 23px;
+      margin-bottom: 8px;
+    }
+
+    .discipline p {
+      color: #aab6c5;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .arrow {
+      float: right;
+      font-size: 28px;
+      color: #728096;
+      margin-top: -32px;
+    }
+
+    .status {
+      margin-top: 35px;
+      text-align: center;
+      color: #68778b;
+      font-size: 12px;
+    }
+
+    .online {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #36d399;
+      margin-right: 6px;
+      box-shadow: 0 0 10px #36d399;
+    }
+
+    @media (max-width: 420px) {
+      h1 {
+        font-size: 26px;
+      }
+
+      .discipline {
+        padding: 21px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="app">
+
+    <header class="header">
+      <div class="logo">🔥</div>
+
+      <h1>FIRE SPORT RESULTS</h1>
+
+      <p class="subtitle">
+        Výsledky hasičských soutěží
+      </p>
+    </header>
+
+    <div class="section-title">
+      Vyber disciplínu
+    </div>
+
+    <button class="discipline attack" onclick="openDiscipline('attack')">
+      <div class="icon">🚒</div>
+
+      <h2>Požární útok</h2>
+
+      <p>
+        1 pokus · LP + PP · automatické pořadí
+      </p>
+
+      <div class="arrow">›</div>
+    </button>
+
+    <button class="discipline hoses" onclick="openDiscipline('hoses')">
+      <div class="icon">🪢</div>
+
+      <h2>Motání hadic</h2>
+
+      <p>
+        1 pokus · měření času · automatické pořadí
+      </p>
+
+      <div class="arrow">›</div>
+    </button>
+
+    <div class="status">
+      <span class="online"></span>
+      Systém připraven
+    </div>
+
+  </main>
+
+  <script type="module">
+
+    // =========================
+    // FIREBASE
+    // =========================
+
+    import { initializeApp }
+      from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+    import {
+      getFirestore
+    }
+      from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+
+    const firebaseConfig = {
+
+      apiKey: "AIzaSyCIZ3Z5HvF6P9TSQ9GxiZEIoVGFsay2pbo",
+
+      authDomain:
+        "fire-sport-results.firebaseapp.com",
+
+      projectId:
+        "fire-sport-results",
+
+      storageBucket:
+        "fire-sport-results.firebasestorage.app",
+
+      messagingSenderId:
+        "63170955961",
+
+      appId:
+        "1:63170955961:web:f5b9e052312a79b17de968"
+    };
+
+
+    const app = initializeApp(firebaseConfig);
+
+    const db = getFirestore(app);
+
+
+    // =========================
+    // DISCIPLÍNY
+    // =========================
+
+    window.openDiscipline = function(type) {
+
+      if (type === "attack") {
+        alert("Požární útok – připravujeme zadávání výsledků.");
+      }
+
+      if (type === "hoses") {
+        alert("Motání hadic – připravujeme zadávání výsledků.");
+      }
+
+    };
+
+  </script>
+
+</body>
+  </html>
