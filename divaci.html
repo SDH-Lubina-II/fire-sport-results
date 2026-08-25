@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Výsledky – SDH Lubina II–Větřkovice</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    min-height:100vh;
+    color:white;
+
+    background:
+        radial-gradient(circle at top right,#5b1010 0%,transparent 35%),
+        linear-gradient(145deg,#090d13,#151b24);
+}
+
+.app{
+    max-width:1100px;
+    margin:auto;
+    padding:20px 16px 50px;
+}
+
+.header{
+    text-align:center;
+    padding:15px 10px 25px;
+}
+
+.logo{
+    font-size:44px;
+    margin-bottom:10px;
+}
+
+.header h1{
+    font-size:23px;
+    line-height:1.35;
+    margin:0;
+}
+
+.header h1 span{
+    color:#ef3333;
+}
+
+.district{
+    margin-top:7px;
+    color:#8995a6;
+    font-size:14px;
+}
+
+.live{
+    display:inline-flex;
+    align-items:center;
+    margin-top:14px;
+    padding:7px 12px;
+    border-radius:20px;
+    background:rgba(54,211,153,.08);
+    color:#8fa39d;
+    font-size:12px;
+}
+
+.online{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#36d399;
+    margin-right:7px;
+    box-shadow:0 0 9px #36d399;
+}
+
+.card{
+    background:rgba(255,255,255,.055);
+    border:1px solid rgba(255,255,255,.10);
+    border-radius:22px;
+    padding:20px;
+    margin-bottom:18px;
+}
+
+.card-title{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:18px;
+}
+
+.card-title h2{
+    margin:0;
+    font-size:24px;
+}
+
+.category{
+    margin-bottom:24px;
+}
+
+.category:last-child{
+    margin-bottom:0;
+}
+
+.category-title{
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.table-wrap{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:760px;
+}
+
+th{
+    padding:12px 8px;
+    background:#b92828;
+    color:white;
+    font-size:13px;
+}
+
+td{
+    padding:11px 8px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    text-align:center;
+    color:#dbe2eb;
+}
+
+.start{
+    font-weight:bold;
+    color:#9eabba;
+}
+
+.time{
+    font-weight:bold;
+    color:#dbe2eb;
+}
+
+.result{
+    font-size:19px;
+    font-weight:bold;
+    color:#ffd166;
+}
+
+.place{
+    font-size:19px;
+    font-weight:bold;
+}
+
+.gold{
+    color:#ffd700;
+}
+
+.silver{
+    color:#cfd3d8;
+}
+
+.bronze{
+    color:#cd7f32;
+}
+
+.np{
+    color:#ff5555;
+    font-weight:bold;
+}
+
+.podium{
+    font-size:21px;
+}
+
+.empty{
+    text-align:center;
+    padding:28px;
+    color:#718096;
+}
+
+.hidden{
+    display:none !important;
+}
+
+.section-hidden{
+    display:none;
+}
+
+.hose-table{
+    min-width:650px;
+}
+
+.best{
+    font-size:19px;
+    font-weight:bold;
+    color:#ffd166;
+}
+
+@media(max-width:700px){
+
+    .app{
+        padding:12px 10px 40px;
+    }
+
+    .header h1{
+        font-size:20px;
+    }
+
+    .card{
+        padding:15px;
+        border-radius:18px;
+    }
+
+    .card-title h2{
+        font-size:21px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+<header class="header">
+
+<div class="logo">
+🔥
+</div>
+
+<h1>
+<span>SBOR DOBROVOLNÝCH HASIČŮ</span><br>
+LUBINA II–VĚTŘKOVICE
+</h1>
+
+<div class="district">
+okres Nový Jičín · Výsledky soutěže
+</div>
+
+<div class="live">
+<span class="online"></span>
+ŽIVÉ VÝSLEDKY
+</div>
+
+</header>
+
+
+<!-- POŽÁRNÍ ÚTOK -->
+
+<div
+id="utokSekce"
+class="card">
+
+<div class="card-title">
+
+<h2>
+🚒 Požární útok
+</h2>
+
+</div>
+
+
+<!-- MUŽI -->
+
+<div
+id="utokMuziSekce"
+class="category">
+
+<div class="category-title">
+👨 Muži
+</div>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Pořadí</th>
+<th>Družstvo</th>
+<th>LP</th>
+<th>PP</th>
+<th>Výsledný čas</th>
+<th>Start</th>
+</tr>
+
+</thead>
+
+<tbody id="utokMuziTab"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+<!-- ŽENY -->
+
+<div
+id="utokZenySekce"
+class="category">
+
+<div class="category-title">
+👩 Ženy
+</div>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Pořadí</th>
+<th>Družstvo</th>
+<th>LP</th>
+<th>PP</th>
+<th>Výsledný čas</th>
+<th>Start</th>
+</tr>
+
+</thead>
+
+<tbody id="utokZenyTab"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+<!-- VETERÁNI -->
+
+<div
+id="utokVeteraniSekce"
+class="category">
+
+<div class="category-title">
+🏆 Veteráni 35+
+</div>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Pořadí</th>
+<th>Družstvo</th>
+<th>LP</th>
+<th>PP</th>
+<th>Výsledný čas</th>
+<th>Start</th>
+</tr>
+
+</thead>
+
+<tbody id="utokVeteraniTab"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- MOTÁNÍ HADIC -->
+
+<div
+id="motaniSekce"
+class="card">
+
+<div class="card-title">
+
+<h2>
+🌀 Motání hadic
+</h2>
+
+</div>
+
+
+<!-- MUŽI -->
+
+<div
+id="motaniMuziSekce"
+class="category">
+
+<div class="category-title">
+👨 Muži
+</div>
+
+<div class="table-wrap">
+
+<table class="hose-table">
+
+<thead>
+
+<tr>
+<th>Pořadí</th>
+<th>Příjmení</th>
+<th>Jméno</th>
+<th>Družstvo</th>
+<th>Nejlepší čas</th>
+</tr>
+
+</thead>
+
+<tbody id="motaniMuziTab"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+<!-- ŽENY -->
+
+<div
+id="motaniZenySekce"
+class="category">
+
+<div class="category-title">
+👩 Ženy
+</div>
+
+<div class="table-wrap">
+
+<table class="hose-table">
+
+<thead>
+
+<tr>
+<th>Pořadí</th>
+<th>Příjmení</th>
+<th>Jméno</th>
+<th>Družstvo</th>
+<th>Nejlepší čas</th>
+</tr>
+
+</thead>
+
+<tbody id="motaniZenyTab"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="live">
+<span class="online"></span>
+Výsledky se aktualizují automaticky
+</div>
+
+
+</div>
+
+
+<script type="module">
+
+
+import {
+    initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+
+import {
+    getFirestore,
+    collection,
+    onSnapshot,
+    doc
+}
+from
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+
+/* FIREBASE */
+
+const firebaseConfig={
+
+    apiKey:
+    "AIzaSyCIZ3Z5HvF6P9TSQ9GxiZEIoVGFsay2pbo",
+
+    authDomain:
+    "fire-sport-results.firebaseapp.com",
+
+    projectId:
+    "fire-sport-results",
+
+    storageBucket:
+    "fire-sport-results.firebasestorage.app",
+
+    messagingSenderId:
+    "63170955961",
+
+    appId:
+    "1:63170955961:web:f5b9e052312a79b17de968"
+
+};
+
+
+const app=
+initializeApp(firebaseConfig);
+
+const db=
+getFirestore(app);
+
+
+/* KOLEKCE */
+
+const utokCol=
+collection(
+    db,
+    "pozarní_utok"
+);
+
+const motaniCol=
+collection(
+    db,
+    "motani_hadic"
+);
+
+const nastaveniRef=
+doc(
+    db,
+    "nastaveni",
+    "viditelnost"
+);
+
+
+/* DATA */
+
+let utokData=[];
+
+let motaniData=[];
+
+let nastaveni={
+
+    utokCelkem:true,
+    utokMuzi:true,
+    utokZeny:true,
+    utokVeterani:true,
+
+    motaniCelkem:true,
+    motaniMuzi:true,
+    motaniZeny:true
+
+};
+
+
+/* ČAS */
+
+function validTime(t){
+
+    if(
+        typeof t!=="string" ||
+        !t.includes(":")
+    )
+        return false;
+
+    const casti=t.split(":");
+
+    if(casti.length!==2)
+        return false;
+
+    const s=Number(casti[0]);
+
+    const setiny=Number(casti[1]);
+
+    return(
+        Number.isFinite(s) &&
+        Number.isFinite(setiny) &&
+        s>=0 &&
+        setiny>=0 &&
+        setiny<=99
+    );
+
+}
+
+
+function casNaCislo(cas){
+
+    if(!validTime(cas))
+        return Infinity;
+
+    const casti=cas.split(":");
+
+    return(
+        Number(casti[0])*100+
+        Number(casti[1])
+    );
+
+}
+
+
+/* VÝSLEDNÝ ČAS */
+
+function vysledek(z){
+
+    if(z.np)
+        return "NP";
+
+    if(
+        !validTime(z.lp) ||
+        !validTime(z.pp)
+    )
+        return "-";
+
+    return(
+        casNaCislo(z.lp)>
+        casNaCislo(z.pp)
+    )
+    ?
+    z.lp
+    :
+    z.pp;
+
+}
+
+
+/* POŘADÍ POŽÁRNÍHO ÚTOKU */
+
+function pripravVysledky(seznam){
+
+    const platne=
+    seznam
+    .filter(z=>
+        !z.np &&
+        validTime(z.lp) &&
+        validTime(z.pp)
+    )
+    .sort(
+        (a,b)=>
+        casNaCislo(
+            vysledek(a)
+        )
+        -
+        casNaCislo(
+            vysledek(b)
+        )
+    );
+
+
+    const np=
+    seznam.filter(
+        z=>z.np
+    );
+
+
+    return[
+        ...platne,
+        ...np
+    ];
+
+}
+
+
+/* VYKRESLENÍ POŽÁRNÍHO ÚTOKU */
+
+function vykresliUtok(
+    id,
+    seznam
+){
+
+    const tab=
+    document.getElementById(id);
+
+    tab.innerHTML="";
+
+
+    if(seznam.length===0){
+
+        tab.innerHTML=`
+
+        <tr>
+
+        <td
+        colspan="6"
+        class="empty">
+
+        Zatím není žádný výsledek.
+
+        </td>
+
+        </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    const vysledky=
+    pripravVysledky(seznam);
+
+
+    vysledky.forEach(
+        (z,index)=>{
+
+            const jeNP=
+            !!z.np;
+
+
+            const poradi=
+            jeNP
+            ?
+            "NP"
+            :
+            `${index+1}.`;
+
+
+            let trida="";
+
+
+            if(!jeNP){
+
+                if(index===0)
+                    trida="gold";
+
+                if(index===1)
+                    trida="silver";
+
+                if(index===2)
+                    trida="bronze";
+
+            }
+
+
+            tab.innerHTML+=`
+
+            <tr>
+
+            <td
+            class="place ${trida}">
+
+            ${poradi}
+
+            </td>
+
+
+            <td>
+            ${z.druzstvo||"-"}
+            </td>
+
+
+            <td class="time">
+            ${z.lp||"-"}
+            </td>
+
+
+            <td class="time">
+            ${z.pp||"-"}
+            </td>
+
+
+            <td
+            class="${jeNP?"np":"result"}">
+
+            ${vysledek(z)}
+
+            </td>
+
+
+            <td class="start">
+            ${z.start||"-"}
+            </td>
+
+            </tr>
+
+            `;
+
+        }
+    );
+
+}
+
+
+/* MOTÁNÍ HADIC */
+
+function pripravMotani(seznam){
+
+    return(
+        seznam
+        .filter(z=>
+            validTime(z.nejlepsi)
+        )
+        .sort(
+            (a,b)=>
+            casNaCislo(a.nejlepsi)-
+            casNaCislo(b.nejlepsi)
+        )
+    );
+
+}
+
+
+/* VYKRESLENÍ MOTÁNÍ */
+
+function vykresliMotani(
+    id,
+    seznam
+){
+
+    const tab=
+    document.getElementById(id);
+
+    tab.innerHTML="";
+
+
+    if(seznam.length===0){
+
+        tab.innerHTML=`
+
+        <tr>
+
+        <td
+        colspan="5"
+        class="empty">
+
+        Zatím není žádný výsledek.
+
+        </td>
+
+        </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    const vysledky=
+    pripravMotani(seznam);
+
+
+    vysledky.forEach(
+        (z,index)=>{
+
+            let trida="";
+
+
+            if(index===0)
+                trida="gold";
+
+            if(index===1)
+                trida="silver";
+
+            if(index===2)
+                trida="bronze";
+
+
+            tab.innerHTML+=`
+
+            <tr>
+
+            <td
+            class="place ${trida}">
+
+            ${index+1}.
+
+            </td>
+
+
+            <td>
+            ${z.prijmeni||"-"}
+            </td>
+
+
+            <td>
+            ${z.jmeno||"-"}
+            </td>
+
+
+            <td>
+            ${z.druzstvo||"-"}
+            </td>
+
+
+            <td class="best">
+            ${z.nejlepsi}
+
+            </td>
+
+            </tr>
+
+            `;
+
+        }
+    );
+
+}
+
+
+/* APLIKACE VIDITELNOSTI */
+
+function pouzijNastaveni(){
+
+    const utok=
+    document.getElementById(
+        "utokSekce"
+    );
+
+
+    const utokMuzi=
+    document.getElementById(
+        "utokMuziSekce"
+    );
+
+
+    const utokZeny=
+    document.getElementById(
+        "utokZenySekce"
+    );
+
+
+    const utokVeterani=
+    document.getElementById(
+        "utokVeteraniSekce"
+    );
+
+
+    const motani=
+    document.getElementById(
+        "motaniSekce"
+    );
+
+
+    const motaniMuzi=
+    document.getElementById(
+        "motaniMuziSekce"
+    );
+
+
+    const motaniZeny=
+    document.getElementById(
+        "motaniZenySekce"
+    );
+
+
+    utok.classList.toggle(
+        "section-hidden",
+        !nastaveni.utokCelkem
+    );
+
+
+    utokMuzi.classList.toggle(
+        "section-hidden",
+        !nastaveni.utokMuzi ||
+        !nastaveni.utokCelkem
+    );
+
+
+    utokZeny.classList.toggle(
+        "section-hidden",
+        !nastaveni.utokZeny ||
+        !nastaveni.utokCelkem
+    );
+
+
+    utokVeterani.classList.toggle(
+        "section-hidden",
+        !nastaveni.utokVeterani ||
+        !nastaveni.utokCelkem
+    );
+
+
+    motani.classList.toggle(
+        "section-hidden",
+        !nastaveni.motaniCelkem
+    );
+
+
+    motaniMuzi.classList.toggle(
+        "section-hidden",
+        !nastaveni.motaniMuzi ||
+        !nastaveni.motaniCelkem
+    );
+
+
+    motaniZeny.classList.toggle(
+        "section-hidden",
+        !nastaveni.motaniZeny ||
+        !nastaveni.motaniCelkem
+    );
+
+}
+
+
+/* FIREBASE – POŽÁRNÍ ÚTOK */
+
+onSnapshot(
+    utokCol,
+    snap=>{
+
+        utokData=[];
+
+        snap.forEach(
+            d=>{
+
+                utokData.push({
+
+                    id:d.id,
+
+                    ...d.data()
+
+                });
+
+            }
+        );
+
+
+        vykresliUtok(
+
+            "utokMuziTab",
+
+            utokData.filter(
+                z=>z.kategorie==="muzi"
+            )
+
+        );
+
+
+        vykresliUtok(
+
+            "utokZenyTab",
+
+            utokData.filter(
+                z=>z.kategorie==="zeny"
+            )
+
+        );
+
+
+        vykresliUtok(
+
+            "utokVeteraniTab",
+
+            utokData.filter(
+                z=>z.kategorie==="veterani"
+            )
+
+        );
+
+    }
+);
+
+
+/* FIREBASE – MOTÁNÍ */
+
+onSnapshot(
+    motaniCol,
+    snap=>{
+
+        motaniData=[];
+
+        snap.forEach(
+            d=>{
+
+                motaniData.push({
+
+                    id:d.id,
+
+                    ...d.data()
+
+                });
+
+            }
+        );
+
+
+        vykresliMotani(
+
+            "motaniMuziTab",
+
+            motaniData.filter(
+                z=>
+                z.kategorie==="muzi" ||
+                !z.kategorie
+            )
+
+        );
+
+
+        vykresliMotani(
+
+            "motaniZenyTab",
+
+            motaniData.filter(
+                z=>
+                z.kategorie==="zeny"
+            )
+
+        );
+
+    }
+);
+
+
+/* FIREBASE – NASTAVENÍ */
+
+onSnapshot(
+    nastaveniRef,
+    snap=>{
+
+        if(
+            snap.exists()
+        ){
+
+            nastaveni={
+                ...nastaveni,
+                ...snap.data()
+            };
+
+        }
+
+
+        pouzijNastaveni();
+
+    }
+);
+
+
+/* PRVNÍ ZOBRAZENÍ */
+
+pouzijNastaveni();
+
+</script>
+
+</body>
+</html> 
