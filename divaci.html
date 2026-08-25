@@ -1250,12 +1250,33 @@ trida="bronze";
 
 }
 
-const poradi=
-jeNP
-?
-"NP"
-:
-(index+1)+".";
+let poradi="";
+
+if(jeNP){
+
+poradi="NP";
+
+}
+else if(index===0){
+
+poradi="🥇";
+
+}
+else if(index===1){
+
+poradi="🥈";
+
+}
+else if(index===2){
+
+poradi="🥉";
+
+}
+else{
+
+poradi=(index+1)+".";
+
+}
 
 
 tab.innerHTML+=`
