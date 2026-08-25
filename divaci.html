@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -30,7 +31,7 @@ padding:18px 16px 45px;
 }
 
 
-/* HLAVNÍ HLAVIČKA */
+/* HLAVICKA */
 
 .header{
 text-align:center;
@@ -38,7 +39,7 @@ padding:15px 10px 28px;
 }
 
 .logo{
-font-size:30px;
+font-size:28px;
 margin-bottom:8px;
 }
 
@@ -79,7 +80,7 @@ box-shadow:0 0 8px #36d399;
 }
 
 
-/* HLAVNÍ TLAČÍTKA */
+/* HLAVNI TLAČÍTKA */
 
 .section-title{
 color:#8796aa;
@@ -92,17 +93,20 @@ margin:0 4px 12px;
 .discipline{
 width:100%;
 border:1px solid rgba(255,255,255,.10);
-border-radius:20px;
-padding:19px;
+border-radius:18px;
+padding:16px;
 margin-bottom:12px;
 color:white;
 text-align:left;
 cursor:pointer;
+
 background:rgba(255,255,255,.055);
+
 transition:.2s;
+
 display:flex;
 align-items:center;
-gap:15px;
+gap:14px;
 }
 
 .discipline:hover{
@@ -111,20 +115,26 @@ transform:translateY(-1px);
 }
 
 .discipline-icon{
-width:48px;
-height:48px;
-border-radius:14px;
+width:42px;
+height:42px;
+
+border-radius:12px;
+
 display:flex;
 align-items:center;
 justify-content:center;
+
 background:rgba(185,40,40,.14);
+
 color:#ef5555;
-font-size:25px;
+
+font-size:21px;
+
 flex-shrink:0;
 }
 
 .name{
-font-size:19px;
+font-size:18px;
 font-weight:bold;
 margin-bottom:4px;
 }
@@ -145,9 +155,13 @@ display:none;
 border:1px solid #394455;
 background:transparent;
 color:#aeb9c8;
+
 padding:9px 14px;
+
 border-radius:10px;
+
 cursor:pointer;
+
 margin-bottom:14px;
 }
 
@@ -155,18 +169,21 @@ margin-bottom:14px;
 background:rgba(255,255,255,.06);
 }
 
+
+/* NADPIS */
+
 .page-title{
 text-align:center;
 margin:5px 0 20px;
 }
 
 .page-title-icon{
-font-size:27px;
+font-size:25px;
 margin-bottom:5px;
 }
 
 .page-title h2{
-font-size:25px;
+font-size:24px;
 margin:0 0 5px;
 }
 
@@ -181,9 +198,13 @@ font-size:13px;
 
 .card{
 background:rgba(255,255,255,.055);
+
 border:1px solid rgba(255,255,255,.10);
+
 border-radius:20px;
+
 padding:18px;
+
 margin-bottom:16px;
 }
 
@@ -197,10 +218,15 @@ font-size:20px;
 
 .status{
 text-align:center;
+
 padding:13px;
+
 border-radius:14px;
+
 background:rgba(255,255,255,.035);
+
 border:1px solid rgba(255,255,255,.07);
+
 margin-bottom:16px;
 }
 
@@ -225,21 +251,25 @@ overflow-x:auto;
 table{
 width:100%;
 border-collapse:collapse;
-min-width:500px;
 }
 
 th{
-padding:11px 8px;
+padding:11px 7px;
 background:#b92828;
 color:white;
 font-size:12px;
+white-space:nowrap;
 }
 
 td{
-padding:11px 8px;
+padding:11px 7px;
+
 border-bottom:1px solid rgba(255,255,255,.08);
+
 text-align:center;
+
 color:#dbe2eb;
+
 font-size:14px;
 }
 
@@ -272,19 +302,29 @@ font-weight:bold;
 
 .category-buttons{
 display:grid;
+
 grid-template-columns:repeat(3,1fr);
+
 gap:9px;
+
 margin-bottom:16px;
 }
 
 .category-button{
 border:1px solid #394455;
+
 border-radius:11px;
+
 padding:11px 7px;
+
 background:#101722;
+
 color:#aeb9c8;
+
 font-weight:bold;
+
 cursor:pointer;
+
 font-size:14px;
 }
 
@@ -298,12 +338,8 @@ border-color:#ef3333;
 color:white;
 }
 
-.category-button.hidden{
-display:none;
-}
 
-
-/* VÝSLEDKY */
+/* VYSLEDKY */
 
 .result{
 font-size:18px;
@@ -335,7 +371,19 @@ color:#ffd166;
 }
 
 
-/* PRÁZDNÉ */
+/* CHYBA */
+
+.error{
+text-align:center;
+padding:25px;
+
+color:#ff7777;
+
+font-size:14px;
+}
+
+
+/* PRAZDNE */
 
 .empty{
 text-align:center;
@@ -344,7 +392,7 @@ color:#718096;
 }
 
 
-/* SKRYTÍ */
+/* SKRYTI */
 
 .hidden{
 display:none !important;
@@ -383,7 +431,7 @@ padding:14px;
 
 
 <!-- ================================= -->
-<!-- HLAVNÍ STRÁNKA -->
+<!-- HLAVNI STRANKA -->
 <!-- ================================= -->
 
 <div id="home">
@@ -404,8 +452,11 @@ okres Nový Jičín
 </div>
 
 <div class="live">
+
 <span class="online"></span>
+
 ŽIVÉ VÝSLEDKY
+
 </div>
 
 </header>
@@ -416,7 +467,7 @@ Soutěže
 </div>
 
 
-<!-- POŽÁRNÍ ÚTOK -->
+<!-- POZARNI UTOK -->
 
 <button
 id="btnUtok"
@@ -424,7 +475,7 @@ class="discipline"
 onclick="otevriUtok()">
 
 <div class="discipline-icon">
-▣
+🚒
 </div>
 
 <div>
@@ -442,7 +493,7 @@ Startovní listina a průběžné výsledky
 </button>
 
 
-<!-- MOTÁNÍ -->
+<!-- MOTANI -->
 
 <button
 id="btnMotani"
@@ -450,7 +501,7 @@ class="discipline"
 onclick="otevriMotani()">
 
 <div class="discipline-icon">
-◎
+🌀
 </div>
 
 <div>
@@ -472,7 +523,7 @@ Startovní listina a průběžné výsledky
 
 
 <!-- ================================= -->
-<!-- POŽÁRNÍ ÚTOK -->
+<!-- POZARNI UTOK -->
 <!-- ================================= -->
 
 <div
@@ -492,7 +543,7 @@ onclick="zpet()">
 <div class="page-title">
 
 <div class="page-title-icon">
-▣
+🚒
 </div>
 
 <h2>
@@ -506,10 +557,7 @@ Výsledky soutěže
 </div>
 
 
-<!-- STAV -->
-
-<div
-class="status">
+<div class="status">
 
 <div
 id="utokStatus"
@@ -530,7 +578,7 @@ Startovní listina
 </div>
 
 
-<!-- STARTOVNÍ LISTINA -->
+<!-- STARTOVNI LISTINA -->
 
 <div class="card">
 
@@ -567,13 +615,14 @@ id="utokStartTab">
 </div>
 
 
-<!-- VÝBĚR KATEGORIE -->
+<!-- VYSLEDKY -->
 
 <div class="card">
 
 <h2>
 Výsledky podle kategorie
 </h2>
+
 
 <div
 class="category-buttons">
@@ -587,6 +636,7 @@ Muži
 
 </button>
 
+
 <button
 id="utokZenyBtn"
 class="category-button"
@@ -595,6 +645,7 @@ onclick="vyberUtok('zeny')">
 Ženy
 
 </button>
+
 
 <button
 id="utokVeteraniBtn"
@@ -606,6 +657,7 @@ Veteráni 35+
 </button>
 
 </div>
+
 
 <div
 id="utokVysledkyCard"
@@ -648,7 +700,7 @@ id="utokVysledkyTab">
 
 
 <!-- ================================= -->
-<!-- MOTÁNÍ HADIC -->
+<!-- MOTANI HADIC -->
 <!-- ================================= -->
 
 <div
@@ -668,7 +720,7 @@ onclick="zpet()">
 <div class="page-title">
 
 <div class="page-title-icon">
-◎
+🌀
 </div>
 
 <h2>
@@ -682,10 +734,7 @@ Výsledky soutěže
 </div>
 
 
-<!-- STAV -->
-
-<div
-class="status">
+<div class="status">
 
 <div
 id="motaniStatus"
@@ -705,8 +754,6 @@ Startovní listina
 
 </div>
 
-
-<!-- STARTOVNÍ LISTINA -->
 
 <div class="card">
 
@@ -745,13 +792,12 @@ id="motaniStartTab">
 </div>
 
 
-<!-- KATEGORIE -->
-
 <div class="card">
 
 <h2>
 Výsledky podle kategorie
 </h2>
+
 
 <div
 class="category-buttons">
@@ -764,6 +810,7 @@ onclick="vyberMotani('muzi')">
 Muži
 
 </button>
+
 
 <button
 id="motaniZenyBtn"
@@ -898,18 +945,16 @@ db,
 /* DATA */
 
 let utokData=[];
-
 let motaniData=[];
 
 
-/* VYBRANÁ KATEGORIE */
+/* VYBRANE KATEGORIE */
 
 let utokKategorie=null;
-
 let motaniKategorie=null;
 
 
-/* NASTAVENÍ */
+/* NASTAVENI */
 
 let nastaveni={
 
@@ -931,6 +976,9 @@ motaniZeny:true
 
 window.otevriUtok=function(){
 
+if(!nastaveni.utokCelkem)
+return;
+
 document
 .getElementById("home")
 .style.display="none";
@@ -947,6 +995,9 @@ document
 
 
 window.otevriMotani=function(){
+
+if(!nastaveni.motaniCelkem)
+return;
 
 document
 .getElementById("home")
@@ -981,7 +1032,7 @@ document
 
 
 /* =========================================
-   ČAS
+   CAS
 ========================================= */
 
 function validTime(t){
@@ -1027,7 +1078,7 @@ Number(c[1])
 
 
 /* =========================================
-   POŽÁRNÍ ÚTOK
+   POZARNI UTOK
 ========================================= */
 
 function vysledek(z){
@@ -1040,6 +1091,7 @@ if(
 !validTime(z.pp)
 )
 return "-";
+
 
 return(
 casNaCislo(z.lp)>
@@ -1066,7 +1118,9 @@ return "Muži";
 }
 
 
-/* STARTOVNÍ LISTINA */
+/* =========================================
+   STARTOVNI LISTINA UTOK
+========================================= */
 
 function vykresliUtokStart(){
 
@@ -1091,12 +1145,28 @@ if(seznam.length===0){
 tab.innerHTML=`
 
 <tr>
-<td colspan="4" class="empty">
-Zatím není přidané žádné družstvo.
+
+<td
+colspan="4"
+class="empty">
+
+Startovní listina zatím není k dispozici.
+
 </td>
+
 </tr>
 
 `;
+
+document.getElementById(
+"utokStatus"
+).textContent=
+"Čeká se na start";
+
+document.getElementById(
+"utokStatusDetail"
+).textContent=
+"Startovní listina je prázdná";
 
 return;
 
@@ -1116,7 +1186,6 @@ let trida="waiting";
 if(z.np){
 
 stav="NP";
-
 trida="np";
 
 dokonceno++;
@@ -1128,7 +1197,6 @@ validTime(z.pp)
 ){
 
 stav="Odběhnuto";
-
 trida="finished";
 
 dokonceno++;
@@ -1140,7 +1208,6 @@ validTime(z.pp)
 ){
 
 stav="Probíhá";
-
 trida="running";
 
 }
@@ -1217,9 +1284,19 @@ detail.textContent=
 }
 
 
-/* VÝSLEDKY */
+/* =========================================
+   VYBER KATEGORIE UTOK
+========================================= */
 
 window.vyberUtok=function(kategorie){
+
+if(
+(kategorie==="muzi" && !nastaveni.utokMuzi) ||
+(kategorie==="zeny" && !nastaveni.utokZeny) ||
+(kategorie==="veterani" && !nastaveni.utokVeterani)
+)
+return;
+
 
 utokKategorie=kategorie;
 
@@ -1294,12 +1371,8 @@ validTime(z.pp)
 )
 .sort(
 (a,b)=>
-casNaCislo(
-vysledek(a)
-)-
-casNaCislo(
-vysledek(b)
-)
+casNaCislo(vysledek(a))-
+casNaCislo(vysledek(b))
 );
 
 
@@ -1345,6 +1418,7 @@ const jeNP=z.np;
 
 let trida="";
 
+
 if(!jeNP){
 
 if(index===0)
@@ -1359,14 +1433,20 @@ trida="bronze";
 }
 
 
+const poradi=
+jeNP
+?
+"NP"
+:
+(index+1)+".";
+
+
 tab.innerHTML+=`
 
 <tr>
 
 <td class="place ${trida}">
-
-${jeNP?"NP":index+1+"."}
-
+${poradi}
 </td>
 
 <td>
@@ -1381,11 +1461,8 @@ ${z.lp||"-"}
 ${z.pp||"-"}
 </td>
 
-<td
-class="${jeNP?"np":"result"}">
-
+<td class="${jeNP?"np":"result"}">
 ${vysledek(z)}
-
 </td>
 
 <td class="start">
@@ -1402,11 +1479,8 @@ ${z.start||"-"}
 
 
 /* =========================================
-   MOTÁNÍ HADIC
+   MOTANI
 ========================================= */
-
-
-/* STARTOVNÍ LISTINA */
 
 function vykresliMotaniStart(){
 
@@ -1419,14 +1493,7 @@ tab.innerHTML="";
 
 
 const seznam=
-[...motaniData].sort(
-(a,b)=>
-Number(a.start||0)-
-Number(b.start||0)
-);
-
-
-let dokonceno=0;
+[...motaniData];
 
 
 if(seznam.length===0){
@@ -1439,7 +1506,7 @@ tab.innerHTML=`
 colspan="6"
 class="empty">
 
-Zatím není přidaný žádný soutěžící.
+Startovní listina zatím není k dispozici.
 
 </td>
 
@@ -1450,6 +1517,9 @@ Zatím není přidaný žádný soutěžící.
 return;
 
 }
+
+
+let dokonceno=0;
 
 
 seznam.forEach(
@@ -1552,9 +1622,18 @@ detail.textContent=
 }
 
 
-/* MOTÁNÍ VÝSLEDKY */
+/* =========================================
+   VYSLEDKY MOTANI
+========================================= */
 
 window.vyberMotani=function(kategorie){
+
+if(
+(kategorie==="muzi" && !nastaveni.motaniMuzi) ||
+(kategorie==="zeny" && !nastaveni.motaniZeny)
+)
+return;
+
 
 motaniKategorie=kategorie;
 
@@ -1657,6 +1736,7 @@ seznam.forEach(
 
 let trida="";
 
+
 if(index===0)
 trida="gold";
 
@@ -1671,11 +1751,8 @@ tab.innerHTML+=`
 
 <tr>
 
-<td
-class="place ${trida}">
-
+<td class="place ${trida}">
 ${index+1}.
-
 </td>
 
 <td>
@@ -1704,12 +1781,14 @@ ${z.nejlepsi}
 
 
 /* =========================================
-   NASTAVENÍ VIDITELNOSTI
+   VIDITELNOST
 ========================================= */
 
 function pouzijNastaveni(){
 
-/* CELÉ SOUTĚŽE */
+/* -------------------------
+   CELÉ SOUTĚŽE
+------------------------- */
 
 document
 .getElementById("btnUtok")
@@ -1727,7 +1806,9 @@ document
 );
 
 
-/* KATEGORIE ÚTOKU */
+/* -------------------------
+   KATEGORIE ÚTOK
+------------------------- */
 
 document
 .getElementById("utokMuziBtn")
@@ -1753,7 +1834,9 @@ document
 );
 
 
-/* KATEGORIE MOTÁNÍ */
+/* -------------------------
+   KATEGORIE MOTANI
+------------------------- */
 
 document
 .getElementById("motaniMuziBtn")
@@ -1770,15 +1853,133 @@ document
 !nastaveni.motaniZeny
 );
 
+
+/* -------------------------
+   KDYZ SE VYPNULA CELÁ
+   SOUTĚŽ
+------------------------- */
+
+const utokOtevren=
+document
+.getElementById("utokScreen")
+.style.display==="block";
+
+
+const motaniOtevren=
+document
+.getElementById("motaniScreen")
+.style.display==="block";
+
+
+if(
+utokOtevren &&
+!nastaveni.utokCelkem
+){
+
+zpet();
+
+return;
+
+}
+
+
+if(
+motaniOtevren &&
+!nastaveni.motaniCelkem
+){
+
+zpet();
+
+return;
+
+}
+
+
+/* -------------------------
+   KDYZ SE VYPNULA
+   AKTIVNÍ KATEGORIE
+------------------------- */
+
+if(
+utokKategorie==="muzi" &&
+!nastaveni.utokMuzi
+){
+
+utokKategorie=null;
+
+document
+.getElementById("utokVysledkyCard")
+.classList.add("hidden");
+
+}
+
+
+if(
+utokKategorie==="zeny" &&
+!nastaveni.utokZeny
+){
+
+utokKategorie=null;
+
+document
+.getElementById("utokVysledkyCard")
+.classList.add("hidden");
+
+}
+
+
+if(
+utokKategorie==="veterani" &&
+!nastaveni.utokVeterani
+){
+
+utokKategorie=null;
+
+document
+.getElementById("utokVysledkyCard")
+.classList.add("hidden");
+
+}
+
+
+if(
+motaniKategorie==="muzi" &&
+!nastaveni.motaniMuzi
+){
+
+motaniKategorie=null;
+
+document
+.getElementById("motaniVysledkyCard")
+.classList.add("hidden");
+
+}
+
+
+if(
+motaniKategorie==="zeny" &&
+!nastaveni.motaniZeny
+){
+
+motaniKategorie=null;
+
+document
+.getElementById("motaniVysledkyCard")
+.classList.add("hidden");
+
+}
+
 }
 
 
 /* =========================================
-   REALTIME ÚTOK
+   REALTIME POŽÁRNÍ ÚTOK
 ========================================= */
 
 onSnapshot(
+
 utokCol,
+
 snap=>{
 
 utokData=[];
@@ -1802,16 +2003,46 @@ vykresliUtokStart();
 if(utokKategorie)
 vykresliUtokVysledky();
 
+},
+
+error=>{
+
+console.error(
+"Chyba Firebase Požární útok:",
+error
+);
+
+document
+.getElementById("utokStartTab")
+.innerHTML=`
+
+<tr>
+
+<td
+colspan="4"
+class="error">
+
+Nepodařilo se načíst výsledky požárního útoku.
+
+</td>
+
+</tr>
+
+`;
+
 }
+
 );
 
 
 /* =========================================
-   REALTIME MOTÁNÍ
+   REALTIME MOTANI
 ========================================= */
 
 onSnapshot(
+
 motaniCol,
+
 snap=>{
 
 motaniData=[];
@@ -1835,7 +2066,17 @@ vykresliMotaniStart();
 if(motaniKategorie)
 vykresliMotaniVysledky();
 
+},
+
+error=>{
+
+console.error(
+"Chyba Firebase Motání hadic:",
+error
+);
+
 }
+
 );
 
 
@@ -1844,7 +2085,9 @@ vykresliMotaniVysledky();
 ========================================= */
 
 onSnapshot(
+
 nastaveniRef,
+
 snap=>{
 
 if(snap.exists()){
@@ -1859,11 +2102,21 @@ nastaveni={
 
 pouzijNastaveni();
 
+},
+
+error=>{
+
+console.error(
+"Chyba Firebase Nastavení:",
+error
+);
+
 }
+
 );
 
 
-/* PRVNÍ NASTAVENÍ */
+/* PRVOTNÍ NASTAVENÍ */
 
 pouzijNastaveni();
 
