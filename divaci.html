@@ -583,6 +583,93 @@ onclick="otevriTisk()">
   
 </div>
 
+ <!-- VÝBĚR TISKU -->
+
+<div id="tiskModal" class="tisk-modal hidden">
+
+<div class="tisk-box">
+
+<h2>
+🖨️ Co chcete vytisknout?
+</h2>
+
+<div class="tisk-section">
+
+<div class="tisk-section-title">
+Požární útok
+</div>
+
+<label class="tisk-option">
+<input
+type="checkbox"
+id="tiskUtokMuzi">
+<span>Muži</span>
+</label>
+
+<label class="tisk-option">
+<input
+type="checkbox"
+id="tiskUtokZeny">
+<span>Ženy</span>
+</label>
+
+<label class="tisk-option">
+<input
+type="checkbox"
+id="tiskUtokVeterani">
+<span>Veteráni 35+</span>
+</label>
+
+</div>
+
+
+<div class="tisk-section">
+
+<div class="tisk-section-title">
+Motání hadic
+</div>
+
+<label class="tisk-option">
+<input
+type="checkbox"
+id="tiskMotaniMuzi">
+<span>Muži</span>
+</label>
+
+<label class="tisk-option">
+<input
+type="checkbox"
+id="tiskMotaniZeny">
+<span>Ženy</span>
+</label>
+
+</div>
+
+
+<div class="tisk-actions">
+
+<button
+class="tisk-zpet"
+onclick="zavriTisk()">
+
+Zrušit
+
+</button>
+
+<button
+class="tisk-vytisknout"
+onclick="vytiskniVysledky()">
+
+🖨️ Vytisknout
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+  
 <!-- POŽÁRNÍ ÚTOK -->
 
 <div id="utokScreen" class="screen">
