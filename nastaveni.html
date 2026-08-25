@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -35,7 +36,7 @@ margin-bottom:25px;
 }
 
 .logo{
-font-size:42px;
+font-size:38px;
 margin-bottom:10px;
 }
 
@@ -153,11 +154,16 @@ background:#d72f2f;
 transform:translateX(26px);
 }
 
+
+/* STAV */
+
 .status{
 text-align:center;
 color:#68778b;
 font-size:13px;
 margin-top:20px;
+
+min-height:20px;
 }
 
 .online{
@@ -169,6 +175,17 @@ background:#36d399;
 margin-right:6px;
 box-shadow:0 0 9px #36d399;
 }
+
+.status.error{
+color:#ff6666;
+}
+
+.status.saved{
+color:#36d399;
+}
+
+
+/* ZPET */
 
 .back{
 display:block;
@@ -346,7 +363,7 @@ checked
 </div>
 
 
-<!-- MOTANI HADIC -->
+<!-- MOTANI -->
 
 <div class="card">
 
@@ -444,11 +461,12 @@ checked
 </div>
 
 
-<div class="status">
+<div
+id="status"
+class="status">
 
 <span class="online"></span>
-
-Nastavení se ukládá automaticky
+Připojeno – nastavení se načítá
 
 </div>
 
@@ -486,7 +504,7 @@ from
 
 /* FIREBASE */
 
-const firebaseConfig = {
+const firebaseConfig={
 
 apiKey:
 "AIzaSyCIZ3Z5HvF6P9TSQ9GxiZEIoVGFsay2pbo",
@@ -509,19 +527,21 @@ appId:
 };
 
 
-const app =
+const app=
 initializeApp(firebaseConfig);
 
-const db =
+const db=
 getFirestore(app);
 
 
-/*
-  JEDEN DOKUMENT PRO NASTAVENI
-*/
+/* DOKUMENT */
 
-const nastaveniRef =
-doc(db,"nastaveni","viditelnost");
+const nastaveniRef=
+doc(
+db,
+"nastaveni",
+"viditelnost"
+);
 
 
 /* PRVKY */
@@ -552,7 +572,7 @@ document.getElementById("motaniZeny")
 };
 
 
-/* VYCHOZI HODNOTY */
+/* VYCHOZI */
 
 const vychozi={
 
@@ -568,22 +588,60 @@ motaniZeny:true
 };
 
 
+/* STAV */
+
+const status=
+document.getElementById("status");
+
+
+function stav(text,trida=""){
+
+status.className=
+"status "+trida;
+
+status.innerHTML=
+text;
+
+}
+
+
 /* REALTIME NACITANI */
 
 onSnapshot(
+
 nastaveniRef,
-(snap)=>{
+
+snap=>{
 
 if(!snap.exists()){
 
 setDoc(
 nastaveniRef,
 vychozi
+)
+.then(()=>{
+
+stav(
+'<span class="online"></span> Nastavení vytvořeno a uloženo',
+"saved"
 );
+
+})
+.catch(error=>{
+
+console.error(error);
+
+stav(
+"❌ Nastavení se nepodařilo uložit",
+"error"
+);
+
+});
 
 return;
 
 }
+
 
 const data=snap.data();
 
@@ -596,7 +654,8 @@ typeof data[k]==="boolean"
 
 prvky[k].checked=data[k];
 
-}else{
+}
+else{
 
 prvky[k].checked=vychozi[k];
 
@@ -604,7 +663,28 @@ prvky[k].checked=vychozi[k];
 
 });
 
+
+stav(
+'<span class="online"></span> Nastavení je uloženo',
+"saved"
+);
+
+},
+
+error=>{
+
+console.error(
+"Firebase nastavení:",
+error
+);
+
+stav(
+"❌ Chyba připojení k nastavení",
+"error"
+);
+
 }
+
 );
 
 
@@ -616,32 +696,67 @@ prvky[k].addEventListener(
 "change",
 async ()=>{
 
+try{
+
+stav(
+"⏳ Ukládám..."
+);
+
+
 await setDoc(
 
 nastaveniRef,
 
 {
-[k]:prvky[k].checked
+
+[k]:
+prvky[k].checked
+
 },
 
 {
+
 merge:true
+
 }
 
 );
 
-}
+
+stav(
+'<span class="online"></span> ✓ Uloženo',
+"saved"
 );
 
-});
+
+}
+catch(error){
+
+console.error(
+"Chyba ukládání:",
+error
+);
+
+
+stav(
+"❌ Nepodařilo se uložit změnu",
+"error"
+);
 
 
 /*
-  KDYZ SE VYPNE CELE SOUTEZ,
-  KATEGORIE ZUSTAVAJI ULOZENE.
-  PO ZNOVUZAPNUTI SE VRATI
-  DO PUvodniho STAVU.
+KDYŽ SE ULOŽENÍ NEPOVEDE,
+VRÁTÍME PŘEPÍNAČ DO PŮVODNÍHO STAVU.
 */
+
+prvky[k].checked=
+!prvky[k].checked;
+
+}
+
+});
+
+});
 
 </script>
 
