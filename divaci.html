@@ -152,6 +152,102 @@ cursor:pointer;
 background:rgba(255,255,255,.07);
 color:#aeb9c8;
 }
+/* OKNO VÝBĚRU TISKU */
+
+.tisk-modal{
+position:fixed;
+inset:0;
+z-index:9999;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:20px;
+background:rgba(0,0,0,.72);
+backdrop-filter:blur(4px);
+}
+
+.tisk-modal.hidden{
+display:none !important;
+}
+
+.tisk-box{
+width:100%;
+max-width:420px;
+background:#151b24;
+border:1px solid rgba(255,255,255,.12);
+border-radius:18px;
+padding:20px;
+box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+
+.tisk-box h2{
+margin:0 0 20px;
+text-align:center;
+font-size:19px;
+}
+
+.tisk-section{
+margin-bottom:18px;
+padding:13px;
+background:rgba(255,255,255,.035);
+border:1px solid rgba(255,255,255,.07);
+border-radius:13px;
+}
+
+.tisk-section-title{
+font-size:13px;
+font-weight:bold;
+color:#ef3333;
+margin-bottom:10px;
+}
+
+.tisk-option{
+display:flex;
+align-items:center;
+gap:10px;
+padding:8px 2px;
+color:#dbe2eb;
+font-size:14px;
+cursor:pointer;
+}
+
+.tisk-option input{
+width:17px;
+height:17px;
+accent-color:#b92828;
+}
+
+.tisk-actions{
+display:flex;
+justify-content:flex-end;
+gap:9px;
+margin-top:5px;
+}
+
+.tisk-zpet,
+.tisk-vytisknout{
+border-radius:9px;
+padding:9px 13px;
+font-size:12px;
+cursor:pointer;
+}
+
+.tisk-zpet{
+border:1px solid #394455;
+background:transparent;
+color:#8995a6;
+}
+
+.tisk-vytisknout{
+border:1px solid #b92828;
+background:#b92828;
+color:white;
+font-weight:bold;
+}
+
+.tisk-vytisknout:hover{
+background:#d02d2d;
+}
   
 /* OBRAZOVKY */
 
@@ -1867,7 +1963,473 @@ ${z.nejlepsi}
 
 
 /* VIDITELNOST */
+/* TISK VÝSLEDKŮ */
 
+window.otevriTisk=function(){
+
+document
+.getElementById("tiskModal")
+.classList.remove("hidden");
+
+};
+
+
+window.zavriTisk=function(){
+
+document
+.getElementById("tiskModal")
+.classList.add("hidden");
+
+};
+
+
+window.vytiskniVysledky=function(){
+
+const vybrane=[];
+
+
+/* POŽÁRNÍ ÚTOK */
+
+if(
+document.getElementById("tiskUtokMuzi").checked
+)
+vybrane.push({
+typ:"utok",
+kategorie:"muzi"
+});
+
+
+if(
+document.getElementById("tiskUtokZeny").checked
+)
+vybrane.push({
+typ:"utok",
+kategorie:"zeny"
+});
+
+
+if(
+document.getElementById("tiskUtokVeterani").checked
+)
+vybrane.push({
+typ:"utok",
+kategorie:"veterani"
+});
+
+
+/* MOTÁNÍ */
+
+if(
+document.getElementById("tiskMotaniMuzi").checked
+)
+vybrane.push({
+typ:"motani",
+kategorie:"muzi"
+});
+
+
+if(
+document.getElementById("tiskMotaniZeny").checked
+)
+vybrane.push({
+typ:"motani",
+kategorie:"zeny"
+});
+
+
+/* NIC NEVYBRÁNO */
+
+if(vybrane.length===0){
+
+alert("Vyberte alespoň jednu výsledkovou tabulku.");
+
+return;
+
+}
+
+
+let obsah="";
+
+
+/* HLAVIČKA */
+
+obsah+=`
+
+<div class="print-header">
+
+<h1>SDH LUBINA II–VĚTŘKOVICE</h1>
+
+<div>Výsledky soutěže</div>
+
+</div>
+
+`;
+
+
+/* VYTVÁŘENÍ TABULEK */
+
+vybrane.forEach(v=>{
+
+
+/* POŽÁRNÍ ÚTOK */
+
+if(v.typ==="utok"){
+
+const seznam=
+utokData
+.filter(z=>z.kategorie===v.kategorie)
+.filter(
+z=>
+z.np ||
+(
+validTime(z.lp) &&
+validTime(z.pp)
+)
+)
+.sort((a,b)=>{
+
+if(a.np && !b.np)
+return 1;
+
+if(!a.np && b.np)
+return -1;
+
+return casNaCislo(vysledek(a))
+-
+casNaCislo(vysledek(b));
+
+});
+
+
+obsah+=`
+
+<div class="print-section">
+
+<h2>🚒 Požární útok – ${nazevKategorie(v.kategorie)}</h2>
+
+<table>
+
+<thead>
+
+<tr>
+<th>Pořadí</th>
+<th>Družstvo</th>
+<th>LP</th>
+<th>PP</th>
+<th>Výsledný čas</th>
+<th>Start</th>
+</tr>
+
+</thead>
+
+<tbody>
+`;
+
+
+seznam.forEach((z,index)=>{
+
+let poradi="";
+
+if(z.np){
+
+poradi="NP";
+
+}
+else if(index===0){
+
+poradi="🥇";
+
+}
+else if(index===1){
+
+poradi="🥈";
+
+}
+else if(index===2){
+
+poradi="🥉";
+
+}
+else{
+
+poradi=(index+1)+".";
+
+}
+
+
+obsah+=`
+
+<tr>
+
+<td>${poradi}</td>
+
+<td>${z.druzstvo||"-"}</td>
+
+<td>${z.lp||"-"}</td>
+
+<td>${z.pp||"-"}</td>
+
+<td>${vysledek(z)}</td>
+
+<td>${z.start||"-"}</td>
+
+</tr>
+
+`;
+
+});
+
+
+obsah+=`
+
+</tbody>
+
+</table>
+
+</div>
+
+`;
+
+}
+
+
+/* MOTÁNÍ HADIC */
+
+if(v.typ==="motani"){
+
+const seznam=
+motaniData
+.filter(
+z=>
+z.kategorie===v.kategorie ||
+(
+v.kategorie==="muzi" &&
+!z.kategorie
+)
+)
+.filter(
+z=>validTime(z.nejlepsi)
+)
+.sort(
+(a,b)=>
+casNaCislo(a.nejlepsi)-
+casNaCislo(b.nejlepsi)
+);
+
+
+obsah+=`
+
+<div class="print-section">
+
+<h2>🌀 Motání hadic – ${v.kategorie==="zeny" ? "Ženy" : "Muži"}</h2>
+
+<table>
+
+<thead>
+
+<tr>
+<th>Pořadí</th>
+<th>Příjmení</th>
+<th>Jméno</th>
+<th>Družstvo</th>
+<th>Čas</th>
+</tr>
+
+</thead>
+
+<tbody>
+`;
+
+
+seznam.forEach((z,index)=>{
+
+let poradi="";
+
+if(index===0){
+
+poradi="🥇";
+
+}
+else if(index===1){
+
+poradi="🥈";
+
+}
+else if(index===2){
+
+poradi="🥉";
+
+}
+else{
+
+poradi=(index+1)+".";
+
+}
+
+
+obsah+=`
+
+<tr>
+
+<td>${poradi}</td>
+
+<td>${z.prijmeni||"-"}</td>
+
+<td>${z.jmeno||"-"}</td>
+
+<td>${z.druzstvo||"-"}</td>
+
+<td>${z.nejlepsi}</td>
+
+</tr>
+
+`;
+
+});
+
+
+obsah+=`
+
+</tbody>
+
+</table>
+
+</div>
+
+`;
+
+}
+
+});
+
+
+/* TISKOVÉ OKNO */
+
+const tiskOkno=
+window.open(
+"",
+"_blank"
+);
+
+
+if(!tiskOkno){
+
+alert(
+"Pro tisk je potřeba povolit v prohlížeči vyskakovací okna."
+);
+
+return;
+
+}
+
+
+tiskOkno.document.write(`
+
+<!DOCTYPE html>
+
+<html lang="cs">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Výsledky – SDH Lubina II–Větřkovice</title>
+
+<style>
+
+body{
+font-family:Arial,sans-serif;
+color:#111;
+margin:25px;
+}
+
+.print-header{
+text-align:center;
+margin-bottom:30px;
+border-bottom:2px solid #b92828;
+padding-bottom:15px;
+}
+
+.print-header h1{
+margin:0 0 6px;
+font-size:22px;
+}
+
+.print-section{
+margin-bottom:35px;
+}
+
+.print-section h2{
+font-size:18px;
+margin-bottom:10px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-bottom:15px;
+}
+
+th{
+background:#b92828;
+color:white;
+padding:8px 6px;
+font-size:12px;
+}
+
+td{
+border-bottom:1px solid #ccc;
+padding:7px 6px;
+text-align:center;
+font-size:12px;
+}
+
+@media print{
+
+body{
+margin:12mm;
+}
+
+.print-section{
+break-inside:avoid;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+${obsah}
+
+<script>
+
+window.onload=function(){
+
+setTimeout(function(){
+
+window.print();
+
+},300);
+
+};
+
+<\/script>
+
+</body>
+
+</html>
+
+`);
+
+
+tiskOkno.document.close();
+
+zavriTisk();
+
+};
 function pouzijNastaveni(){
 
 document
