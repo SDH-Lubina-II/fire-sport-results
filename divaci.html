@@ -131,6 +131,28 @@ color:#8995a6;
 font-size:13px;
 }
 
+/* TLAČÍTKO TISKU */
+
+.print-button-wrap{
+text-align:center;
+margin:4px 0 18px;
+}
+
+.print-button{
+border:1px solid rgba(255,255,255,.10);
+border-radius:9px;
+padding:7px 12px;
+background:rgba(255,255,255,.035);
+color:#718096;
+font-size:11px;
+cursor:pointer;
+}
+
+.print-button:hover{
+background:rgba(255,255,255,.07);
+color:#aeb9c8;
+}
+  
 /* OBRAZOVKY */
 
 .screen{
@@ -546,7 +568,19 @@ Startovní listina a výsledky
 </div>
 
 </button>
+  
+<div class="print-button-wrap">
 
+<button
+class="print-button"
+onclick="otevriTisk()">
+
+🖨️ Tisk výsledků
+
+</button>
+
+</div>
+  
 </div>
 
 <!-- POŽÁRNÍ ÚTOK -->
